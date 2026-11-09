@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "comment": "Rwanda administrative-geography → mobility tier mapping. Bounding boxes are first-pass approximations sufficient for the Kigali pilot. BEFORE any external sale of intelligence derived from this layer, boundaries MUST be verified against authoritative Rwanda admin geography (e.g. Rwanda Land Management and Use Authority maps). Lookup checks DENSE → MEDIUM → LOW; SPARSE is the default for unmatched coordinates.",
+  "tiers": {
+    "DENSE": {
+      "criteria": "Kigali City Province (Nyarugenge, Gasabo, Kicukiro)",
+      "boundingBoxes": [
+        { "name": "Kigali City", "minLat": -2.04, "maxLat": -1.86, "minLng": 30.00, "maxLng": 30.20 }
+      ]
+    },
+    "MEDIUM": {
+      "criteria": "Secondary cities (Huye, Musanze, Rubavu, Rusizi)",
+      "boundingBoxes": [
+        { "name": "Huye",    "minLat": -2.625, "maxLat": -2.575, "minLng": 29.720, "maxLng": 29.770 },
+        { "name": "Musanze", "minLat": -1.520, "maxLat": -1.470, "minLng": 29.610, "maxLng": 29.660 },
+        { "name": "Rubavu",  "minLat": -1.700, "maxLat": -1.650, "minLng": 29.230, "maxLng": 29.290 },
+        { "name": "Rusizi",  "minLat": -2.500, "maxLat": -2.460, "minLng": 28.880, "maxLng": 28.920 }
+      ]
+    },
+    "LOW": {
+      "criteria": "Other district capitals",
+      "boundingBoxes": [
+        { "name": "Nyanza",     "minLat": -2.360, "maxLat": -2.330, "minLng": 29.730, "maxLng": 29.760 },
+        { "name": "Karongi",    "minLat": -2.080, "maxLat": -2.050, "minLng": 29.355, "maxLng": 29.385 },
+        { "name": "Muhanga",    "minLat": -2.095, "maxLat": -2.065, "minLng": 29.745, "maxLng": 29.775 },
+        { "name": "Ruhango",    "minLat": -2.245, "maxLat": -2.215, "minLng": 29.770, "maxLng": 29.800 },
+        { "name": "Nyamagabe",  "minLat": -2.475, "maxLat": -2.445, "minLng": 29.625, "maxLng": 29.655 },
+        { "name": "Rwamagana",  "minLat": -1.965, "maxLat": -1.935, "minLng": 30.420, "maxLng": 30.450 },
+        { "name": "Kayonza",    "minLat": -1.890, "maxLat": -1.860, "minLng": 30.625, "maxLng": 30.655 },
+        { "name": "Kirehe",     "minLat": -2.225, "maxLat": -2.195, "minLng": 30.690, "maxLng": 30.720 },
+        { "name": "Ngoma",      "minLat": -2.155, "maxLat": -2.125, "minLng": 30.515, "maxLng": 30.545 },
+        { "name": "Nyagatare",  "minLat": -1.300, "maxLat": -1.270, "minLng": 30.310, "maxLng": 30.340 },
+        { "name": "Gicumbi",    "minLat": -1.585, "maxLat": -1.555, "minLng": 30.000, "maxLng": 30.030 },
+        { "name": "Burera",     "minLat": -1.490, "maxLat": -1.460, "minLng": 29.860, "maxLng": 29.890 },
+        { "name": "Gakenke",    "minLat": -1.700, "maxLat": -1.670, "minLng": 29.770, "maxLng": 29.800 },
+        { "name": "Rulindo",    "minLat": -1.770, "maxLat": -1.740, "minLng": 30.060, "maxLng": 30.090 },
+        { "name": "Nyabihu",    "minLat": -1.665, "maxLat": -1.635, "minLng": 29.500, "maxLng": 29.530 },
+        { "name": "Ngororero",  "minLat": -1.880, "maxLat": -1.850, "minLng": 29.590, "maxLng": 29.620 },
+        { "name": "Rutsiro",    "minLat": -1.945, "maxLat": -1.915, "minLng": 29.330, "maxLng": 29.360 },
+        { "name": "Nyamasheke", "minLat": -2.345, "maxLat": -2.315, "minLng": 29.135, "maxLng": 29.165 },
+        { "name": "Nyaruguru",  "minLat": -2.620, "maxLat": -2.590, "minLng": 29.405, "maxLng": 29.435 },
+        { "name": "Gisagara",   "minLat": -2.620, "maxLat": -2.590, "minLng": 29.815, "maxLng": 29.845 },
+        { "name": "Bugesera",   "minLat": -2.225, "maxLat": -2.195, "minLng": 30.230, "maxLng": 30.260 },
+        { "name": "Kamonyi",    "minLat": -1.985, "maxLat": -1.955, "minLng": 29.910, "maxLng": 29.940 }
+      ]
+    },
+    "SPARSE": {
+      "criteria": "Everywhere else (default)",
+      "boundingBoxes": []
+    }
+  }
+}

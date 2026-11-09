@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Bimoto</string>
+    <string name="title_activity_main">Bimoto</string>
+    <string name="package_name">rw.bimoto.app</string>
+    <string name="custom_url_scheme">rw.bimoto.app</string>
+</resources>

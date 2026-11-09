@@ -1,0 +1,594 @@
+name: Server Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: server-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  jest:
+    name: jest
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      # config.ts substitutes safe defaults for missing env vars when
+      # NODE_ENV=test, so we don't need to ferry real secrets in here.
+      NODE_ENV: test
+      CI: 'true'
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: '9.15.0'
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client (test compile-time dependency)
+        working-directory: packages/server
+        run: pnpm exec prisma generate
+
+      - name: Build shared (test type-check dependency)
+        # Belt-and-suspenders: the packages/server pretest hook also
+        # runs this build. Keep the explicit step so the workflow is
+        # deterministic regardless of pretest evolution.
+        run: pnpm --filter @bimoto/shared build
+
+      # GROUNDSKEEPER G4 — dist/ has to exist before the suite runs, or the
+      # dist-boot smoke test silently skips itself.
+      #
+      # That test guards the R1 crash class: an ESM-resolution failure that
+      # kills `node dist/index.js` on import while every unit test passes,
+      # because ts-jest never touches dist/. It decides whether to run with
+      # `existsSync(dist/index.js) ? describe : describe.skip`, and its own
+      # comment claimed "CI runs `pnpm build` first". No workflow built
+      # @bimoto/server. The guard had therefore never executed against a
+      # single pull request — a regression test that was, in CI, a comment.
+      - name: Build server (the dist-boot smoke test needs dist/ to exist)
+        run: pnpm --filter @bimoto/server build
+
+      - name: Run server tests
+        # pipefail matters: without it the pipe would report tee's exit
+        # code and a failing suite would go green.
+        run: |
+          set -o pipefail
+          pnpm test:server 2>&1 | tee /tmp/server-tests.log
+
+      # And the skip must not be able to come back quietly. Jest prints
+      # "skipped" in its summary only when something was skipped, so an
+      # accidental return to describe.skip fails this step rather than
+      # showing a green suite that never ran the guard.
+      - name: The dist-boot suite RAN (not skipped)
+        run: |
+          if grep -qE '^Tests:.*skipped' /tmp/server-tests.log; then
+            echo "::error::A test suite was skipped. If it is dist-boot.smoke, the build step above did not produce dist/index.js and the R1 boot guard did not run."
+            grep -E '^(Tests|Test Suites):' /tmp/server-tests.log
+            exit 1
+          fi
+          grep -E '^(Tests|Test Suites):' /tmp/server-tests.log
+          echo "dist-boot smoke suite executed."
+
+  # WIRE-AUDIT — nothing goes dormant silently again. Re-extracts the
+  # wiring map (server endpoints ↔ client calls ↔ routes ↔ navigation)
+  # and fails when a NEW orphan endpoint or unreachable screen appears
+  # that is not in scripts/wiring-audit/allowlist.json (every entry
+  # there needs a reason string). Baseline findings are allowlisted, so
+  # only new dormancy fails. Verdict context: docs/wiring-report.md.
+  wiring-audit:
+    name: wiring audit (no silent dormancy)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: '9.15.0'
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Extractor + guard behaviour tests (fixture repo)
+        run: pnpm wiring:test
+
+      - name: Wiring guard (orphan endpoints / unreachable screens)
+        run: pnpm wiring:check
+
+  # GROUNDSKEEPER G4 — nothing ran `tsc --noEmit` anywhere. Both packages
+  # do compile as part of their build, but no job asked the compiler a
+  # question on a pull request, which is the mechanical reason an unused
+  # import sat in SyncManager.ts and 96 unnecessary `(prisma as any)` casts
+  # survived: there was no step whose failure would have named them.
+  #
+  # Shared is covered by its own build (`tsc`), which the jest job already
+  # runs, so this job asks the two packages that had no such check.
+  typecheck:
+    name: typecheck (tsc --noEmit, every .ts root)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: '9.15.0'
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # The server's types depend on the generated Prisma client and on
+      # shared's build output, exactly as the jest job's do.
+      - name: Generate Prisma client
+        working-directory: packages/server
+        run: pnpm exec prisma generate
+
+      - name: Build shared (type dependency of both packages)
+        run: pnpm --filter @bimoto/shared build
+
+      - name: Server (src)
+        run: pnpm --filter @bimoto/server exec tsc --noEmit
+
+      # DECRYPT v3 addendum — the server's tsconfig includes only src/**,
+      # so prisma/seed.ts and packages/server/scripts/*.ts were never
+      # typechecked by anything. That gap is how a `prisma.user.createMany`
+      # still naming the pre-rename field reached CI and failed at Prisma's
+      # runtime validation with a green typecheck above it.
+      - name: Server (prisma + scripts)
+        run: pnpm --filter @bimoto/server exec tsc --noEmit -p tsconfig.tools.json
+
+      - name: Client
+        run: pnpm --filter @bimoto/client exec tsc --noEmit
+
+      # HYGIENE W3 G3 — the client's tsconfig includes only src, so
+      # vite.config.ts, capacitor.config.ts (appId: rw.bimoto.app, the
+      # permanent bundle ID) and the two root-level tests were resolved
+      # into no tsconfig project at all. The tests DO run — vitest picks
+      # them up — but vitest does not typecheck, so webview-csp.test.ts,
+      # which guards the native WebView Content-Security-Policy, executed
+      # with zero type checking. tsconfig.root.json is that project.
+      - name: Client (root configs + root tests)
+        run: pnpm --filter @bimoto/client exec tsc --noEmit -p tsconfig.root.json
+
+      - name: Shared
+        run: pnpm --filter @bimoto/shared exec tsc --noEmit
+
+      # HYGIENE W3 G3 — shared's build project excludes src/**/__tests__,
+      # but those tests run under the server's jest (its roots include
+      # shared/src) and ts-jest typechecks them at test time. The gap this
+      # closes is narrow and real: it is THIS job's guarantee that stopped
+      # at their door.
+      - name: Shared (__tests__, excluded from the build project)
+        run: pnpm --filter @bimoto/shared exec tsc --noEmit -p tsconfig.test.json
+
+      - name: E2E specs and helpers
+        run: pnpm --filter @bimoto/e2e exec tsc --noEmit
+
+      # HYGIENE W3 G3 — route-guard, txn-guard, pin-guard and dep-guard
+      # each landed with a tsconfig and an entry in the root `typecheck`
+      # script, but no step here. The root script and this job now name
+      # the same set.
+      - name: Guard scripts (every guard project)
+        run: |
+          pnpm exec tsc --noEmit -p scripts/constants-guard
+          pnpm exec tsc --noEmit -p scripts/i18n-review
+          pnpm exec tsc --noEmit -p scripts/wiring-audit
+          pnpm exec tsc --noEmit -p scripts/route-guard
+          pnpm exec tsc --noEmit -p scripts/txn-guard
+          pnpm exec tsc --noEmit -p scripts/pin-guard
+          pnpm exec tsc --noEmit -p scripts/dep-guard
+          pnpm exec tsc --noEmit -p scripts/project-guard
+
+      # HYGIENE W3 G3 — the guard that keeps this job's answer honest.
+      # Every step above compiles a project someone remembered to add. The
+      # project guard asks the question nobody had automated: is there any
+      # .ts/.tsx in the tree that NO project resolves? It derives its
+      # project list from the root `typecheck` script, so it measures
+      # exactly the set this job runs, and it fails both on a new orphan
+      # and on an allowlist entry that has gone stale.
+      - name: Project guard (no .ts outside every tsconfig project)
+        run: pnpm projects:check
+
+      - name: Project guard behaviour tests (both directions)
+        run: pnpm projects:test
+
+  # GROUNDSKEEPER G4 — the structural answer to "how can I be sure what I
+  # built?". A declared-but-unenforced rule can never again exist silently.
+  #
+  # GPS_RECORD_INTERVAL_MS was exported for months with a value that looked
+  # authoritative (7000) and zero consumers anywhere. Thirteen more shared
+  # constants encode business rules the founder specified and nobody has
+  # wired yet — cancellation penalties, a late-driver threshold, an AML
+  # daily volume limit. Those two things are not the same and must not be
+  # treated the same: deleting the second group would erase specifications.
+  #
+  # The guard makes the distinction explicit and permanent. A constant with
+  # no production consumer is either a fossil (delete it) or a pending rule
+  # (say so in the allowlist, with a reason). It can no longer be neither.
+  constants-guard:
+    name: constants guard (no rule declared and unenforced in silence)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: '9.15.0'
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Guard behaviour tests (fixture repo, both directions)
+        run: pnpm constants:test
+
+      - name: Constants guard (dead constants / unenforced rules)
+        run: pnpm constants:check
+
+  # AUTH-READ G4 — the route-security walker, kept.
+  #
+  # AUDIT-BATTERY §G walked all 42 routes files as a throwaway script and
+  # found the chat IDOR: GET /api/journeys/:id/messages passed no caller
+  # to a service whose query was `where: { journeyId }`, while the POST
+  # thirty lines below it verified the sender was a party to the journey.
+  # The check existed, was deliberate, and the read path did not call it.
+  # No test caught it because every chat spec read as a participant.
+  #
+  # Rule 1 makes that specific asymmetry impossible to reintroduce: a read
+  # route whose same-path write sibling enforces ownership must enforce it
+  # too. The walker reads handler bodies, not service internals — so a read
+  # that delegates to a service is ALLOWLISTED with the function that
+  # carries the check named, and the entry fails once it stops being true.
+  route-guard:
+    name: route guard (read siblings that skip the write's ownership check)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: '9.15.0'
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Guard behaviour tests (fixture routes, both directions)
+        run: pnpm routes:test
+
+      - name: Route guard (rule 1 — read-sibling ownership parity)
+        run: pnpm routes:check
+
+  # CUTGUARD v2 G1/G3 + amendment 2 — the serialization boundary, and the
+  # version gate as a class.
+  #
+  # Five rules, each blind to the others' case:
+  #
+  #   S1  a raw Prisma row reaching res.json in a routes file. This is
+  #       what shipped `moneyPinHash` — an unsalted HMAC over a four-digit
+  #       space — to every caller of /me, because getMe built its payload
+  #       by SUBTRACTION and a column added to the model joined the wire
+  #       the day it was declared.
+  #   S2  an exported service returning a raw user row. B-1's exact shape,
+  #       and the one S1 cannot see from the route's side.
+  #   S3  a commissionBreakdown written as a literal instead of produced
+  #       by a projector.
+  #   S4  a CUSTOMER-projected commission attached with no version gate.
+  #       B-2 crashed a v13 passenger's confirm dialog; the same shape
+  #       reached four more surfaces, two of which no amount of reading
+  #       had found.
+  #   S5  a route calling a version-gated service function without saying
+  #       which generation it is answering. From inside a correct service,
+  #       a caller who forgot is indistinguishable from one who meant no.
+  #
+  # This job is why "a sixth ungated surface fails the build" is a fact
+  # rather than a hope. The guard was written in #210 and typechecked by
+  # the typecheck job from the start; until this job existed nothing RAN
+  # its rules, so it could only fail somebody who thought to ask.
+  serialization-guard:
+    name: serialization guard (rows, money shapes, and the version gate)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: '9.15.0'
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Guard behaviour tests (fixtures, both directions, all five rules)
+        run: pnpm serialize:test
+
+      - name: Serialization guard (S1-S5)
+        run: pnpm serialize:check
+
+  # MONEY-ATOMIC G5 — the transaction-boundary walker, beside its siblings.
+  #
+  # Six functions moved money, or the record of money, in separate
+  # committed statements: confirmJourney released escrow after the journey
+  # was already stamped COMPLETED; disputeJourney froze it after the
+  # journey was already DISPUTED; the expiry job refunded after the
+  # journey was already EXPIRED and out of its own retry filter. Each
+  # failure landed somewhere no cron revisits, so the money simply stopped.
+  #
+  # The rule makes the shape impossible to reintroduce unexamined: a
+  # function writing two or more distinct models outside a $transaction is
+  # either fixed or allowlisted with the §D class letter and a reason —
+  # and class (a), atomicity genuinely needed, cannot be allowlisted at
+  # all. The walker reads syntax, not runtime, which is why the entries
+  # are attestations and why a stale one fails.
+  txn-guard:
+    name: txn guard (money paths that commit in pieces)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: '9.15.0'
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Guard behaviour tests (fixture services, both directions)
+        run: pnpm txn:test
+
+      - name: Transaction guard (unbatched cross-model writes)
+        run: pnpm txn:check
+
+  # SUPPLY-CHAIN G3 — the guard that watches the tree beneath the guards.
+  #
+  # AUDIT-BATTERY §K-5: this repo had EIGHT bespoke guards for its own
+  # invariants and zero automation watching the ~1,400 packages under
+  # them. `--prod` is the point: the installed tree carries dev and build
+  # tooling that never reaches a user, and gating on all ~159 of its
+  # advisories teaches everyone to ignore the gate.
+  #
+  # A new advisory at high or above FAILS. A baseline entry whose
+  # advisory has gone also FAILS, as stale — the route-guard precedent
+  # (#183): these entries are human judgements about accepted risk, and
+  # one that no longer describes anything real is an unexamined claim.
+  #
+  # This job talks to the registry, which the install steps above already
+  # do. If the audit cannot run it fails rather than reporting a clean
+  # tree it never saw.
+  dep-guard:
+    name: dep guard (production advisories)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: '9.15.0'
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Guard behaviour tests (new advisory fails, stale entry fails)
+        run: pnpm deps:test
+
+      - name: Production advisories (attested or fixed, never ignored)
+        run: pnpm deps:check
+
+  # SUPPLY-CHAIN G2 — the pin parity check.
+  #
+  # AUDIT-BATTERY §K-4: `engines.node` was `>=22.9.0` with no ceiling,
+  # `packageManager` was unset, every workflow pinned `node-version: 24`
+  # and packages/server/Dockerfile ships `node:22-bookworm-slim` in both
+  # stages — which render.yaml inherits. Every green run above was
+  # evidence about a Node production does not run.
+  #
+  # The pin now lives in `.nvmrc` and nowhere else. This job asserts it
+  # stays that way: majors match the Dockerfile's two stages, every
+  # engines.node range is bounded, no workflow hardcodes `node-version`
+  # or points `node-version-file` at package.json (which setup-node
+  # resolves as a RANGE — the trap that would silently restore Node 24),
+  # and `packageManager` matches the pnpm the workflows pin.
+  pin-guard:
+    name: pin guard (CI runs what production runs)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: '9.15.0'
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Guard behaviour tests (planted drift fails, HEAD passes)
+        run: pnpm pins:test
+
+      - name: Pin parity (.nvmrc vs Dockerfile, engines, workflows, pnpm)
+        run: pnpm pins:check
+
+  # GHOST-TRACE G4 — the map tooling gets a guard like its siblings.
+  #
+  # `pnpm map:test` (the geojson->poly converter, the admin-4 selector,
+  # and the build-region script's behaviour) has run in no workflow at
+  # all: 37 passing tests guarded by nothing on a PR. Same minimal shape
+  # as the wiring audit above — these are plain-node scripts, so no
+  # Prisma generate and no shared build.
+  map-tools:
+    name: map tools (selector + poly pipeline)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: '9.15.0'
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Map tooling behaviour tests (converter, selector, build-region)
+        run: pnpm map:test
+
+  # I18N-TRUTH — the Kinyarwanda review workbook is generated, not
+  # remembered. Regenerates docs/i18n-rw-review.md and
+  # docs/i18n-native-review-queue.md from the locale files and fails when
+  # the committed files differ, so a PR that adds a UI string without
+  # running `pnpm i18n:review` cannot merge. The old hand-maintained file
+  # drifted to auditing 232 of 1088 keys; this is what stops that.
+  i18n-review:
+    name: i18n review freshness (workbook matches the locales)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: '9.15.0'
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Generator + guard behaviour tests (fixture locales)
+        run: pnpm i18n:review:test
+
+      - name: Review freshness guard (regenerate and diff)
+        run: pnpm i18n:review:check
+
+  # LANDMARKS — the catalog shipped 35 landmarks and every one of them sat
+  # about 20 km west of Kigali, because nothing ever checked. This is the
+  # check: every point in the catalog must fall inside the same bounding box
+  # the offline map ships, and every point must have come from the committed
+  # OSM harvest rather than from someone's memory. A hand-typed coordinate
+  # fails here.
+  landmarks:
+    name: landmarks (every point inside Kigali, from evidence)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: '9.15.0'
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Audit behaviour tests (bbox, parser, matching rule, replay)
+        run: pnpm landmarks:test
+
+      - name: Bounding-box invariant (every shipped landmark is in Kigali)
+        run: pnpm landmarks:verify
+
+      - name: The catalog is what the evidence produces, not what was typed
+        run: |
+          pnpm landmarks:evidence
+          pnpm landmarks:build
+          git diff --exit-code -- packages/shared/src/constants/locations.ts \
+            packages/shared/src/constants/landmarks scripts/landmark-geocode-cache.json
+
+  # PILOT-UPDATER — shell that is never executed in CI will rot. Lint
+  # the Kigali update script and exercise its preflight refusals,
+  # .env-preservation, rollback and verify paths (no Mac, pnpm or
+  # database needed: the test suite shims them).
+  pilot-updater:
+    name: pilot updater (shellcheck + behaviour)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Lint the updater and its tests (POSIX sh)
+        run: shellcheck -s sh scripts/update-pilot.command scripts/tests/test-update-pilot.sh
+
+      # MAP-RWANDA G3 — the map builders are shell too, and a real build
+      # needs Geofabrik, a JDK and several GB of scratch, so CI lints them
+      # and exercises the dry-run path that stops before any network.
+      - name: Lint the map builders (POSIX sh)
+        run: |
+          shellcheck -s sh \
+            scripts/build-region-pmtiles.command \
+            scripts/build-kigali-pmtiles.command \
+            scripts/derive-province-polys.command
+
+      - name: Updater behaviour tests
+        run: sh scripts/tests/test-update-pilot.sh
+
+      - name: Map builder behaviour tests (region table, clips, refusals)
+        run: sh scripts/tests/test-build-region.sh
+
+      - name: Province boundary conversion (GeoJSON to .poly)
+        run: node --test scripts/tests/geojson-to-poly.test.mjs

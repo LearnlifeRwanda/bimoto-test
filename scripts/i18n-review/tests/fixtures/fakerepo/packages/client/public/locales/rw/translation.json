@@ -1,0 +1,19 @@
+{
+  "app": {
+    "name": "Bimoto",
+    "tagline": "Urugendo rwawe, igiciro cyawe"
+  },
+  "journey": {
+    "moto": "Moto",
+    "distance": "{{distance}} km",
+    "legend": "ibumoso | iburyo",
+    "multiline": "umurongo wa mbere\numurongo wa kabiri"
+  },
+  "welcome": {
+    "languageRw": "Kinyarwanda"
+  },
+  "errors": {
+    "invalid": "[RW] Invalid status transition.",
+    "fresh": "Ijambo rishya"
+  }
+}

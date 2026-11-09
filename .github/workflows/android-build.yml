@@ -1,0 +1,194 @@
+name: Android Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      api_url:
+        description: 'API URL to bake into the APK as VITE_API_URL (e.g. a pilot tunnel origin)'
+        required: false
+        default: 'https://bimoto-api.onrender.com'
+      push_enabled:
+        description: >-
+          Bake VITE_PUSH_ENABLED into the APK. Leave 'false' unless the
+          build also ships real Firebase config (google-services.json) —
+          arming push in a Firebase-less APK crashes on login
+          (PUSH-CRASH).
+        required: false
+        default: 'false'
+      version_name:
+        description: >-
+          versionName to stamp on the APK (e.g. '14', '14.1',
+          '15-pilot'). Leave empty to use the value in
+          packages/client/android/app/build.gradle. The smoke step below
+          asserts whichever one the built APK actually carries, so a
+          build can never quietly ship a different version than the one
+          it was dispatched for.
+        required: false
+        default: ''
+
+concurrency:
+  group: android-build-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Bake the API URL into the bundled client JS so the APK connects to
+  # the right backend (it also becomes the CSP connect-src origin — see
+  # packages/client/vite.config.ts). Manual runs can point a pilot build
+  # at a tunnel origin via the api_url input; push/PR builds (empty
+  # inputs context) fall back to the Render production URL. Without a
+  # value, the Vite build falls back to http://localhost:3000 (via the
+  # `||` default in useSocket.ts et al.) and the installed APK can't
+  # reach the backend.
+  VITE_API_URL: ${{ inputs.api_url || 'https://bimoto-api.onrender.com' }}
+  # PUSH-CRASH G1 — native push stays disarmed unless a manual run
+  # explicitly opts in (and only makes sense alongside real Firebase
+  # config). push/PR builds (empty inputs context) always get 'false',
+  # so CI debug APKs can never hit the Firebase-less register() crash.
+  VITE_PUSH_ENABLED: ${{ inputs.push_enabled || 'false' }}
+  # PILOT-GUARD Item 5 — empty on push/PR builds (the inputs context is
+  # empty there), which means "use the gradle default".
+  BIMOTO_VERSION_NAME: ${{ inputs.version_name || '' }}
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: '9.15.0'
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client (server build needs it)
+        working-directory: packages/server
+        run: pnpm exec prisma generate
+
+      - name: Build shared + client
+        run: |
+          pnpm --filter @bimoto/shared build
+          pnpm --filter @bimoto/client build
+
+      - name: Capacitor sync (Android)
+        working-directory: packages/client
+        run: npx cap sync android
+
+      - name: Gradle assemble (debug — installable, dev-signed)
+        working-directory: packages/client/android
+        run: |
+          set -e
+          if [ -n "$BIMOTO_VERSION_NAME" ]; then
+            echo "Stamping versionName=$BIMOTO_VERSION_NAME (from the version_name input)"
+            ./gradlew assembleDebug --no-daemon "-PbimotoVersionName=$BIMOTO_VERSION_NAME"
+          else
+            echo "Using the versionName in app/build.gradle"
+            ./gradlew assembleDebug --no-daemon
+          fi
+
+      # PILOT-GUARD Item 5 — the build says which build it is.
+      #
+      # versionCode/versionName sat at 1 / "1.0" through every cut the
+      # board calls v1..v13, so "which build am I on" had no answer on a
+      # tester's phone and none in a crash report. This step reads the
+      # version back OUT of the assembled APK and fails if it is not what
+      # this run asked for, so the stamp cannot drift from the dispatch.
+      #
+      # `cap sync android` (two steps up) copies web assets and refreshes
+      # the plugin block in capacitor.build.gradle; it does not write
+      # defaultConfig, so it cannot move these values. Reading them back
+      # from the APK is what proves that rather than assuming it.
+      - name: Smoke-test APK version stamp
+        working-directory: packages/client/android
+        run: |
+          set -e
+          APK=$(find app/build/outputs/apk/debug -name '*.apk' | head -1)
+          if [ -z "$APK" ]; then
+            echo "::error::No APK found in app/build/outputs/apk/debug/"
+            exit 1
+          fi
+          AAPT=$(find "$ANDROID_HOME/build-tools" -name aapt -type f | sort -V | tail -1)
+          if [ -z "$AAPT" ]; then
+            AAPT=$(find "$ANDROID_HOME/build-tools" -name aapt2 -type f | sort -V | tail -1)
+          fi
+          if [ -z "$AAPT" ]; then
+            echo "::error::Neither aapt nor aapt2 found under $ANDROID_HOME/build-tools — cannot verify the APK version stamp."
+            exit 1
+          fi
+          BADGING=$("$AAPT" dump badging "$APK" | grep -m1 "^package:")
+          echo "$BADGING"
+          ACTUAL_NAME=$(echo "$BADGING" | sed -n "s/.*versionName='\([^']*\)'.*/\1/p")
+          ACTUAL_CODE=$(echo "$BADGING" | sed -n "s/.*versionCode='\([^']*\)'.*/\1/p")
+          # The two `def` lines at the top of app/build.gradle are the
+          # single source of the shipped default; a dispatch-time
+          # version_name overrides only the name.
+          EXPECTED_CODE=$(sed -n 's/^def bimotoDefaultVersionCode = \([0-9][0-9]*\)$/\1/p' app/build.gradle)
+          if [ -n "$BIMOTO_VERSION_NAME" ]; then
+            EXPECTED_NAME="$BIMOTO_VERSION_NAME"
+          else
+            EXPECTED_NAME=$(sed -n 's/^def bimotoDefaultVersionName = "\(.*\)"$/\1/p' app/build.gradle)
+          fi
+          if [ -z "$EXPECTED_NAME" ] || [ -z "$EXPECTED_CODE" ]; then
+            echo "::error::Could not read the expected version out of app/build.gradle — the two 'def bimotoDefault...' lines must stay on one line each."
+            exit 1
+          fi
+          if [ "$ACTUAL_NAME" != "$EXPECTED_NAME" ]; then
+            echo "::error::APK versionName is '$ACTUAL_NAME', expected '$EXPECTED_NAME'."
+            exit 1
+          fi
+          if [ "$ACTUAL_CODE" != "$EXPECTED_CODE" ]; then
+            echo "::error::APK versionCode is '$ACTUAL_CODE', expected '$EXPECTED_CODE'."
+            exit 1
+          fi
+          echo "✅ APK is versionCode $ACTUAL_CODE / versionName $ACTUAL_NAME"
+
+      - name: Smoke-test API URL is baked into APK
+        working-directory: packages/client/android
+        run: |
+          set -e
+          APK=$(find app/build/outputs/apk/debug -name '*.apk' | head -1)
+          if [ -z "$APK" ]; then
+            echo "::error::No APK found in app/build/outputs/apk/debug/"
+            exit 1
+          fi
+          echo "Inspecting $APK"
+          mkdir -p /tmp/apk-inspect
+          unzip -o "$APK" -d /tmp/apk-inspect > /dev/null
+          # Check for the host of whatever origin this run baked in (the
+          # Render default or a pilot api_url from workflow_dispatch).
+          API_HOST=$(node -e "console.log(new URL(process.env.VITE_API_URL).host)")
+          # Capacitor bundles the Vite output under assets/public/ inside the APK.
+          if grep -rF "$API_HOST" /tmp/apk-inspect/assets/public/ > /dev/null; then
+            echo "✅ APK contains $API_HOST — VITE_API_URL was correctly baked in"
+          else
+            echo "::error::APK does NOT contain $API_HOST — VITE_API_URL was NOT baked in correctly"
+            echo "::error::The APK would fall back to localhost:3000 and could not connect to the intended backend."
+            echo "URLs found in bundled JS:"
+            grep -rEho 'https?://[a-zA-Z0-9._-]+' /tmp/apk-inspect/assets/public/ | sort -u | head -20
+            exit 1
+          fi
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: bimoto-android-debug-${{ github.sha }}
+          path: packages/client/android/app/build/outputs/apk/debug/*.apk
+          retention-days: 30
+          if-no-files-found: error

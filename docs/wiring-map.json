@@ -1,0 +1,6776 @@
+{
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/admin/aml-flags",
+      "file": "packages/server/src/routes/admin-aml.routes.ts",
+      "line": 59
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/aml-flags/:flagId",
+      "file": "packages/server/src/routes/admin-aml.routes.ts",
+      "line": 256
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/aml-flags/:flagId/dismiss",
+      "file": "packages/server/src/routes/admin-aml.routes.ts",
+      "line": 301
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/aml-flags/:flagId/mark-for-freeze",
+      "file": "packages/server/src/routes/admin-aml.routes.ts",
+      "line": 346
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/aml-flags/export",
+      "file": "packages/server/src/routes/admin-aml.routes.ts",
+      "line": 98
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/aml-flags/precision",
+      "file": "packages/server/src/routes/admin-aml.routes.ts",
+      "line": 192
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/bnr-reports",
+      "file": "packages/server/src/routes/admin-bnr.routes.ts",
+      "line": 31
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/bnr-reports/:id",
+      "file": "packages/server/src/routes/admin-bnr.routes.ts",
+      "line": 117
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/bnr-reports/:id/download.csv",
+      "file": "packages/server/src/routes/admin-bnr.routes.ts",
+      "line": 195
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/bnr-reports/:id/download.pdf",
+      "file": "packages/server/src/routes/admin-bnr.routes.ts",
+      "line": 173
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/bnr-reports/generate",
+      "file": "packages/server/src/routes/admin-bnr.routes.ts",
+      "line": 63
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/conflicts",
+      "file": "packages/server/src/routes/admin-conflicts.routes.ts",
+      "line": 51
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/conflicts/:type",
+      "file": "packages/server/src/routes/admin-conflicts.routes.ts",
+      "line": 138
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/conflicts/:type/:id",
+      "file": "packages/server/src/routes/admin-conflicts.routes.ts",
+      "line": 169
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/conflicts/:type/:id/decide",
+      "file": "packages/server/src/routes/admin-conflicts.routes.ts",
+      "line": 211
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/conflicts/audit",
+      "file": "packages/server/src/routes/admin-conflicts.routes.ts",
+      "line": 81
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/conflicts/audit/verify",
+      "file": "packages/server/src/routes/admin-conflicts.routes.ts",
+      "line": 108
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/dashboard",
+      "file": "packages/server/src/routes/admin.routes.ts",
+      "line": 60
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/deletion-requests",
+      "file": "packages/server/src/routes/admin.routes.ts",
+      "line": 589
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/disputes",
+      "file": "packages/server/src/routes/admin.routes.ts",
+      "line": 391
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/disputes/:journeyId/resolve",
+      "file": "packages/server/src/routes/admin.routes.ts",
+      "line": 465
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/emergency/:id/resolve",
+      "file": "packages/server/src/routes/admin-emergency.routes.ts",
+      "line": 155
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/emergency/active",
+      "file": "packages/server/src/routes/admin-emergency.routes.ts",
+      "line": 50
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/emergency/history",
+      "file": "packages/server/src/routes/admin-emergency.routes.ts",
+      "line": 92
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/error-reports",
+      "file": "packages/server/src/routes/admin-error-reports.routes.ts",
+      "line": 141
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/error-reports/:id/export.json",
+      "file": "packages/server/src/routes/admin-error-reports.routes.ts",
+      "line": 409
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/error-reports/export.jsonl",
+      "file": "packages/server/src/routes/admin-error-reports.routes.ts",
+      "line": 336
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/error-reports/groups",
+      "file": "packages/server/src/routes/admin-error-reports.routes.ts",
+      "line": 227
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/escrow/:id/verify",
+      "file": "packages/server/src/routes/admin.routes.ts",
+      "line": 697
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/fee-waivers",
+      "file": "packages/server/src/routes/admin-fee-waiver.routes.ts",
+      "line": 48
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/fee-waivers/:waiverId/extend",
+      "file": "packages/server/src/routes/admin-fee-waiver.routes.ts",
+      "line": 158
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/fee-waivers/:waiverId/revoke",
+      "file": "packages/server/src/routes/admin-fee-waiver.routes.ts",
+      "line": 206
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/fee-waivers/driver/:driverId/grant",
+      "file": "packages/server/src/routes/admin-fee-waiver.routes.ts",
+      "line": 100
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/flagged-users",
+      "file": "packages/server/src/routes/admin.routes.ts",
+      "line": 535
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/flagged-users/:userId/unflag",
+      "file": "packages/server/src/routes/admin.routes.ts",
+      "line": 653
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/freeze",
+      "file": "packages/server/src/routes/admin-freeze.routes.ts",
+      "line": 56
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/freeze/:userId",
+      "file": "packages/server/src/routes/admin-freeze.routes.ts",
+      "line": 107
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/freeze/:userId/audit",
+      "file": "packages/server/src/routes/admin-freeze.routes.ts",
+      "line": 150
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/freeze/:userId/freeze",
+      "file": "packages/server/src/routes/admin-freeze.routes.ts",
+      "line": 189
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/freeze/:userId/unfreeze",
+      "file": "packages/server/src/routes/admin-freeze.routes.ts",
+      "line": 257
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/funnel/export.csv",
+      "file": "packages/server/src/routes/admin-funnel.routes.ts",
+      "line": 114
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/funnel/metrics",
+      "file": "packages/server/src/routes/admin-funnel.routes.ts",
+      "line": 95
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/mobility/aggregates",
+      "file": "packages/server/src/routes/admin-mobility.routes.ts",
+      "line": 96
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/mobility/aggregates/run-now",
+      "file": "packages/server/src/routes/admin-mobility.routes.ts",
+      "line": 224
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/mobility/aggregates/stats",
+      "file": "packages/server/src/routes/admin-mobility.routes.ts",
+      "line": 125
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/mobility/tier-config",
+      "file": "packages/server/src/routes/admin-mobility.routes.ts",
+      "line": 253
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/mobility/tier-config/reload",
+      "file": "packages/server/src/routes/admin-mobility.routes.ts",
+      "line": 273
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/payouts/batches",
+      "file": "packages/server/src/routes/admin-payouts.routes.ts",
+      "line": 140
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/payouts/batches/:id",
+      "file": "packages/server/src/routes/admin-payouts.routes.ts",
+      "line": 374
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/payouts/driver/:driverId",
+      "file": "packages/server/src/routes/admin-payouts.routes.ts",
+      "line": 299
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/payouts/summary",
+      "file": "packages/server/src/routes/admin-payouts.routes.ts",
+      "line": 203
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/pickup-verifications/summary",
+      "file": "packages/server/src/routes/admin-pickup-verification.routes.ts",
+      "line": 76
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/push/test",
+      "file": "packages/server/src/routes/admin-push.routes.ts",
+      "line": 39
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/reports/monthly",
+      "file": "packages/server/src/routes/admin.routes.ts",
+      "line": 737
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/sms-inbound",
+      "file": "packages/server/src/routes/admin-sms-inbound.routes.ts",
+      "line": 34
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/sms-inbound/:id",
+      "file": "packages/server/src/routes/admin-sms-inbound.routes.ts",
+      "line": 97
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/sms-inbound/:id/dismiss",
+      "file": "packages/server/src/routes/admin-sms-inbound.routes.ts",
+      "line": 174
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/sms-inbound/:id/replay",
+      "file": "packages/server/src/routes/admin-sms-inbound.routes.ts",
+      "line": 123
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/sms-inbound/stats",
+      "file": "packages/server/src/routes/admin-sms-inbound.routes.ts",
+      "line": 64
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/verifications",
+      "file": "packages/server/src/routes/admin.routes.ts",
+      "line": 135
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/verifications/:userId/approve",
+      "file": "packages/server/src/routes/admin.routes.ts",
+      "line": 194
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/verifications/:userId/reject",
+      "file": "packages/server/src/routes/admin.routes.ts",
+      "line": 254
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/verifications/:userId/revoke",
+      "file": "packages/server/src/routes/admin.routes.ts",
+      "line": 332
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "file": "packages/server/src/routes/auth.routes.ts",
+      "line": 208
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/refresh",
+      "file": "packages/server/src/routes/auth.routes.ts",
+      "line": 172
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/request-otp",
+      "file": "packages/server/src/routes/auth.routes.ts",
+      "line": 68
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/verify-otp",
+      "file": "packages/server/src/routes/auth.routes.ts",
+      "line": 120
+    },
+    {
+      "method": "GET",
+      "path": "/api/bids/my-history",
+      "file": "packages/server/src/routes/bid-history.routes.ts",
+      "line": 36
+    },
+    {
+      "method": "GET",
+      "path": "/api/cooperative/dashboard",
+      "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+      "line": 92
+    },
+    {
+      "method": "POST",
+      "path": "/api/cooperative/dispatch",
+      "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+      "line": 331
+    },
+    {
+      "method": "GET",
+      "path": "/api/cooperative/drivers",
+      "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+      "line": 134
+    },
+    {
+      "method": "GET",
+      "path": "/api/cooperative/drivers/:driverProfileId",
+      "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+      "line": 168
+    },
+    {
+      "method": "POST",
+      "path": "/api/cooperative/drivers/:driverProfileId/add-to-cooperative",
+      "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+      "line": 554
+    },
+    {
+      "method": "POST",
+      "path": "/api/cooperative/drivers/:driverProfileId/approve",
+      "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+      "line": 434
+    },
+    {
+      "method": "POST",
+      "path": "/api/cooperative/drivers/:driverProfileId/reject",
+      "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+      "line": 477
+    },
+    {
+      "method": "POST",
+      "path": "/api/cooperative/drivers/:driverProfileId/remove-from-cooperative",
+      "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+      "line": 579
+    },
+    {
+      "method": "POST",
+      "path": "/api/cooperative/drivers/:driverProfileId/set-active",
+      "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+      "line": 525
+    },
+    {
+      "method": "GET",
+      "path": "/api/cooperative/financials",
+      "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+      "line": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/cooperative/me",
+      "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+      "line": 229
+    },
+    {
+      "method": "POST",
+      "path": "/api/diagnostics/error-report",
+      "file": "packages/server/src/routes/diagnostics.routes.ts",
+      "line": 168
+    },
+    {
+      "method": "GET",
+      "path": "/api/docs.json",
+      "file": "packages/server/src/index.ts",
+      "line": 276
+    },
+    {
+      "method": "GET",
+      "path": "/api/documents/:key",
+      "file": "packages/server/src/routes/document.routes.ts",
+      "line": 49
+    },
+    {
+      "method": "GET",
+      "path": "/api/driver-id/:number",
+      "file": "packages/server/src/routes/driver-id.routes.ts",
+      "line": 64
+    },
+    {
+      "method": "GET",
+      "path": "/api/driver/auto-bid-rules",
+      "file": "packages/server/src/routes/driver-auto-bid.routes.ts",
+      "line": 110
+    },
+    {
+      "method": "POST",
+      "path": "/api/driver/auto-bid-rules",
+      "file": "packages/server/src/routes/driver-auto-bid.routes.ts",
+      "line": 128
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/driver/auto-bid-rules/:id",
+      "file": "packages/server/src/routes/driver-auto-bid.routes.ts",
+      "line": 185
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/driver/auto-bid-rules/:id",
+      "file": "packages/server/src/routes/driver-auto-bid.routes.ts",
+      "line": 156
+    },
+    {
+      "method": "POST",
+      "path": "/api/driver/auto-bid-rules/pause-all",
+      "file": "packages/server/src/routes/driver-auto-bid.routes.ts",
+      "line": 203
+    },
+    {
+      "method": "POST",
+      "path": "/api/driver/auto-bid-rules/resume-all",
+      "file": "packages/server/src/routes/driver-auto-bid.routes.ts",
+      "line": 221
+    },
+    {
+      "method": "GET",
+      "path": "/api/driver/stats",
+      "file": "packages/server/src/routes/driver-stats.routes.ts",
+      "line": 46
+    },
+    {
+      "method": "GET",
+      "path": "/api/drivers/me/screener",
+      "file": "packages/server/src/routes/driver-screener.routes.ts",
+      "line": 71
+    },
+    {
+      "method": "POST",
+      "path": "/api/drivers/me/screener",
+      "file": "packages/server/src/routes/driver-screener.routes.ts",
+      "line": 33
+    },
+    {
+      "method": "GET",
+      "path": "/api/geocode/directions",
+      "file": "packages/server/src/routes/geocode.routes.ts",
+      "line": 278
+    },
+    {
+      "method": "GET",
+      "path": "/api/geocode/reverse",
+      "file": "packages/server/src/routes/geocode.routes.ts",
+      "line": 147
+    },
+    {
+      "method": "GET",
+      "path": "/api/geocode/search",
+      "file": "packages/server/src/routes/geocode.routes.ts",
+      "line": 85
+    },
+    {
+      "method": "GET",
+      "path": "/api/health",
+      "file": "packages/server/src/routes/health.routes.ts",
+      "line": 42
+    },
+    {
+      "method": "GET",
+      "path": "/api/intel/aggregates/export",
+      "file": "packages/server/src/routes/intel.routes.ts",
+      "line": 173
+    },
+    {
+      "method": "GET",
+      "path": "/api/journeys",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 276
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 98
+    },
+    {
+      "method": "GET",
+      "path": "/api/journeys/:id",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 625
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/accept-bid",
+      "file": "packages/server/src/routes/bid.routes.ts",
+      "line": 168
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/accept-bid-card",
+      "file": "packages/server/src/routes/bid.routes.ts",
+      "line": 232
+    },
+    {
+      "method": "GET",
+      "path": "/api/journeys/:id/bids",
+      "file": "packages/server/src/routes/bid.routes.ts",
+      "line": 35
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/bids",
+      "file": "packages/server/src/routes/bid.routes.ts",
+      "line": 73
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/journeys/:id/bids/:bidId",
+      "file": "packages/server/src/routes/bid.routes.ts",
+      "line": 350
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/bids/:bidId/decline",
+      "file": "packages/server/src/routes/bid.routes.ts",
+      "line": 301
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/cancel",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 1508
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/cancel-scheduled",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 1625
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/confirm",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 824
+    },
+    {
+      "method": "GET",
+      "path": "/api/journeys/:id/customer-mode-status",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 542
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/dispute",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 858
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/dispute-no-show",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 1585
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/emergency",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 1037
+    },
+    {
+      "method": "GET",
+      "path": "/api/journeys/:id/emergency/active",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 1469
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/end",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 797
+    },
+    {
+      "method": "GET",
+      "path": "/api/journeys/:id/eta",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 661
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/interrupt",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 956
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/legs/:legId/activate",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 1833
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/legs/:legId/complete",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 1757
+    },
+    {
+      "method": "GET",
+      "path": "/api/journeys/:id/messages",
+      "file": "packages/server/src/routes/message.routes.ts",
+      "line": 42
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/messages",
+      "file": "packages/server/src/routes/message.routes.ts",
+      "line": 96
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/pickup-verification",
+      "file": "packages/server/src/routes/pickup-verification.routes.ts",
+      "line": 65
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/rate",
+      "file": "packages/server/src/routes/rating.routes.ts",
+      "line": 81
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/reconcile",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 1707
+    },
+    {
+      "method": "GET",
+      "path": "/api/journeys/:id/reconciliation-status",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 1659
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/redispatch",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 1545
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/report",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 909
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/start",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 760
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/suggest-up",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 436
+    },
+    {
+      "method": "GET",
+      "path": "/api/journeys/:id/supply",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 334
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/upload/delivery-photo",
+      "file": "packages/server/src/routes/upload.routes.ts",
+      "line": 149
+    },
+    {
+      "method": "POST",
+      "path": "/api/journeys/:id/upload/pickup-photo",
+      "file": "packages/server/src/routes/upload.routes.ts",
+      "line": 75
+    },
+    {
+      "method": "GET",
+      "path": "/api/journeys/fair-price",
+      "file": "packages/server/src/routes/journey.routes.ts",
+      "line": 185
+    },
+    {
+      "method": "GET",
+      "path": "/api/map/:region.pmtiles",
+      "file": "packages/server/src/routes/map.routes.ts",
+      "line": 256
+    },
+    {
+      "method": "GET",
+      "path": "/api/map/kigali.pmtiles",
+      "file": "packages/server/src/routes/map.routes.ts",
+      "line": 211
+    },
+    {
+      "method": "GET",
+      "path": "/api/map/regions",
+      "file": "packages/server/src/routes/map.routes.ts",
+      "line": 176
+    },
+    {
+      "method": "GET",
+      "path": "/api/payments/:escrowId/status",
+      "file": "packages/server/src/routes/payment.routes.ts",
+      "line": 60
+    },
+    {
+      "method": "POST",
+      "path": "/api/payments/initiate",
+      "file": "packages/server/src/routes/payment.routes.ts",
+      "line": 185
+    },
+    {
+      "method": "POST",
+      "path": "/api/payments/initiate-card",
+      "file": "packages/server/src/routes/payment.routes.ts",
+      "line": 371
+    },
+    {
+      "method": "POST",
+      "path": "/api/payout/end-shift",
+      "file": "packages/server/src/routes/payout.routes.ts",
+      "line": 288
+    },
+    {
+      "method": "POST",
+      "path": "/api/payout/preference",
+      "file": "packages/server/src/routes/payout.routes.ts",
+      "line": 225
+    },
+    {
+      "method": "POST",
+      "path": "/api/payout/preference/request-otp",
+      "file": "packages/server/src/routes/payout.routes.ts",
+      "line": 157
+    },
+    {
+      "method": "GET",
+      "path": "/api/payout/summary",
+      "file": "packages/server/src/routes/payout.routes.ts",
+      "line": 66
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/push/register",
+      "file": "packages/server/src/routes/push.routes.ts",
+      "line": 90
+    },
+    {
+      "method": "POST",
+      "path": "/api/push/register",
+      "file": "packages/server/src/routes/push.routes.ts",
+      "line": 40
+    },
+    {
+      "method": "GET",
+      "path": "/api/scheduled-rides",
+      "file": "packages/server/src/routes/scheduled-ride.routes.ts",
+      "line": 55
+    },
+    {
+      "method": "POST",
+      "path": "/api/scheduled-rides/:id/conflict-acknowledge",
+      "file": "packages/server/src/routes/scheduled-ride.routes.ts",
+      "line": 179
+    },
+    {
+      "method": "GET",
+      "path": "/api/scheduled-rides/customer",
+      "file": "packages/server/src/routes/scheduled-ride.routes.ts",
+      "line": 111
+    },
+    {
+      "method": "GET",
+      "path": "/api/sim/inbox",
+      "file": "packages/server/src/routes/sim.routes.ts",
+      "line": 127
+    },
+    {
+      "method": "GET",
+      "path": "/api/sim/messages",
+      "file": "packages/server/src/routes/sim.routes.ts",
+      "line": 97
+    },
+    {
+      "method": "POST",
+      "path": "/api/sms/inbound",
+      "file": "packages/server/src/routes/sms-inbound.routes.ts",
+      "line": 67
+    },
+    {
+      "method": "GET",
+      "path": "/api/sync/events",
+      "file": "packages/server/src/routes/sync.routes.ts",
+      "line": 89
+    },
+    {
+      "method": "POST",
+      "path": "/api/sync/events",
+      "file": "packages/server/src/routes/sync.routes.ts",
+      "line": 60
+    },
+    {
+      "method": "POST",
+      "path": "/api/sync/gps",
+      "file": "packages/server/src/routes/sync.routes.ts",
+      "line": 145
+    },
+    {
+      "method": "GET",
+      "path": "/api/users/:id/profile",
+      "file": "packages/server/src/routes/user.routes.ts",
+      "line": 922
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/users/me",
+      "file": "packages/server/src/routes/user.routes.ts",
+      "line": 503
+    },
+    {
+      "method": "GET",
+      "path": "/api/users/me",
+      "file": "packages/server/src/routes/user.routes.ts",
+      "line": 72
+    },
+    {
+      "method": "PUT",
+      "path": "/api/users/me",
+      "file": "packages/server/src/routes/user.routes.ts",
+      "line": 119
+    },
+    {
+      "method": "POST",
+      "path": "/api/users/me/accept-driver-terms",
+      "file": "packages/server/src/routes/user.routes.ts",
+      "line": 254
+    },
+    {
+      "method": "POST",
+      "path": "/api/users/me/accept-privacy",
+      "file": "packages/server/src/routes/user.routes.ts",
+      "line": 167
+    },
+    {
+      "method": "POST",
+      "path": "/api/users/me/accept-terms",
+      "file": "packages/server/src/routes/user.routes.ts",
+      "line": 212
+    },
+    {
+      "method": "GET",
+      "path": "/api/users/me/account-status",
+      "file": "packages/server/src/routes/user.routes.ts",
+      "line": 894
+    },
+    {
+      "method": "GET",
+      "path": "/api/users/me/data-export",
+      "file": "packages/server/src/routes/user.routes.ts",
+      "line": 588
+    },
+    {
+      "method": "POST",
+      "path": "/api/users/me/deletion/cancel",
+      "file": "packages/server/src/routes/user.routes.ts",
+      "line": 534
+    },
+    {
+      "method": "POST",
+      "path": "/api/users/me/driver-profile",
+      "file": "packages/server/src/routes/user.routes.ts",
+      "line": 625
+    },
+    {
+      "method": "PUT",
+      "path": "/api/users/me/driver-profile",
+      "file": "packages/server/src/routes/user.routes.ts",
+      "line": 675
+    },
+    {
+      "method": "PUT",
+      "path": "/api/users/me/driver-verification",
+      "file": "packages/server/src/routes/user.routes.ts",
+      "line": 310
+    },
+    {
+      "method": "POST",
+      "path": "/api/users/me/driver-verification/upload/:docType",
+      "file": "packages/server/src/routes/user.routes.ts",
+      "line": 420
+    },
+    {
+      "method": "PUT",
+      "path": "/api/users/me/location",
+      "file": "packages/server/src/routes/user.routes.ts",
+      "line": 716
+    },
+    {
+      "method": "PUT",
+      "path": "/api/users/me/online-status",
+      "file": "packages/server/src/routes/user.routes.ts",
+      "line": 754
+    },
+    {
+      "method": "GET",
+      "path": "/api/users/me/tier-status",
+      "file": "packages/server/src/routes/user.routes.ts",
+      "line": 807
+    },
+    {
+      "method": "POST",
+      "path": "/api/webhooks/flutterwave",
+      "file": "packages/server/src/routes/webhook.routes.ts",
+      "line": 127
+    }
+  ],
+  "unresolvedEndpoints": [],
+  "nonRouterMounts": [
+    {
+      "mount": "/api/docs",
+      "handler": "swaggerUi.serve",
+      "line": 277
+    }
+  ],
+  "calls": [
+    {
+      "path": "/api/admin/conflicts",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminConflicts.tsx",
+      "line": 66,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/conflicts",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminDashboard.tsx",
+      "line": 31,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/conflicts/:param",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminConflictsList.tsx",
+      "line": 42,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/conflicts/:param/:param",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminConflictDetail.tsx",
+      "line": 84,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/conflicts/:param/:param/decide",
+      "method": "POST",
+      "file": "packages/client/src/pages/admin/AdminConflictDecideModal.tsx",
+      "line": 43,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/conflicts/audit",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminConflictAudit.tsx",
+      "line": 65,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/conflicts/audit/verify",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminConflictAudit.tsx",
+      "line": 79,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/dashboard",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminDashboard.tsx",
+      "line": 23,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/deletion-requests",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminDeletionRequests.tsx",
+      "line": 56,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/disputes",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminDisputes.tsx",
+      "line": 28,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/disputes/:param/resolve",
+      "method": "POST",
+      "file": "packages/client/src/pages/admin/AdminDisputes.tsx",
+      "line": 42,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/emergency/:param/resolve",
+      "method": "POST",
+      "file": "packages/client/src/lib/emergency-api.ts",
+      "line": 72,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/emergency/active",
+      "method": "GET",
+      "file": "packages/client/src/lib/emergency-api.ts",
+      "line": 51,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/emergency/history",
+      "method": "GET",
+      "file": "packages/client/src/lib/emergency-api.ts",
+      "line": 59,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/error-reports",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminErrorReports.tsx",
+      "line": 66,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/error-reports/:param/export.json",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminErrorReports.tsx",
+      "line": 85,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/error-reports/export.jsonl",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminErrorReports.tsx",
+      "line": 103,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/error-reports/groups",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminErrorReports.tsx",
+      "line": 69,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/fee-waivers",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+      "line": 126,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/fee-waivers/:param/extend",
+      "method": null,
+      "file": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+      "line": 179,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/fee-waivers/:param/revoke",
+      "method": null,
+      "file": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+      "line": 184,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/fee-waivers/driver/:param/grant",
+      "method": null,
+      "file": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+      "line": 168,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/flagged-users",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminFlaggedUsers.tsx",
+      "line": 22,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/flagged-users/:param/unflag",
+      "method": "POST",
+      "file": "packages/client/src/pages/admin/AdminFlaggedUsers.tsx",
+      "line": 30,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/freeze/:param/:param",
+      "method": "POST",
+      "file": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+      "line": 226,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/funnel/export.csv",
+      "method": null,
+      "file": "packages/client/src/pages/admin/AdminFunnel.tsx",
+      "line": 102,
+      "via": "literal"
+    },
+    {
+      "path": "/api/admin/funnel/metrics",
+      "method": "GET",
+      "file": "packages/client/src/hooks/useFunnelMetrics.ts",
+      "line": 61,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/mobility/aggregates",
+      "method": "GET",
+      "file": "packages/client/src/lib/intel-api.ts",
+      "line": 93,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/mobility/aggregates/run-now",
+      "method": "POST",
+      "file": "packages/client/src/lib/intel-api.ts",
+      "line": 239,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/mobility/aggregates/stats",
+      "method": "GET",
+      "file": "packages/client/src/lib/intel-api.ts",
+      "line": 123,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/mobility/tier-config",
+      "method": "GET",
+      "file": "packages/client/src/lib/intel-api.ts",
+      "line": 115,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/mobility/tier-config/reload",
+      "method": "POST",
+      "file": "packages/client/src/lib/intel-api.ts",
+      "line": 250,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/payouts/batches",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminPayouts.tsx",
+      "line": 74,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/payouts/driver/:param",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+      "line": 113,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/payouts/summary",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminPayouts.tsx",
+      "line": 60,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/verifications",
+      "method": "GET",
+      "file": "packages/client/src/pages/admin/AdminVerifications.tsx",
+      "line": 69,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/verifications/:param/approve",
+      "method": "POST",
+      "file": "packages/client/src/pages/admin/AdminVerifications.tsx",
+      "line": 82,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/verifications/:param/reject",
+      "method": "POST",
+      "file": "packages/client/src/pages/admin/AdminVerifications.tsx",
+      "line": 109,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/verifications/:param/revoke",
+      "method": "POST",
+      "file": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+      "line": 261,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/admin/verifications/:param/revoke",
+      "method": "POST",
+      "file": "packages/client/src/pages/admin/AdminVerifications.tsx",
+      "line": 123,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/auth/logout",
+      "method": "POST",
+      "file": "packages/client/src/lib/logout.ts",
+      "line": 14,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/auth/refresh",
+      "method": "POST",
+      "file": "packages/client/src/lib/auth-refresh.ts",
+      "line": 32,
+      "via": "fetch"
+    },
+    {
+      "path": "/api/auth/request-otp",
+      "method": "POST",
+      "file": "packages/client/src/pages/auth/LoginPage.tsx",
+      "line": 106,
+      "via": "fetch"
+    },
+    {
+      "path": "/api/auth/verify-otp",
+      "method": "POST",
+      "file": "packages/client/src/pages/auth/LoginPage.tsx",
+      "line": 147,
+      "via": "fetch"
+    },
+    {
+      "path": "/api/bids/my-history",
+      "method": "GET",
+      "file": "packages/client/src/components/journey/ActiveJourneyBanner.tsx",
+      "line": 124,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/bids/my-history",
+      "method": "GET",
+      "file": "packages/client/src/hooks/useSocket.ts",
+      "line": 297,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/diagnostics/error-report",
+      "method": "POST",
+      "file": "packages/client/src/components/diagnostics/ErrorLogSection.tsx",
+      "line": 80,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/diagnostics/error-report",
+      "method": "POST",
+      "file": "packages/client/src/services/diagnostics-upload.ts",
+      "line": 177,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/documents/",
+      "method": null,
+      "file": "packages/client/src/lib/document-ref.ts",
+      "line": 20,
+      "via": "literal"
+    },
+    {
+      "path": "/api/documents/:param",
+      "method": "GET",
+      "file": "packages/client/src/components/admin/DocumentLink.tsx",
+      "line": 69,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/driver-id/:param",
+      "method": "GET",
+      "file": "packages/client/src/pages/public/CheckDriverPage.tsx",
+      "line": 32,
+      "via": "fetch"
+    },
+    {
+      "path": "/api/driver/auto-bid-rules",
+      "method": "GET",
+      "file": "packages/client/src/hooks/useDriverAutoBid.ts",
+      "line": 87,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/driver/auto-bid-rules",
+      "method": "POST",
+      "file": "packages/client/src/hooks/useDriverAutoBid.ts",
+      "line": 123,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/driver/auto-bid-rules/:param",
+      "method": "DELETE",
+      "file": "packages/client/src/hooks/useDriverAutoBid.ts",
+      "line": 153,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/driver/auto-bid-rules/pause-all",
+      "method": "POST",
+      "file": "packages/client/src/hooks/useDriverAutoBid.ts",
+      "line": 174,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/driver/auto-bid-rules/resume-all",
+      "method": "POST",
+      "file": "packages/client/src/hooks/useDriverAutoBid.ts",
+      "line": 200,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/driver/stats",
+      "method": "GET",
+      "file": "packages/client/src/components/driver/DriverStatsCard.tsx",
+      "line": 96,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/drivers/me/screener",
+      "method": "POST",
+      "file": "packages/client/src/pages/onboarding/DriverScreenerPage.tsx",
+      "line": 113,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/geocode/directions",
+      "method": "GET",
+      "file": "packages/client/src/hooks/useRouteAlternatives.ts",
+      "line": 85,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/geocode/directions",
+      "method": "GET",
+      "file": "packages/client/src/hooks/useRouteDirections.ts",
+      "line": 64,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/geocode/reverse",
+      "method": "GET",
+      "file": "packages/client/src/hooks/useGeocodeSearch.ts",
+      "line": 157,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/geocode/search",
+      "method": "GET",
+      "file": "packages/client/src/hooks/useGeocodeSearch.ts",
+      "line": 94,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/health",
+      "method": "GET",
+      "file": "packages/client/src/App.tsx",
+      "line": 261,
+      "via": "fetch"
+    },
+    {
+      "path": "/api/health",
+      "method": "GET",
+      "file": "packages/client/src/hooks/useDiagnostics.ts",
+      "line": 68,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/health",
+      "method": "GET",
+      "file": "packages/client/src/sync/connectivity.ts",
+      "line": 151,
+      "via": "fetch"
+    },
+    {
+      "path": "/api/intel/aggregates/export",
+      "method": "GET",
+      "file": "packages/client/src/lib/intel-api.ts",
+      "line": 147,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys",
+      "method": "GET",
+      "file": "packages/client/src/components/journey/ActiveJourneyBanner.tsx",
+      "line": 113,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys",
+      "method": "POST",
+      "file": "packages/client/src/pages/customer/GoodsRequestPage.tsx",
+      "line": 329,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys",
+      "method": "POST",
+      "file": "packages/client/src/pages/customer/NewJourneyPage.tsx",
+      "line": 341,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys",
+      "method": "GET",
+      "file": "packages/client/src/pages/customer/PaymentsPage.tsx",
+      "line": 139,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys",
+      "method": "POST",
+      "file": "packages/client/src/pages/customer/UrgentMessengerPage.tsx",
+      "line": 219,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys",
+      "method": "GET",
+      "file": "packages/client/src/pages/driver/DashboardPage.tsx",
+      "line": 166,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys",
+      "method": "GET",
+      "file": "packages/client/src/pages/driver/NoShowDisputesPage.tsx",
+      "line": 36,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys",
+      "method": "GET",
+      "file": "packages/client/src/pages/shared/HistoryPage.tsx",
+      "line": 74,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys",
+      "method": "POST",
+      "file": "packages/client/src/sync/OutboxReplay.ts",
+      "line": 97,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param",
+      "method": "GET",
+      "file": "packages/client/src/components/journey/ActiveJourneyBanner.tsx",
+      "line": 133,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param",
+      "method": "GET",
+      "file": "packages/client/src/hooks/useSocket.ts",
+      "line": 201,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param",
+      "method": "GET",
+      "file": "packages/client/src/pages/customer/BidListPage.tsx",
+      "line": 195,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param",
+      "method": "GET",
+      "file": "packages/client/src/pages/customer/InProgressPage.tsx",
+      "line": 71,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param",
+      "method": "GET",
+      "file": "packages/client/src/pages/customer/MatchedPage.tsx",
+      "line": 113,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param",
+      "method": "GET",
+      "file": "packages/client/src/pages/customer/ScheduledRidePage.tsx",
+      "line": 35,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param",
+      "method": "GET",
+      "file": "packages/client/src/pages/driver/ActiveRidePage.tsx",
+      "line": 63,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param",
+      "method": "GET",
+      "file": "packages/client/src/pages/driver/ApproachPage.tsx",
+      "line": 120,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param",
+      "method": "GET",
+      "file": "packages/client/src/pages/driver/BidPage.tsx",
+      "line": 57,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param",
+      "method": "GET",
+      "file": "packages/client/src/pages/driver/GoodsPickupPage.tsx",
+      "line": 139,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param",
+      "method": "GET",
+      "file": "packages/client/src/pages/shared/RideReceiptPage.tsx",
+      "line": 85,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/accept-bid",
+      "method": "POST",
+      "file": "packages/client/src/pages/customer/BidListPage.tsx",
+      "line": 403,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/accept-bid-card",
+      "method": "POST",
+      "file": "packages/client/src/pages/customer/BidListPage.tsx",
+      "line": 475,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/bids",
+      "method": "GET",
+      "file": "packages/client/src/pages/customer/BidListPage.tsx",
+      "line": 198,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/bids",
+      "method": "GET",
+      "file": "packages/client/src/pages/customer/BidListPage.tsx",
+      "line": 293,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/bids",
+      "method": "POST",
+      "file": "packages/client/src/pages/driver/BidPage.tsx",
+      "line": 245,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/bids/:param/decline",
+      "method": "POST",
+      "file": "packages/client/src/pages/customer/BidListPage.tsx",
+      "line": 384,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/cancel",
+      "method": "POST",
+      "file": "packages/client/src/pages/customer/MatchedPage.tsx",
+      "line": 211,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/cancel",
+      "method": "POST",
+      "file": "packages/client/src/pages/customer/ScheduledRidePage.tsx",
+      "line": 61,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/cancel",
+      "method": "POST",
+      "file": "packages/client/src/pages/driver/ApproachPage.tsx",
+      "line": 153,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/confirm",
+      "method": "POST",
+      "file": "packages/client/src/pages/customer/InProgressPage.tsx",
+      "line": 135,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/dispute-no-show",
+      "method": "POST",
+      "file": "packages/client/src/pages/driver/NoShowDisputesPage.tsx",
+      "line": 62,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/emergency",
+      "method": "POST",
+      "file": "packages/client/src/components/safety/EmergencySOS.tsx",
+      "line": 87,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/emergency/active",
+      "method": "GET",
+      "file": "packages/client/src/components/safety/EmergencySOS.tsx",
+      "line": 177,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/end",
+      "method": "POST",
+      "file": "packages/client/src/pages/driver/ActiveRidePage.tsx",
+      "line": 170,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/eta",
+      "method": "GET",
+      "file": "packages/client/src/hooks/useDriverLocationStream.ts",
+      "line": 93,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/interrupt",
+      "method": "POST",
+      "file": "packages/client/src/pages/customer/InProgressPage.tsx",
+      "line": 116,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/legs/:param/activate",
+      "method": "POST",
+      "file": "packages/client/src/pages/driver/BidPage.tsx",
+      "line": 221,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/legs/:param/complete",
+      "method": "POST",
+      "file": "packages/client/src/pages/driver/BidPage.tsx",
+      "line": 192,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/messages",
+      "method": "GET",
+      "file": "packages/client/src/pages/customer/MatchedPage.tsx",
+      "line": 125,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/messages",
+      "method": "POST",
+      "file": "packages/client/src/pages/customer/MatchedPage.tsx",
+      "line": 178,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/messages",
+      "method": "GET",
+      "file": "packages/client/src/pages/driver/ApproachPage.tsx",
+      "line": 123,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/messages",
+      "method": "POST",
+      "file": "packages/client/src/pages/driver/ApproachPage.tsx",
+      "line": 174,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/messages",
+      "method": "GET",
+      "file": "packages/client/src/pages/shared/ChatPage.tsx",
+      "line": 51,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/messages",
+      "method": "POST",
+      "file": "packages/client/src/pages/shared/ChatPage.tsx",
+      "line": 72,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/pickup-verification",
+      "method": "POST",
+      "file": "packages/client/src/components/journey/PickupVerifyCard.tsx",
+      "line": 56,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/rate",
+      "method": "POST",
+      "file": "packages/client/src/components/rating/RateRideCard.tsx",
+      "line": 124,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/redispatch",
+      "method": "POST",
+      "file": "packages/client/src/pages/customer/MatchedPage.tsx",
+      "line": 236,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/report",
+      "method": "POST",
+      "file": "packages/client/src/components/report/ReportRideCard.tsx",
+      "line": 53,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/start",
+      "method": "POST",
+      "file": "packages/client/src/pages/driver/ActiveRidePage.tsx",
+      "line": 145,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/:param/upload/:param",
+      "method": "POST",
+      "file": "packages/client/src/pages/driver/GoodsPickupPage.tsx",
+      "line": 195,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/fair-price",
+      "method": "GET",
+      "file": "packages/client/src/components/journey/FairPriceHint.tsx",
+      "line": 103,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/journeys/fair-price",
+      "method": "GET",
+      "file": "packages/client/src/pages/customer/UrgentMessengerPage.tsx",
+      "line": 126,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/map/:param.pmtiles",
+      "method": "GET",
+      "file": "packages/client/src/services/map-cache.ts",
+      "line": 456,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/map/regions",
+      "method": "GET",
+      "file": "packages/client/src/services/map-cache.ts",
+      "line": 309,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/payments/:param/status",
+      "method": "GET",
+      "file": "packages/client/src/pages/customer/PaymentsPage.tsx",
+      "line": 63,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/payments/:param/status",
+      "method": "GET",
+      "file": "packages/client/src/services/payment.ts",
+      "line": 123,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/payments/initiate",
+      "method": "POST",
+      "file": "packages/client/src/services/payment.ts",
+      "line": 86,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/payments/initiate-card",
+      "method": "POST",
+      "file": "packages/client/src/services/payment.ts",
+      "line": 217,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/payout/end-shift",
+      "method": "POST",
+      "file": "packages/client/src/hooks/useDriverPayout.ts",
+      "line": 110,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/payout/preference",
+      "method": "POST",
+      "file": "packages/client/src/hooks/useDriverPayout.ts",
+      "line": 153,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/payout/preference/request-otp",
+      "method": "POST",
+      "file": "packages/client/src/hooks/useDriverPayout.ts",
+      "line": 128,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/payout/summary",
+      "method": "GET",
+      "file": "packages/client/src/hooks/useDriverPayout.ts",
+      "line": 92,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/push/register",
+      "method": "POST",
+      "file": "packages/client/src/hooks/usePushNotifications.ts",
+      "line": 64,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/push/register",
+      "method": "DELETE",
+      "file": "packages/client/src/hooks/usePushNotifications.ts",
+      "line": 77,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/scheduled-rides",
+      "method": "GET",
+      "file": "packages/client/src/pages/driver/ScheduledRidesPage.tsx",
+      "line": 36,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/scheduled-rides/customer",
+      "method": "GET",
+      "file": "packages/client/src/components/journey/UpcomingRidesSection.tsx",
+      "line": 28,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/sim/inbox",
+      "method": null,
+      "file": "packages/client/src/components/ui/SimulationBanner.tsx",
+      "line": 33,
+      "via": "literal"
+    },
+    {
+      "path": "/api/sync/events",
+      "method": "POST",
+      "file": "packages/client/src/sync/SyncManager.ts",
+      "line": 83,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/sync/events",
+      "method": "GET",
+      "file": "packages/client/src/sync/SyncManager.ts",
+      "line": 135,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/sync/gps",
+      "method": "POST",
+      "file": "packages/client/src/sync/SyncManager.ts",
+      "line": 116,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me",
+      "method": "GET",
+      "file": "packages/client/src/App.tsx",
+      "line": 286,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me",
+      "method": "GET",
+      "file": "packages/client/src/components/ui/DeletionBanner.tsx",
+      "line": 114,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me",
+      "method": "GET",
+      "file": "packages/client/src/hooks/useDiagnostics.ts",
+      "line": 82,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me",
+      "method": "PUT",
+      "file": "packages/client/src/pages/auth/RegisterPage.tsx",
+      "line": 83,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me",
+      "method": "GET",
+      "file": "packages/client/src/pages/driver/DashboardPage.tsx",
+      "line": 408,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me",
+      "method": "DELETE",
+      "file": "packages/client/src/pages/shared/DeleteAccountPage.tsx",
+      "line": 72,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me",
+      "method": "PUT",
+      "file": "packages/client/src/pages/shared/ProfilePage.tsx",
+      "line": 66,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me",
+      "method": "PUT",
+      "file": "packages/client/src/pages/shared/ProfilePage.tsx",
+      "line": 106,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me",
+      "method": "PUT",
+      "file": "packages/client/src/pages/shared/ProfilePage.tsx",
+      "line": 133,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me",
+      "method": "PUT",
+      "file": "packages/client/src/pages/shared/SettingsPage.tsx",
+      "line": 107,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me",
+      "method": "PUT",
+      "file": "packages/client/src/pages/shared/SettingsPage.tsx",
+      "line": 136,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me/accept-driver-terms",
+      "method": "POST",
+      "file": "packages/client/src/pages/onboarding/DriverVerificationPage.tsx",
+      "line": 35,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me/accept-privacy",
+      "method": "POST",
+      "file": "packages/client/src/pages/onboarding/ConsentPage.tsx",
+      "line": 32,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me/accept-terms",
+      "method": "POST",
+      "file": "packages/client/src/pages/onboarding/ConsentPage.tsx",
+      "line": 39,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me/account-status",
+      "method": "GET",
+      "file": "packages/client/src/pages/driver/AccountPage.tsx",
+      "line": 393,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me/account-status",
+      "method": "GET",
+      "file": "packages/client/src/pages/driver/DashboardPage.tsx",
+      "line": 461,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me/data-export",
+      "method": "GET",
+      "file": "packages/client/src/pages/shared/SettingsPage.tsx",
+      "line": 206,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me/deletion/cancel",
+      "method": "POST",
+      "file": "packages/client/src/components/ui/DeletionBanner.tsx",
+      "line": 104,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me/driver-profile",
+      "method": "POST",
+      "file": "packages/client/src/pages/auth/RegisterPage.tsx",
+      "line": 99,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me/driver-profile",
+      "method": "PUT",
+      "file": "packages/client/src/pages/shared/SettingsPage.tsx",
+      "line": 160,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me/driver-verification",
+      "method": "PUT",
+      "file": "packages/client/src/pages/onboarding/DriverVerificationPage.tsx",
+      "line": 42,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me/driver-verification/upload/:param",
+      "method": "POST",
+      "file": "packages/client/src/pages/onboarding/DriverVerificationPage.tsx",
+      "line": 71,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me/location",
+      "method": "PUT",
+      "file": "packages/client/src/pages/driver/DashboardPage.tsx",
+      "line": 125,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me/location",
+      "method": "PUT",
+      "file": "packages/client/src/services/driver-liveness.ts",
+      "line": 67,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me/online-status",
+      "method": "PUT",
+      "file": "packages/client/src/pages/driver/DashboardPage.tsx",
+      "line": 144,
+      "via": "apiFetch"
+    },
+    {
+      "path": "/api/users/me/tier-status",
+      "method": "GET",
+      "file": "packages/client/src/pages/driver/DashboardPage.tsx",
+      "line": 441,
+      "via": "apiFetch"
+    }
+  ],
+  "unresolvedCalls": [],
+  "routes": [
+    {
+      "path": "*",
+      "screen": "NotFoundPage",
+      "screenFile": "packages/client/src/pages/NotFoundPage.tsx",
+      "guards": []
+    },
+    {
+      "path": "/",
+      "screen": "CustomerHomePage",
+      "screenFile": "packages/client/src/pages/customer/CustomerHomePage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/admin",
+      "screen": "AdminDashboard",
+      "screenFile": "packages/client/src/pages/admin/AdminDashboard.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AdminGuard"
+      ]
+    },
+    {
+      "path": "/admin/conflicts",
+      "screen": "AdminConflicts",
+      "screenFile": "packages/client/src/pages/admin/AdminConflicts.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AdminGuard"
+      ]
+    },
+    {
+      "path": "/admin/conflicts/:type",
+      "screen": "AdminConflictsList",
+      "screenFile": "packages/client/src/pages/admin/AdminConflictsList.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AdminGuard"
+      ]
+    },
+    {
+      "path": "/admin/conflicts/:type/:id",
+      "screen": "AdminConflictDetail",
+      "screenFile": "packages/client/src/pages/admin/AdminConflictDetail.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AdminGuard"
+      ]
+    },
+    {
+      "path": "/admin/conflicts/audit",
+      "screen": "AdminConflictAudit",
+      "screenFile": "packages/client/src/pages/admin/AdminConflictAudit.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AdminGuard"
+      ]
+    },
+    {
+      "path": "/admin/deletions",
+      "screen": "AdminDeletionRequests",
+      "screenFile": "packages/client/src/pages/admin/AdminDeletionRequests.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AdminGuard"
+      ]
+    },
+    {
+      "path": "/admin/disputes",
+      "screen": "AdminDisputes",
+      "screenFile": "packages/client/src/pages/admin/AdminDisputes.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AdminGuard"
+      ]
+    },
+    {
+      "path": "/admin/emergency",
+      "screen": "AdminEmergency",
+      "screenFile": "packages/client/src/pages/admin/AdminEmergency.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AdminGuard"
+      ]
+    },
+    {
+      "path": "/admin/error-reports",
+      "screen": "AdminErrorReports",
+      "screenFile": "packages/client/src/pages/admin/AdminErrorReports.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AdminGuard"
+      ]
+    },
+    {
+      "path": "/admin/flagged",
+      "screen": "AdminFlaggedUsers",
+      "screenFile": "packages/client/src/pages/admin/AdminFlaggedUsers.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AdminGuard"
+      ]
+    },
+    {
+      "path": "/admin/funnel",
+      "screen": "AdminFunnel",
+      "screenFile": "packages/client/src/pages/admin/AdminFunnel.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AdminGuard"
+      ]
+    },
+    {
+      "path": "/admin/payouts",
+      "screen": "AdminPayouts",
+      "screenFile": "packages/client/src/pages/admin/AdminPayouts.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AdminGuard"
+      ]
+    },
+    {
+      "path": "/admin/payouts/driver/:driverId",
+      "screen": "AdminPayoutDriver",
+      "screenFile": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AdminGuard"
+      ]
+    },
+    {
+      "path": "/admin/verifications",
+      "screen": "AdminVerifications",
+      "screenFile": "packages/client/src/pages/admin/AdminVerifications.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AdminGuard"
+      ]
+    },
+    {
+      "path": "/check-driver",
+      "screen": "CheckDriverPage",
+      "screenFile": "packages/client/src/pages/public/CheckDriverPage.tsx",
+      "guards": []
+    },
+    {
+      "path": "/consent",
+      "screen": "ConsentPage",
+      "screenFile": "packages/client/src/pages/onboarding/ConsentPage.tsx",
+      "guards": [
+        "ConsentRoute"
+      ]
+    },
+    {
+      "path": "/customer/priority",
+      "screen": "UrgentMessengerPage",
+      "screenFile": "packages/client/src/pages/customer/UrgentMessengerPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/customer/urgent",
+      "screen": "UrgentMessengerPage",
+      "screenFile": "packages/client/src/pages/customer/UrgentMessengerPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/diagnostics",
+      "screen": "DiagnosticsPage",
+      "screenFile": "packages/client/src/pages/shared/DiagnosticsPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/driver",
+      "screen": "DashboardPage",
+      "screenFile": "packages/client/src/pages/driver/DashboardPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "DriverRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/driver/account",
+      "screen": "AccountPage",
+      "screenFile": "packages/client/src/pages/driver/AccountPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "DriverRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/driver/approach/:id",
+      "screen": "ApproachPage",
+      "screenFile": "packages/client/src/pages/driver/ApproachPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "DriverRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/driver/auto-bid",
+      "screen": "AutoBidRulesPage",
+      "screenFile": "packages/client/src/pages/driver/AutoBidRulesPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "DriverRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/driver/bid/:id",
+      "screen": "BidPage",
+      "screenFile": "packages/client/src/pages/driver/BidPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "DriverRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/driver/goods/:id",
+      "screen": "GoodsPickupPage",
+      "screenFile": "packages/client/src/pages/driver/GoodsPickupPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "DriverRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/driver/no-show-disputes",
+      "screen": "NoShowDisputesPage",
+      "screenFile": "packages/client/src/pages/driver/NoShowDisputesPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "DriverRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/driver/ride/:id",
+      "screen": "ActiveRidePage",
+      "screenFile": "packages/client/src/pages/driver/ActiveRidePage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "DriverRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/driver/scheduled",
+      "screen": "ScheduledRidesPage",
+      "screenFile": "packages/client/src/pages/driver/ScheduledRidesPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "DriverRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/driver/screener",
+      "screen": "DriverScreenerPage",
+      "screenFile": "packages/client/src/pages/onboarding/DriverScreenerPage.tsx",
+      "guards": [
+        "ProtectedRoute"
+      ]
+    },
+    {
+      "path": "/driver/verification",
+      "screen": "DriverVerificationPage",
+      "screenFile": "packages/client/src/pages/onboarding/DriverVerificationPage.tsx",
+      "guards": [
+        "ProtectedRoute"
+      ]
+    },
+    {
+      "path": "/guide",
+      "screen": "UserGuidePage",
+      "screenFile": "packages/client/src/pages/shared/UserGuidePage.tsx",
+      "guards": []
+    },
+    {
+      "path": "/intel",
+      "screen": "IntelPage",
+      "screenFile": "packages/client/src/pages/intel/IntelPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "IntelGuard",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/journey/:id/bids",
+      "screen": "BidListPage",
+      "screenFile": "packages/client/src/pages/customer/BidListPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/journey/:id/chat",
+      "screen": "ChatPage",
+      "screenFile": "packages/client/src/pages/shared/ChatPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/journey/:id/matched",
+      "screen": "MatchedPage",
+      "screenFile": "packages/client/src/pages/customer/MatchedPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/journey/:id/progress",
+      "screen": "InProgressPage",
+      "screenFile": "packages/client/src/pages/customer/InProgressPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/journey/:id/receipt",
+      "screen": "RideReceiptPage",
+      "screenFile": "packages/client/src/pages/shared/RideReceiptPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/journey/:id/scheduled",
+      "screen": "ScheduledRidePage",
+      "screenFile": "packages/client/src/pages/customer/ScheduledRidePage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/journey/goods",
+      "screen": "GoodsRequestPage",
+      "screenFile": "packages/client/src/pages/customer/GoodsRequestPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/journey/new",
+      "screen": "NewJourneyPage",
+      "screenFile": "packages/client/src/pages/customer/NewJourneyPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/login",
+      "screen": "LoginPage",
+      "screenFile": "packages/client/src/pages/auth/LoginPage.tsx",
+      "guards": [
+        "AuthRoute"
+      ]
+    },
+    {
+      "path": "/payments",
+      "screen": "PaymentsPage",
+      "screenFile": "packages/client/src/pages/customer/PaymentsPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/profile",
+      "screen": "ProfilePage",
+      "screenFile": "packages/client/src/pages/shared/ProfilePage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/register",
+      "screen": "RegisterPage",
+      "screenFile": "packages/client/src/pages/auth/RegisterPage.tsx",
+      "guards": [
+        "RegisterRoute"
+      ]
+    },
+    {
+      "path": "/rides",
+      "screen": "HistoryPage",
+      "screenFile": "packages/client/src/pages/shared/HistoryPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/settings",
+      "screen": "SettingsPage",
+      "screenFile": "packages/client/src/pages/shared/SettingsPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/settings/delete-account",
+      "screen": "DeleteAccountPage",
+      "screenFile": "packages/client/src/pages/shared/DeleteAccountPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/settings/maps",
+      "screen": "MapsSettingsPage",
+      "screenFile": "packages/client/src/pages/shared/MapsSettingsPage.tsx",
+      "guards": [
+        "ProtectedRoute",
+        "AppShell"
+      ]
+    },
+    {
+      "path": "/welcome",
+      "screen": "WelcomePage",
+      "screenFile": "packages/client/src/pages/onboarding/WelcomePage.tsx",
+      "guards": []
+    }
+  ],
+  "navEdges": [
+    {
+      "target": "/",
+      "file": "packages/client/src/App.tsx",
+      "line": 138,
+      "kind": "redirect"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/App.tsx",
+      "line": 166,
+      "kind": "redirect"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/App.tsx",
+      "line": 173,
+      "kind": "redirect"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/App.tsx",
+      "line": 176,
+      "kind": "redirect"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/App.tsx",
+      "line": 198,
+      "kind": "redirect"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/App.tsx",
+      "line": 204,
+      "kind": "redirect"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/App.tsx",
+      "line": 223,
+      "kind": "redirect"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/components/layout/BackControl.tsx",
+      "line": 63,
+      "kind": "navigate"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/components/layout/BottomNav.tsx",
+      "line": 49,
+      "kind": "bottomnav"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/components/layout/BottomNav.tsx",
+      "line": 77,
+      "kind": "bottomnav"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/pages/customer/BidListPage.tsx",
+      "line": 1104,
+      "kind": "navigate"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/pages/customer/GoodsRequestPage.tsx",
+      "line": 376,
+      "kind": "navigate"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/pages/customer/GoodsRequestPage.tsx",
+      "line": 378,
+      "kind": "navigate"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/pages/customer/MatchedPage.tsx",
+      "line": 218,
+      "kind": "navigate"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/pages/customer/NewJourneyPage.tsx",
+      "line": 443,
+      "kind": "navigate"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/pages/customer/NewJourneyPage.tsx",
+      "line": 445,
+      "kind": "navigate"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/pages/customer/ScheduledRidePage.tsx",
+      "line": 68,
+      "kind": "navigate"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/pages/NotFoundPage.tsx",
+      "line": 15,
+      "kind": "link"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/pages/onboarding/ConsentPage.tsx",
+      "line": 61,
+      "kind": "navigate"
+    },
+    {
+      "target": "/",
+      "file": "packages/client/src/pages/shared/DeleteAccountPage.tsx",
+      "line": 94,
+      "kind": "navigate"
+    },
+    {
+      "target": "/admin",
+      "file": "packages/client/src/pages/admin/AdminConflicts.tsx",
+      "line": 85,
+      "kind": "link"
+    },
+    {
+      "target": "/admin",
+      "file": "packages/client/src/pages/admin/AdminFunnel.tsx",
+      "line": 110,
+      "kind": "link"
+    },
+    {
+      "target": "/admin",
+      "file": "packages/client/src/pages/shared/ProfilePage.tsx",
+      "line": 307,
+      "kind": "navigate"
+    },
+    {
+      "target": "/admin/conflicts",
+      "file": "packages/client/src/pages/admin/AdminConflictAudit.tsx",
+      "line": 94,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/conflicts",
+      "file": "packages/client/src/pages/admin/AdminConflictsList.tsx",
+      "line": 61,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/conflicts",
+      "file": "packages/client/src/pages/admin/AdminDashboard.tsx",
+      "line": 73,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/conflicts/:param",
+      "file": "packages/client/src/pages/admin/AdminConflictDetail.tsx",
+      "line": 104,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/conflicts/:param",
+      "file": "packages/client/src/pages/admin/AdminConflictDetail.tsx",
+      "line": 131,
+      "kind": "navigate"
+    },
+    {
+      "target": "/admin/conflicts/:param",
+      "file": "packages/client/src/pages/admin/AdminConflicts.tsx",
+      "line": 100,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/conflicts/:param/:param",
+      "file": "packages/client/src/pages/admin/AdminConflictsList.tsx",
+      "line": 74,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/conflicts/audit",
+      "file": "packages/client/src/pages/admin/AdminConflicts.tsx",
+      "line": 127,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/conflicts/audit",
+      "file": "packages/client/src/pages/admin/AdminDashboard.tsx",
+      "line": 97,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/deletions",
+      "file": "packages/client/src/pages/admin/AdminDashboard.tsx",
+      "line": 85,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/disputes",
+      "file": "packages/client/src/pages/admin/AdminDashboard.tsx",
+      "line": 70,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/emergency",
+      "file": "packages/client/src/components/admin/AdminEmergencyAlerts.tsx",
+      "line": 154,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/emergency",
+      "file": "packages/client/src/pages/admin/AdminDashboard.tsx",
+      "line": 109,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/error-reports",
+      "file": "packages/client/src/pages/admin/AdminDashboard.tsx",
+      "line": 103,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/flagged",
+      "file": "packages/client/src/pages/admin/AdminDashboard.tsx",
+      "line": 76,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/funnel",
+      "file": "packages/client/src/pages/admin/AdminDashboard.tsx",
+      "line": 94,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/payouts",
+      "file": "packages/client/src/pages/admin/AdminDashboard.tsx",
+      "line": 79,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/payouts",
+      "file": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+      "line": 297,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/payouts",
+      "file": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+      "line": 309,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/payouts/driver/:param",
+      "file": "packages/client/src/pages/admin/AdminPayouts.tsx",
+      "line": 252,
+      "kind": "link"
+    },
+    {
+      "target": "/admin/verifications",
+      "file": "packages/client/src/pages/admin/AdminDashboard.tsx",
+      "line": 67,
+      "kind": "link"
+    },
+    {
+      "target": "/check-driver",
+      "file": "packages/client/src/pages/onboarding/WelcomePage.tsx",
+      "line": 67,
+      "kind": "navigate"
+    },
+    {
+      "target": "/consent",
+      "file": "packages/client/src/App.tsx",
+      "line": 122,
+      "kind": "redirect"
+    },
+    {
+      "target": "/customer/priority",
+      "file": "packages/client/src/pages/customer/GoodsRequestPage.tsx",
+      "line": 426,
+      "kind": "navigate"
+    },
+    {
+      "target": "/customer/urgent",
+      "file": "packages/client/src/pages/customer/GoodsRequestPage.tsx",
+      "line": 436,
+      "kind": "navigate"
+    },
+    {
+      "target": "/diagnostics",
+      "file": "packages/client/src/pages/shared/ProfilePage.tsx",
+      "line": 413,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver",
+      "file": "packages/client/src/components/layout/BackControl.tsx",
+      "line": 62,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver",
+      "file": "packages/client/src/components/layout/BottomNav.tsx",
+      "line": 70,
+      "kind": "bottomnav"
+    },
+    {
+      "target": "/driver",
+      "file": "packages/client/src/components/layout/BottomNav.tsx",
+      "line": 78,
+      "kind": "bottomnav"
+    },
+    {
+      "target": "/driver",
+      "file": "packages/client/src/pages/driver/ActiveRidePage.tsx",
+      "line": 247,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver",
+      "file": "packages/client/src/pages/driver/ApproachPage.tsx",
+      "line": 160,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver",
+      "file": "packages/client/src/pages/driver/GoodsPickupPage.tsx",
+      "line": 553,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver",
+      "file": "packages/client/src/pages/onboarding/DriverVerificationPage.tsx",
+      "line": 54,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver",
+      "file": "packages/client/src/pages/onboarding/DriverVerificationPage.tsx",
+      "line": 268,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver/account",
+      "file": "packages/client/src/pages/driver/AutoBidRulesPage.tsx",
+      "line": 432,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver/account",
+      "file": "packages/client/src/pages/driver/DashboardPage.tsx",
+      "line": 616,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver/account",
+      "file": "packages/client/src/pages/driver/DashboardPage.tsx",
+      "line": 638,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver/account",
+      "file": "packages/client/src/pages/shared/ProfilePage.tsx",
+      "line": 349,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver/approach/:param",
+      "file": "packages/client/src/components/journey/ActiveJourneyBanner.tsx",
+      "line": 190,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver/auto-bid",
+      "file": "packages/client/src/pages/driver/AccountPage.tsx",
+      "line": 490,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver/bid/:param",
+      "file": "packages/client/src/pages/driver/DashboardPage.tsx",
+      "line": 746,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver/goods/:param",
+      "file": "packages/client/src/components/journey/ActiveJourneyBanner.tsx",
+      "line": 194,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver/no-show-disputes",
+      "file": "packages/client/src/pages/driver/AccountPage.tsx",
+      "line": 516,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver/ride/:param",
+      "file": "packages/client/src/components/journey/ActiveJourneyBanner.tsx",
+      "line": 192,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver/scheduled",
+      "file": "packages/client/src/components/layout/BottomNav.tsx",
+      "line": 71,
+      "kind": "bottomnav"
+    },
+    {
+      "target": "/driver/scheduled",
+      "file": "packages/client/src/components/layout/BottomNav.tsx",
+      "line": 79,
+      "kind": "bottomnav"
+    },
+    {
+      "target": "/driver/screener",
+      "file": "packages/client/src/pages/onboarding/ConsentPage.tsx",
+      "line": 59,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver/verification",
+      "file": "packages/client/src/pages/driver/DashboardPage.tsx",
+      "line": 599,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver/verification",
+      "file": "packages/client/src/pages/onboarding/DriverScreenerPage.tsx",
+      "line": 126,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver/verification",
+      "file": "packages/client/src/pages/onboarding/DriverScreenerPage.tsx",
+      "line": 136,
+      "kind": "navigate"
+    },
+    {
+      "target": "/driver/verification",
+      "file": "packages/client/src/pages/shared/ProfilePage.tsx",
+      "line": 330,
+      "kind": "navigate"
+    },
+    {
+      "target": "/guide",
+      "file": "packages/client/src/pages/onboarding/WelcomePage.tsx",
+      "line": 80,
+      "kind": "navigate"
+    },
+    {
+      "target": "/guide",
+      "file": "packages/client/src/pages/shared/ProfilePage.tsx",
+      "line": 382,
+      "kind": "navigate"
+    },
+    {
+      "target": "/intel",
+      "file": "packages/client/src/App.tsx",
+      "line": 124,
+      "kind": "redirect"
+    },
+    {
+      "target": "/intel",
+      "file": "packages/client/src/pages/admin/AdminDashboard.tsx",
+      "line": 115,
+      "kind": "link"
+    },
+    {
+      "target": "/journey/:param/bids",
+      "file": "packages/client/src/components/journey/ActiveJourneyBanner.tsx",
+      "line": 179,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/bids",
+      "file": "packages/client/src/components/sync/OutboxPanel.tsx",
+      "line": 83,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/bids",
+      "file": "packages/client/src/pages/customer/GoodsRequestPage.tsx",
+      "line": 339,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/bids",
+      "file": "packages/client/src/pages/customer/MatchedPage.tsx",
+      "line": 243,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/bids",
+      "file": "packages/client/src/pages/customer/MatchedPage.tsx",
+      "line": 519,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/bids",
+      "file": "packages/client/src/pages/customer/NewJourneyPage.tsx",
+      "line": 393,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/bids",
+      "file": "packages/client/src/pages/customer/ScheduledRidePage.tsx",
+      "line": 45,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/bids",
+      "file": "packages/client/src/pages/customer/UrgentMessengerPage.tsx",
+      "line": 229,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/chat",
+      "file": "packages/client/src/components/chat/ChatEntryButton.tsx",
+      "line": 29,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/matched",
+      "file": "packages/client/src/components/journey/ActiveJourneyBanner.tsx",
+      "line": 183,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/matched",
+      "file": "packages/client/src/pages/customer/BidListPage.tsx",
+      "line": 453,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/matched",
+      "file": "packages/client/src/pages/customer/BidListPage.tsx",
+      "line": 540,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/matched",
+      "file": "packages/client/src/pages/customer/BidListPage.tsx",
+      "line": 558,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/matched",
+      "file": "packages/client/src/pages/customer/BidListPage.tsx",
+      "line": 601,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/matched",
+      "file": "packages/client/src/pages/customer/BidListPage.tsx",
+      "line": 645,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/matched",
+      "file": "packages/client/src/pages/customer/BidListPage.tsx",
+      "line": 675,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/matched",
+      "file": "packages/client/src/pages/customer/BidListPage.tsx",
+      "line": 1012,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/progress",
+      "file": "packages/client/src/components/journey/ActiveJourneyBanner.tsx",
+      "line": 185,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/receipt",
+      "file": "packages/client/src/pages/customer/PaymentsPage.tsx",
+      "line": 214,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/receipt",
+      "file": "packages/client/src/pages/shared/HistoryPage.tsx",
+      "line": 252,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/scheduled",
+      "file": "packages/client/src/components/journey/UpcomingRidesSection.tsx",
+      "line": 56,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/:param/scheduled",
+      "file": "packages/client/src/pages/customer/NewJourneyPage.tsx",
+      "line": 391,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/goods",
+      "file": "packages/client/src/pages/customer/CustomerHomePage.tsx",
+      "line": 76,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/goods",
+      "file": "packages/client/src/pages/customer/UrgentMessengerPage.tsx",
+      "line": 268,
+      "kind": "navigate"
+    },
+    {
+      "target": "/journey/new",
+      "file": "packages/client/src/pages/customer/CustomerHomePage.tsx",
+      "line": 62,
+      "kind": "navigate"
+    },
+    {
+      "target": "/login",
+      "file": "packages/client/src/App.tsx",
+      "line": 115,
+      "kind": "redirect"
+    },
+    {
+      "target": "/login",
+      "file": "packages/client/src/App.tsx",
+      "line": 197,
+      "kind": "redirect"
+    },
+    {
+      "target": "/login",
+      "file": "packages/client/src/App.tsx",
+      "line": 219,
+      "kind": "redirect"
+    },
+    {
+      "target": "/login",
+      "file": "packages/client/src/pages/auth/LoginPage.tsx",
+      "line": 124,
+      "kind": "navigate"
+    },
+    {
+      "target": "/login",
+      "file": "packages/client/src/pages/auth/RegisterPage.tsx",
+      "line": 152,
+      "kind": "navigate"
+    },
+    {
+      "target": "/login",
+      "file": "packages/client/src/pages/onboarding/WelcomePage.tsx",
+      "line": 22,
+      "kind": "navigate"
+    },
+    {
+      "target": "/login",
+      "file": "packages/client/src/pages/shared/ProfilePage.tsx",
+      "line": 55,
+      "kind": "navigate"
+    },
+    {
+      "target": "/login",
+      "file": "packages/client/src/pages/shared/SettingsPage.tsx",
+      "line": 192,
+      "kind": "navigate"
+    },
+    {
+      "target": "/payments",
+      "file": "packages/client/src/pages/shared/ProfilePage.tsx",
+      "line": 367,
+      "kind": "navigate"
+    },
+    {
+      "target": "/profile",
+      "file": "packages/client/src/components/layout/BottomNav.tsx",
+      "line": 51,
+      "kind": "bottomnav"
+    },
+    {
+      "target": "/profile",
+      "file": "packages/client/src/components/layout/BottomNav.tsx",
+      "line": 73,
+      "kind": "bottomnav"
+    },
+    {
+      "target": "/profile",
+      "file": "packages/client/src/components/layout/BottomNav.tsx",
+      "line": 81,
+      "kind": "bottomnav"
+    },
+    {
+      "target": "/register",
+      "file": "packages/client/src/App.tsx",
+      "line": 121,
+      "kind": "redirect"
+    },
+    {
+      "target": "/register",
+      "file": "packages/client/src/App.tsx",
+      "line": 222,
+      "kind": "redirect"
+    },
+    {
+      "target": "/register",
+      "file": "packages/client/src/pages/auth/LoginPage.tsx",
+      "line": 177,
+      "kind": "navigate"
+    },
+    {
+      "target": "/rides",
+      "file": "packages/client/src/components/layout/BottomNav.tsx",
+      "line": 50,
+      "kind": "bottomnav"
+    },
+    {
+      "target": "/rides",
+      "file": "packages/client/src/components/layout/BottomNav.tsx",
+      "line": 72,
+      "kind": "bottomnav"
+    },
+    {
+      "target": "/rides",
+      "file": "packages/client/src/components/layout/BottomNav.tsx",
+      "line": 80,
+      "kind": "bottomnav"
+    },
+    {
+      "target": "/settings",
+      "file": "packages/client/src/pages/shared/DeleteAccountPage.tsx",
+      "line": 171,
+      "kind": "navigate"
+    },
+    {
+      "target": "/settings",
+      "file": "packages/client/src/pages/shared/DeleteAccountPage.tsx",
+      "line": 216,
+      "kind": "navigate"
+    },
+    {
+      "target": "/settings",
+      "file": "packages/client/src/pages/shared/ProfilePage.tsx",
+      "line": 397,
+      "kind": "navigate"
+    },
+    {
+      "target": "/settings/delete-account",
+      "file": "packages/client/src/pages/shared/SettingsPage.tsx",
+      "line": 517,
+      "kind": "navigate"
+    },
+    {
+      "target": "/settings/maps",
+      "file": "packages/client/src/pages/shared/SettingsPage.tsx",
+      "line": 372,
+      "kind": "navigate"
+    },
+    {
+      "target": "/welcome",
+      "file": "packages/client/src/App.tsx",
+      "line": 182,
+      "kind": "redirect"
+    }
+  ],
+  "unresolvedNav": [
+    {
+      "file": "packages/client/src/components/layout/AppHeader.tsx",
+      "line": 72,
+      "snippet": "navigate(home)",
+      "reason": "navigate target is not a string/template literal"
+    },
+    {
+      "file": "packages/client/src/components/ScreenErrorBoundary.tsx",
+      "line": 114,
+      "snippet": "navigate(homePath, { replace: true })",
+      "reason": "navigate target is not a string/template literal"
+    },
+    {
+      "file": "packages/client/src/hooks/usePushNotifications.ts",
+      "line": 178,
+      "snippet": "navigate(path)",
+      "reason": "navigate target is not a string/template literal"
+    },
+    {
+      "file": "packages/client/src/pages/admin/AdminPayouts.tsx",
+      "line": 159,
+      "snippet": "<Link key={t.key} to={t.linkTo}> {body} </Link>",
+      "reason": "Link target is not a string/template literal"
+    },
+    {
+      "file": "packages/client/src/pages/auth/LoginPage.tsx",
+      "line": 179,
+      "snippet": "navigate(roleHomePath(data.user?.role), { replace: true })",
+      "reason": "navigate target is not a string/template literal"
+    },
+    {
+      "file": "packages/client/src/pages/auth/RegisterPage.tsx",
+      "line": 127,
+      "snippet": "navigate(roleHomePath(updatedUser?.role ?? role), { replace: true })",
+      "reason": "navigate target is not a string/template literal"
+    }
+  ],
+  "analysis": {
+    "endpointStatus": [
+      {
+        "method": "GET",
+        "path": "/api/admin/aml-flags",
+        "file": "packages/server/src/routes/admin-aml.routes.ts",
+        "line": 59,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/aml-flags/:flagId",
+        "file": "packages/server/src/routes/admin-aml.routes.ts",
+        "line": 256,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/aml-flags/:flagId/dismiss",
+        "file": "packages/server/src/routes/admin-aml.routes.ts",
+        "line": 301,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/aml-flags/:flagId/mark-for-freeze",
+        "file": "packages/server/src/routes/admin-aml.routes.ts",
+        "line": 346,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/aml-flags/export",
+        "file": "packages/server/src/routes/admin-aml.routes.ts",
+        "line": 98,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/aml-flags/precision",
+        "file": "packages/server/src/routes/admin-aml.routes.ts",
+        "line": 192,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/bnr-reports",
+        "file": "packages/server/src/routes/admin-bnr.routes.ts",
+        "line": 31,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/bnr-reports/:id",
+        "file": "packages/server/src/routes/admin-bnr.routes.ts",
+        "line": 117,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/bnr-reports/:id/download.csv",
+        "file": "packages/server/src/routes/admin-bnr.routes.ts",
+        "line": 195,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/bnr-reports/:id/download.pdf",
+        "file": "packages/server/src/routes/admin-bnr.routes.ts",
+        "line": 173,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/bnr-reports/generate",
+        "file": "packages/server/src/routes/admin-bnr.routes.ts",
+        "line": 63,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/conflicts",
+        "file": "packages/server/src/routes/admin-conflicts.routes.ts",
+        "line": 51,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminConflicts.tsx",
+            "line": 66,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/admin/AdminDashboard.tsx",
+            "line": 31,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/conflicts/:type",
+        "file": "packages/server/src/routes/admin-conflicts.routes.ts",
+        "line": 138,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminConflictsList.tsx",
+            "line": 42,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/admin/AdminConflictAudit.tsx",
+            "line": 65,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/conflicts/:type/:id",
+        "file": "packages/server/src/routes/admin-conflicts.routes.ts",
+        "line": 169,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminConflictDetail.tsx",
+            "line": 84,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/admin/AdminConflictAudit.tsx",
+            "line": 79,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/conflicts/:type/:id/decide",
+        "file": "packages/server/src/routes/admin-conflicts.routes.ts",
+        "line": 211,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminConflictDecideModal.tsx",
+            "line": 43,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/conflicts/audit",
+        "file": "packages/server/src/routes/admin-conflicts.routes.ts",
+        "line": 81,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminConflictsList.tsx",
+            "line": 42,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/admin/AdminConflictAudit.tsx",
+            "line": 65,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/conflicts/audit/verify",
+        "file": "packages/server/src/routes/admin-conflicts.routes.ts",
+        "line": 108,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminConflictDetail.tsx",
+            "line": 84,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/admin/AdminConflictAudit.tsx",
+            "line": 79,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/dashboard",
+        "file": "packages/server/src/routes/admin.routes.ts",
+        "line": 60,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminDashboard.tsx",
+            "line": 23,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/deletion-requests",
+        "file": "packages/server/src/routes/admin.routes.ts",
+        "line": 589,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminDeletionRequests.tsx",
+            "line": 56,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/disputes",
+        "file": "packages/server/src/routes/admin.routes.ts",
+        "line": 391,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminDisputes.tsx",
+            "line": 28,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/disputes/:journeyId/resolve",
+        "file": "packages/server/src/routes/admin.routes.ts",
+        "line": 465,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminDisputes.tsx",
+            "line": 42,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/emergency/:id/resolve",
+        "file": "packages/server/src/routes/admin-emergency.routes.ts",
+        "line": 155,
+        "callers": [
+          {
+            "file": "packages/client/src/lib/emergency-api.ts",
+            "line": 72,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/emergency/active",
+        "file": "packages/server/src/routes/admin-emergency.routes.ts",
+        "line": 50,
+        "callers": [
+          {
+            "file": "packages/client/src/lib/emergency-api.ts",
+            "line": 51,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/emergency/history",
+        "file": "packages/server/src/routes/admin-emergency.routes.ts",
+        "line": 92,
+        "callers": [
+          {
+            "file": "packages/client/src/lib/emergency-api.ts",
+            "line": 59,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/error-reports",
+        "file": "packages/server/src/routes/admin-error-reports.routes.ts",
+        "line": 141,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminErrorReports.tsx",
+            "line": 66,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/error-reports/:id/export.json",
+        "file": "packages/server/src/routes/admin-error-reports.routes.ts",
+        "line": 409,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminErrorReports.tsx",
+            "line": 85,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/error-reports/export.jsonl",
+        "file": "packages/server/src/routes/admin-error-reports.routes.ts",
+        "line": 336,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminErrorReports.tsx",
+            "line": 103,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/error-reports/groups",
+        "file": "packages/server/src/routes/admin-error-reports.routes.ts",
+        "line": 227,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminErrorReports.tsx",
+            "line": 69,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/escrow/:id/verify",
+        "file": "packages/server/src/routes/admin.routes.ts",
+        "line": 697,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/fee-waivers",
+        "file": "packages/server/src/routes/admin-fee-waiver.routes.ts",
+        "line": 48,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+            "line": 126,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/fee-waivers/:waiverId/extend",
+        "file": "packages/server/src/routes/admin-fee-waiver.routes.ts",
+        "line": 158,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+            "line": 179,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/fee-waivers/:waiverId/revoke",
+        "file": "packages/server/src/routes/admin-fee-waiver.routes.ts",
+        "line": 206,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+            "line": 184,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/fee-waivers/driver/:driverId/grant",
+        "file": "packages/server/src/routes/admin-fee-waiver.routes.ts",
+        "line": 100,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+            "line": 168,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/flagged-users",
+        "file": "packages/server/src/routes/admin.routes.ts",
+        "line": 535,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminFlaggedUsers.tsx",
+            "line": 22,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/flagged-users/:userId/unflag",
+        "file": "packages/server/src/routes/admin.routes.ts",
+        "line": 653,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminFlaggedUsers.tsx",
+            "line": 30,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/freeze",
+        "file": "packages/server/src/routes/admin-freeze.routes.ts",
+        "line": 56,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/freeze/:userId",
+        "file": "packages/server/src/routes/admin-freeze.routes.ts",
+        "line": 107,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/freeze/:userId/audit",
+        "file": "packages/server/src/routes/admin-freeze.routes.ts",
+        "line": 150,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/freeze/:userId/freeze",
+        "file": "packages/server/src/routes/admin-freeze.routes.ts",
+        "line": 189,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+            "line": 226,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/freeze/:userId/unfreeze",
+        "file": "packages/server/src/routes/admin-freeze.routes.ts",
+        "line": 257,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+            "line": 226,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/funnel/export.csv",
+        "file": "packages/server/src/routes/admin-funnel.routes.ts",
+        "line": 114,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminFunnel.tsx",
+            "line": 102,
+            "via": "literal",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/funnel/metrics",
+        "file": "packages/server/src/routes/admin-funnel.routes.ts",
+        "line": 95,
+        "callers": [
+          {
+            "file": "packages/client/src/hooks/useFunnelMetrics.ts",
+            "line": 61,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/mobility/aggregates",
+        "file": "packages/server/src/routes/admin-mobility.routes.ts",
+        "line": 96,
+        "callers": [
+          {
+            "file": "packages/client/src/lib/intel-api.ts",
+            "line": 93,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/mobility/aggregates/run-now",
+        "file": "packages/server/src/routes/admin-mobility.routes.ts",
+        "line": 224,
+        "callers": [
+          {
+            "file": "packages/client/src/lib/intel-api.ts",
+            "line": 239,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/mobility/aggregates/stats",
+        "file": "packages/server/src/routes/admin-mobility.routes.ts",
+        "line": 125,
+        "callers": [
+          {
+            "file": "packages/client/src/lib/intel-api.ts",
+            "line": 123,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/mobility/tier-config",
+        "file": "packages/server/src/routes/admin-mobility.routes.ts",
+        "line": 253,
+        "callers": [
+          {
+            "file": "packages/client/src/lib/intel-api.ts",
+            "line": 115,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/mobility/tier-config/reload",
+        "file": "packages/server/src/routes/admin-mobility.routes.ts",
+        "line": 273,
+        "callers": [
+          {
+            "file": "packages/client/src/lib/intel-api.ts",
+            "line": 250,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/payouts/batches",
+        "file": "packages/server/src/routes/admin-payouts.routes.ts",
+        "line": 140,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminPayouts.tsx",
+            "line": 74,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/payouts/batches/:id",
+        "file": "packages/server/src/routes/admin-payouts.routes.ts",
+        "line": 374,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/payouts/driver/:driverId",
+        "file": "packages/server/src/routes/admin-payouts.routes.ts",
+        "line": 299,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+            "line": 113,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/payouts/summary",
+        "file": "packages/server/src/routes/admin-payouts.routes.ts",
+        "line": 203,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminPayouts.tsx",
+            "line": 60,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/pickup-verifications/summary",
+        "file": "packages/server/src/routes/admin-pickup-verification.routes.ts",
+        "line": 76,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/push/test",
+        "file": "packages/server/src/routes/admin-push.routes.ts",
+        "line": 39,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/reports/monthly",
+        "file": "packages/server/src/routes/admin.routes.ts",
+        "line": 737,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/sms-inbound",
+        "file": "packages/server/src/routes/admin-sms-inbound.routes.ts",
+        "line": 34,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/sms-inbound/:id",
+        "file": "packages/server/src/routes/admin-sms-inbound.routes.ts",
+        "line": 97,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/sms-inbound/:id/dismiss",
+        "file": "packages/server/src/routes/admin-sms-inbound.routes.ts",
+        "line": 174,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/sms-inbound/:id/replay",
+        "file": "packages/server/src/routes/admin-sms-inbound.routes.ts",
+        "line": 123,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/sms-inbound/stats",
+        "file": "packages/server/src/routes/admin-sms-inbound.routes.ts",
+        "line": 64,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/admin/verifications",
+        "file": "packages/server/src/routes/admin.routes.ts",
+        "line": 135,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminVerifications.tsx",
+            "line": 69,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/verifications/:userId/approve",
+        "file": "packages/server/src/routes/admin.routes.ts",
+        "line": 194,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminVerifications.tsx",
+            "line": 82,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/verifications/:userId/reject",
+        "file": "packages/server/src/routes/admin.routes.ts",
+        "line": 254,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminVerifications.tsx",
+            "line": 109,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/admin/verifications/:userId/revoke",
+        "file": "packages/server/src/routes/admin.routes.ts",
+        "line": 332,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+            "line": 261,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/admin/AdminVerifications.tsx",
+            "line": 123,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/auth/logout",
+        "file": "packages/server/src/routes/auth.routes.ts",
+        "line": 208,
+        "callers": [
+          {
+            "file": "packages/client/src/lib/logout.ts",
+            "line": 14,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/auth/refresh",
+        "file": "packages/server/src/routes/auth.routes.ts",
+        "line": 172,
+        "callers": [
+          {
+            "file": "packages/client/src/lib/auth-refresh.ts",
+            "line": 32,
+            "via": "fetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/auth/request-otp",
+        "file": "packages/server/src/routes/auth.routes.ts",
+        "line": 68,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/auth/LoginPage.tsx",
+            "line": 106,
+            "via": "fetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/auth/verify-otp",
+        "file": "packages/server/src/routes/auth.routes.ts",
+        "line": 120,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/auth/LoginPage.tsx",
+            "line": 147,
+            "via": "fetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/bids/my-history",
+        "file": "packages/server/src/routes/bid-history.routes.ts",
+        "line": 36,
+        "callers": [
+          {
+            "file": "packages/client/src/components/journey/ActiveJourneyBanner.tsx",
+            "line": 124,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/hooks/useSocket.ts",
+            "line": 297,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/cooperative/dashboard",
+        "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+        "line": 92,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/cooperative/dispatch",
+        "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+        "line": 331,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/cooperative/drivers",
+        "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+        "line": 134,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/cooperative/drivers/:driverProfileId",
+        "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+        "line": 168,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/cooperative/drivers/:driverProfileId/add-to-cooperative",
+        "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+        "line": 554,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/cooperative/drivers/:driverProfileId/approve",
+        "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+        "line": 434,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/cooperative/drivers/:driverProfileId/reject",
+        "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+        "line": 477,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/cooperative/drivers/:driverProfileId/remove-from-cooperative",
+        "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+        "line": 579,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/cooperative/drivers/:driverProfileId/set-active",
+        "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+        "line": 525,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/cooperative/financials",
+        "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+        "line": 200,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/cooperative/me",
+        "file": "packages/server/src/routes/cooperative-leader.routes.ts",
+        "line": 229,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/diagnostics/error-report",
+        "file": "packages/server/src/routes/diagnostics.routes.ts",
+        "line": 168,
+        "callers": [
+          {
+            "file": "packages/client/src/components/diagnostics/ErrorLogSection.tsx",
+            "line": 80,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/services/diagnostics-upload.ts",
+            "line": 177,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/docs.json",
+        "file": "packages/server/src/index.ts",
+        "line": 276,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/documents/:key",
+        "file": "packages/server/src/routes/document.routes.ts",
+        "line": 49,
+        "callers": [
+          {
+            "file": "packages/client/src/components/admin/DocumentLink.tsx",
+            "line": 69,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/driver-id/:number",
+        "file": "packages/server/src/routes/driver-id.routes.ts",
+        "line": 64,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/public/CheckDriverPage.tsx",
+            "line": 32,
+            "via": "fetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/driver/auto-bid-rules",
+        "file": "packages/server/src/routes/driver-auto-bid.routes.ts",
+        "line": 110,
+        "callers": [
+          {
+            "file": "packages/client/src/hooks/useDriverAutoBid.ts",
+            "line": 87,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/driver/auto-bid-rules",
+        "file": "packages/server/src/routes/driver-auto-bid.routes.ts",
+        "line": 128,
+        "callers": [
+          {
+            "file": "packages/client/src/hooks/useDriverAutoBid.ts",
+            "line": 123,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "DELETE",
+        "path": "/api/driver/auto-bid-rules/:id",
+        "file": "packages/server/src/routes/driver-auto-bid.routes.ts",
+        "line": 185,
+        "callers": [
+          {
+            "file": "packages/client/src/hooks/useDriverAutoBid.ts",
+            "line": 153,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "PATCH",
+        "path": "/api/driver/auto-bid-rules/:id",
+        "file": "packages/server/src/routes/driver-auto-bid.routes.ts",
+        "line": 156,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/driver/auto-bid-rules/pause-all",
+        "file": "packages/server/src/routes/driver-auto-bid.routes.ts",
+        "line": 203,
+        "callers": [
+          {
+            "file": "packages/client/src/hooks/useDriverAutoBid.ts",
+            "line": 174,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/driver/auto-bid-rules/resume-all",
+        "file": "packages/server/src/routes/driver-auto-bid.routes.ts",
+        "line": 221,
+        "callers": [
+          {
+            "file": "packages/client/src/hooks/useDriverAutoBid.ts",
+            "line": 200,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/driver/stats",
+        "file": "packages/server/src/routes/driver-stats.routes.ts",
+        "line": 46,
+        "callers": [
+          {
+            "file": "packages/client/src/components/driver/DriverStatsCard.tsx",
+            "line": 96,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/drivers/me/screener",
+        "file": "packages/server/src/routes/driver-screener.routes.ts",
+        "line": 71,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/drivers/me/screener",
+        "file": "packages/server/src/routes/driver-screener.routes.ts",
+        "line": 33,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/onboarding/DriverScreenerPage.tsx",
+            "line": 113,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/geocode/directions",
+        "file": "packages/server/src/routes/geocode.routes.ts",
+        "line": 278,
+        "callers": [
+          {
+            "file": "packages/client/src/hooks/useRouteAlternatives.ts",
+            "line": 85,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/hooks/useRouteDirections.ts",
+            "line": 64,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/geocode/reverse",
+        "file": "packages/server/src/routes/geocode.routes.ts",
+        "line": 147,
+        "callers": [
+          {
+            "file": "packages/client/src/hooks/useGeocodeSearch.ts",
+            "line": 157,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/geocode/search",
+        "file": "packages/server/src/routes/geocode.routes.ts",
+        "line": 85,
+        "callers": [
+          {
+            "file": "packages/client/src/hooks/useGeocodeSearch.ts",
+            "line": 94,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/health",
+        "file": "packages/server/src/routes/health.routes.ts",
+        "line": 42,
+        "callers": [
+          {
+            "file": "packages/client/src/App.tsx",
+            "line": 261,
+            "via": "fetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/hooks/useDiagnostics.ts",
+            "line": 68,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/sync/connectivity.ts",
+            "line": 151,
+            "via": "fetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/intel/aggregates/export",
+        "file": "packages/server/src/routes/intel.routes.ts",
+        "line": 173,
+        "callers": [
+          {
+            "file": "packages/client/src/lib/intel-api.ts",
+            "line": 147,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/journeys",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 276,
+        "callers": [
+          {
+            "file": "packages/client/src/components/journey/ActiveJourneyBanner.tsx",
+            "line": 113,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/customer/PaymentsPage.tsx",
+            "line": 139,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/driver/DashboardPage.tsx",
+            "line": 166,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/driver/NoShowDisputesPage.tsx",
+            "line": 36,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/shared/HistoryPage.tsx",
+            "line": 74,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 98,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/customer/GoodsRequestPage.tsx",
+            "line": 329,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/customer/NewJourneyPage.tsx",
+            "line": 341,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/customer/UrgentMessengerPage.tsx",
+            "line": 219,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/sync/OutboxReplay.ts",
+            "line": 97,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/journeys/:id",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 625,
+        "callers": [
+          {
+            "file": "packages/client/src/components/journey/ActiveJourneyBanner.tsx",
+            "line": 133,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/hooks/useSocket.ts",
+            "line": 201,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/customer/BidListPage.tsx",
+            "line": 195,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/customer/InProgressPage.tsx",
+            "line": 71,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/customer/MatchedPage.tsx",
+            "line": 113,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/customer/ScheduledRidePage.tsx",
+            "line": 35,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/driver/ActiveRidePage.tsx",
+            "line": 63,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/driver/ApproachPage.tsx",
+            "line": 120,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/driver/BidPage.tsx",
+            "line": 57,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/driver/GoodsPickupPage.tsx",
+            "line": 139,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/shared/RideReceiptPage.tsx",
+            "line": 85,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/components/journey/FairPriceHint.tsx",
+            "line": 103,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/customer/UrgentMessengerPage.tsx",
+            "line": 126,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/accept-bid",
+        "file": "packages/server/src/routes/bid.routes.ts",
+        "line": 168,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/customer/BidListPage.tsx",
+            "line": 403,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/accept-bid-card",
+        "file": "packages/server/src/routes/bid.routes.ts",
+        "line": 232,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/customer/BidListPage.tsx",
+            "line": 475,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/journeys/:id/bids",
+        "file": "packages/server/src/routes/bid.routes.ts",
+        "line": 35,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/customer/BidListPage.tsx",
+            "line": 198,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/customer/BidListPage.tsx",
+            "line": 293,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/bids",
+        "file": "packages/server/src/routes/bid.routes.ts",
+        "line": 73,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/driver/BidPage.tsx",
+            "line": 245,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "DELETE",
+        "path": "/api/journeys/:id/bids/:bidId",
+        "file": "packages/server/src/routes/bid.routes.ts",
+        "line": 350,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/bids/:bidId/decline",
+        "file": "packages/server/src/routes/bid.routes.ts",
+        "line": 301,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/customer/BidListPage.tsx",
+            "line": 384,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/cancel",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 1508,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/customer/MatchedPage.tsx",
+            "line": 211,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/customer/ScheduledRidePage.tsx",
+            "line": 61,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/driver/ApproachPage.tsx",
+            "line": 153,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/cancel-scheduled",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 1625,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/confirm",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 824,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/customer/InProgressPage.tsx",
+            "line": 135,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/journeys/:id/customer-mode-status",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 542,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/dispute",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 858,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/dispute-no-show",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 1585,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/driver/NoShowDisputesPage.tsx",
+            "line": 62,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/emergency",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 1037,
+        "callers": [
+          {
+            "file": "packages/client/src/components/safety/EmergencySOS.tsx",
+            "line": 87,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/journeys/:id/emergency/active",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 1469,
+        "callers": [
+          {
+            "file": "packages/client/src/components/safety/EmergencySOS.tsx",
+            "line": 177,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/end",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 797,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/driver/ActiveRidePage.tsx",
+            "line": 170,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/journeys/:id/eta",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 661,
+        "callers": [
+          {
+            "file": "packages/client/src/hooks/useDriverLocationStream.ts",
+            "line": 93,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/interrupt",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 956,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/customer/InProgressPage.tsx",
+            "line": 116,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/legs/:legId/activate",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 1833,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/driver/BidPage.tsx",
+            "line": 221,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/legs/:legId/complete",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 1757,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/driver/BidPage.tsx",
+            "line": 192,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/journeys/:id/messages",
+        "file": "packages/server/src/routes/message.routes.ts",
+        "line": 42,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/customer/MatchedPage.tsx",
+            "line": 125,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/driver/ApproachPage.tsx",
+            "line": 123,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/shared/ChatPage.tsx",
+            "line": 51,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/messages",
+        "file": "packages/server/src/routes/message.routes.ts",
+        "line": 96,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/customer/MatchedPage.tsx",
+            "line": 178,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/driver/ApproachPage.tsx",
+            "line": 174,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/shared/ChatPage.tsx",
+            "line": 72,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/pickup-verification",
+        "file": "packages/server/src/routes/pickup-verification.routes.ts",
+        "line": 65,
+        "callers": [
+          {
+            "file": "packages/client/src/components/journey/PickupVerifyCard.tsx",
+            "line": 56,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/rate",
+        "file": "packages/server/src/routes/rating.routes.ts",
+        "line": 81,
+        "callers": [
+          {
+            "file": "packages/client/src/components/rating/RateRideCard.tsx",
+            "line": 124,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/reconcile",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 1707,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/journeys/:id/reconciliation-status",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 1659,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/redispatch",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 1545,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/customer/MatchedPage.tsx",
+            "line": 236,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/report",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 909,
+        "callers": [
+          {
+            "file": "packages/client/src/components/report/ReportRideCard.tsx",
+            "line": 53,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/start",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 760,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/driver/ActiveRidePage.tsx",
+            "line": 145,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/suggest-up",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 436,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/journeys/:id/supply",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 334,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/upload/delivery-photo",
+        "file": "packages/server/src/routes/upload.routes.ts",
+        "line": 149,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/driver/GoodsPickupPage.tsx",
+            "line": 195,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/journeys/:id/upload/pickup-photo",
+        "file": "packages/server/src/routes/upload.routes.ts",
+        "line": 75,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/driver/GoodsPickupPage.tsx",
+            "line": 195,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/journeys/fair-price",
+        "file": "packages/server/src/routes/journey.routes.ts",
+        "line": 185,
+        "callers": [
+          {
+            "file": "packages/client/src/components/journey/ActiveJourneyBanner.tsx",
+            "line": 133,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/hooks/useSocket.ts",
+            "line": 201,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/customer/BidListPage.tsx",
+            "line": 195,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/customer/InProgressPage.tsx",
+            "line": 71,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/customer/MatchedPage.tsx",
+            "line": 113,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/customer/ScheduledRidePage.tsx",
+            "line": 35,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/driver/ActiveRidePage.tsx",
+            "line": 63,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/driver/ApproachPage.tsx",
+            "line": 120,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/driver/BidPage.tsx",
+            "line": 57,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/driver/GoodsPickupPage.tsx",
+            "line": 139,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/shared/RideReceiptPage.tsx",
+            "line": 85,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/components/journey/FairPriceHint.tsx",
+            "line": 103,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/customer/UrgentMessengerPage.tsx",
+            "line": 126,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/map/:region.pmtiles",
+        "file": "packages/server/src/routes/map.routes.ts",
+        "line": 256,
+        "callers": [
+          {
+            "file": "packages/client/src/services/map-cache.ts",
+            "line": 456,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/services/map-cache.ts",
+            "line": 309,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/map/kigali.pmtiles",
+        "file": "packages/server/src/routes/map.routes.ts",
+        "line": 211,
+        "callers": [
+          {
+            "file": "packages/client/src/services/map-cache.ts",
+            "line": 456,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/map/regions",
+        "file": "packages/server/src/routes/map.routes.ts",
+        "line": 176,
+        "callers": [
+          {
+            "file": "packages/client/src/services/map-cache.ts",
+            "line": 456,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/services/map-cache.ts",
+            "line": 309,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/payments/:escrowId/status",
+        "file": "packages/server/src/routes/payment.routes.ts",
+        "line": 60,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/customer/PaymentsPage.tsx",
+            "line": 63,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/services/payment.ts",
+            "line": 123,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/payments/initiate",
+        "file": "packages/server/src/routes/payment.routes.ts",
+        "line": 185,
+        "callers": [
+          {
+            "file": "packages/client/src/services/payment.ts",
+            "line": 86,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/payments/initiate-card",
+        "file": "packages/server/src/routes/payment.routes.ts",
+        "line": 371,
+        "callers": [
+          {
+            "file": "packages/client/src/services/payment.ts",
+            "line": 217,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/payout/end-shift",
+        "file": "packages/server/src/routes/payout.routes.ts",
+        "line": 288,
+        "callers": [
+          {
+            "file": "packages/client/src/hooks/useDriverPayout.ts",
+            "line": 110,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/payout/preference",
+        "file": "packages/server/src/routes/payout.routes.ts",
+        "line": 225,
+        "callers": [
+          {
+            "file": "packages/client/src/hooks/useDriverPayout.ts",
+            "line": 153,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/payout/preference/request-otp",
+        "file": "packages/server/src/routes/payout.routes.ts",
+        "line": 157,
+        "callers": [
+          {
+            "file": "packages/client/src/hooks/useDriverPayout.ts",
+            "line": 128,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/payout/summary",
+        "file": "packages/server/src/routes/payout.routes.ts",
+        "line": 66,
+        "callers": [
+          {
+            "file": "packages/client/src/hooks/useDriverPayout.ts",
+            "line": 92,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "DELETE",
+        "path": "/api/push/register",
+        "file": "packages/server/src/routes/push.routes.ts",
+        "line": 90,
+        "callers": [
+          {
+            "file": "packages/client/src/hooks/usePushNotifications.ts",
+            "line": 77,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/push/register",
+        "file": "packages/server/src/routes/push.routes.ts",
+        "line": 40,
+        "callers": [
+          {
+            "file": "packages/client/src/hooks/usePushNotifications.ts",
+            "line": 64,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/scheduled-rides",
+        "file": "packages/server/src/routes/scheduled-ride.routes.ts",
+        "line": 55,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/driver/ScheduledRidesPage.tsx",
+            "line": 36,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/scheduled-rides/:id/conflict-acknowledge",
+        "file": "packages/server/src/routes/scheduled-ride.routes.ts",
+        "line": 179,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/scheduled-rides/customer",
+        "file": "packages/server/src/routes/scheduled-ride.routes.ts",
+        "line": 111,
+        "callers": [
+          {
+            "file": "packages/client/src/components/journey/UpcomingRidesSection.tsx",
+            "line": 28,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/sim/inbox",
+        "file": "packages/server/src/routes/sim.routes.ts",
+        "line": 127,
+        "callers": [
+          {
+            "file": "packages/client/src/components/ui/SimulationBanner.tsx",
+            "line": 33,
+            "via": "literal",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/sim/messages",
+        "file": "packages/server/src/routes/sim.routes.ts",
+        "line": 97,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "POST",
+        "path": "/api/sms/inbound",
+        "file": "packages/server/src/routes/sms-inbound.routes.ts",
+        "line": 67,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "GET",
+        "path": "/api/sync/events",
+        "file": "packages/server/src/routes/sync.routes.ts",
+        "line": 89,
+        "callers": [
+          {
+            "file": "packages/client/src/sync/SyncManager.ts",
+            "line": 135,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/sync/events",
+        "file": "packages/server/src/routes/sync.routes.ts",
+        "line": 60,
+        "callers": [
+          {
+            "file": "packages/client/src/sync/SyncManager.ts",
+            "line": 83,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/sync/gps",
+        "file": "packages/server/src/routes/sync.routes.ts",
+        "line": 145,
+        "callers": [
+          {
+            "file": "packages/client/src/sync/SyncManager.ts",
+            "line": 116,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/users/:id/profile",
+        "file": "packages/server/src/routes/user.routes.ts",
+        "line": 922,
+        "callers": [],
+        "status": "orphan-candidate"
+      },
+      {
+        "method": "DELETE",
+        "path": "/api/users/me",
+        "file": "packages/server/src/routes/user.routes.ts",
+        "line": 503,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/shared/DeleteAccountPage.tsx",
+            "line": 72,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/users/me",
+        "file": "packages/server/src/routes/user.routes.ts",
+        "line": 72,
+        "callers": [
+          {
+            "file": "packages/client/src/App.tsx",
+            "line": 286,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/components/ui/DeletionBanner.tsx",
+            "line": 114,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/hooks/useDiagnostics.ts",
+            "line": 82,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/driver/DashboardPage.tsx",
+            "line": 408,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "PUT",
+        "path": "/api/users/me",
+        "file": "packages/server/src/routes/user.routes.ts",
+        "line": 119,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/auth/RegisterPage.tsx",
+            "line": 83,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/shared/ProfilePage.tsx",
+            "line": 66,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/shared/ProfilePage.tsx",
+            "line": 106,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/shared/ProfilePage.tsx",
+            "line": 133,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/shared/SettingsPage.tsx",
+            "line": 107,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/shared/SettingsPage.tsx",
+            "line": 136,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/users/me/accept-driver-terms",
+        "file": "packages/server/src/routes/user.routes.ts",
+        "line": 254,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/onboarding/DriverVerificationPage.tsx",
+            "line": 35,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/users/me/accept-privacy",
+        "file": "packages/server/src/routes/user.routes.ts",
+        "line": 167,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/onboarding/ConsentPage.tsx",
+            "line": 32,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/users/me/accept-terms",
+        "file": "packages/server/src/routes/user.routes.ts",
+        "line": 212,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/onboarding/ConsentPage.tsx",
+            "line": 39,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/users/me/account-status",
+        "file": "packages/server/src/routes/user.routes.ts",
+        "line": 894,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/driver/AccountPage.tsx",
+            "line": 393,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/pages/driver/DashboardPage.tsx",
+            "line": 461,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/users/me/data-export",
+        "file": "packages/server/src/routes/user.routes.ts",
+        "line": 588,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/shared/SettingsPage.tsx",
+            "line": 206,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/users/me/deletion/cancel",
+        "file": "packages/server/src/routes/user.routes.ts",
+        "line": 534,
+        "callers": [
+          {
+            "file": "packages/client/src/components/ui/DeletionBanner.tsx",
+            "line": 104,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/users/me/driver-profile",
+        "file": "packages/server/src/routes/user.routes.ts",
+        "line": 625,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/auth/RegisterPage.tsx",
+            "line": 99,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "PUT",
+        "path": "/api/users/me/driver-profile",
+        "file": "packages/server/src/routes/user.routes.ts",
+        "line": 675,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/shared/SettingsPage.tsx",
+            "line": 160,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "PUT",
+        "path": "/api/users/me/driver-verification",
+        "file": "packages/server/src/routes/user.routes.ts",
+        "line": 310,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/onboarding/DriverVerificationPage.tsx",
+            "line": 42,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/users/me/driver-verification/upload/:docType",
+        "file": "packages/server/src/routes/user.routes.ts",
+        "line": 420,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/onboarding/DriverVerificationPage.tsx",
+            "line": 71,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "PUT",
+        "path": "/api/users/me/location",
+        "file": "packages/server/src/routes/user.routes.ts",
+        "line": 716,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/driver/DashboardPage.tsx",
+            "line": 125,
+            "via": "apiFetch",
+            "deadFile": false
+          },
+          {
+            "file": "packages/client/src/services/driver-liveness.ts",
+            "line": 67,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "PUT",
+        "path": "/api/users/me/online-status",
+        "file": "packages/server/src/routes/user.routes.ts",
+        "line": 754,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/driver/DashboardPage.tsx",
+            "line": 144,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "GET",
+        "path": "/api/users/me/tier-status",
+        "file": "packages/server/src/routes/user.routes.ts",
+        "line": 807,
+        "callers": [
+          {
+            "file": "packages/client/src/pages/driver/DashboardPage.tsx",
+            "line": 441,
+            "via": "apiFetch",
+            "deadFile": false
+          }
+        ],
+        "status": "called"
+      },
+      {
+        "method": "POST",
+        "path": "/api/webhooks/flutterwave",
+        "file": "packages/server/src/routes/webhook.routes.ts",
+        "line": 127,
+        "callers": [],
+        "status": "orphan-candidate"
+      }
+    ],
+    "routeStatus": [
+      {
+        "path": "*",
+        "screen": "NotFoundPage",
+        "screenFile": "packages/client/src/pages/NotFoundPage.tsx",
+        "guards": [],
+        "reachable": true,
+        "reachedFrom": []
+      },
+      {
+        "path": "/",
+        "screen": "CustomerHomePage",
+        "screenFile": "packages/client/src/pages/customer/CustomerHomePage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/consent",
+          "screen:/journey/:id/bids",
+          "screen:/journey/:id/matched",
+          "screen:/journey/:id/scheduled",
+          "screen:/journey/goods",
+          "screen:/journey/new",
+          "screen:/settings/delete-account",
+          "seed:boot:/",
+          "seed:bottomnav:/",
+          "seed:bottomnav:/",
+          "seed:redirect:/",
+          "seed:redirect:/",
+          "seed:redirect:/",
+          "seed:redirect:/",
+          "seed:redirect:/",
+          "seed:redirect:/",
+          "seed:redirect:/"
+        ]
+      },
+      {
+        "path": "/admin",
+        "screen": "AdminDashboard",
+        "screenFile": "packages/client/src/pages/admin/AdminDashboard.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AdminGuard"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/admin/conflicts",
+          "screen:/admin/funnel",
+          "screen:/profile"
+        ]
+      },
+      {
+        "path": "/admin/conflicts",
+        "screen": "AdminConflicts",
+        "screenFile": "packages/client/src/pages/admin/AdminConflicts.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AdminGuard"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/admin",
+          "screen:/admin/conflicts/:type",
+          "screen:/admin/conflicts/audit"
+        ]
+      },
+      {
+        "path": "/admin/conflicts/:type",
+        "screen": "AdminConflictsList",
+        "screenFile": "packages/client/src/pages/admin/AdminConflictsList.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AdminGuard"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/admin/conflicts",
+          "screen:/admin/conflicts/:type/:id"
+        ]
+      },
+      {
+        "path": "/admin/conflicts/:type/:id",
+        "screen": "AdminConflictDetail",
+        "screenFile": "packages/client/src/pages/admin/AdminConflictDetail.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AdminGuard"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/admin/conflicts/:type"
+        ]
+      },
+      {
+        "path": "/admin/conflicts/audit",
+        "screen": "AdminConflictAudit",
+        "screenFile": "packages/client/src/pages/admin/AdminConflictAudit.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AdminGuard"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/admin",
+          "screen:/admin/conflicts"
+        ]
+      },
+      {
+        "path": "/admin/deletions",
+        "screen": "AdminDeletionRequests",
+        "screenFile": "packages/client/src/pages/admin/AdminDeletionRequests.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AdminGuard"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/admin"
+        ]
+      },
+      {
+        "path": "/admin/disputes",
+        "screen": "AdminDisputes",
+        "screenFile": "packages/client/src/pages/admin/AdminDisputes.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AdminGuard"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/admin"
+        ]
+      },
+      {
+        "path": "/admin/emergency",
+        "screen": "AdminEmergency",
+        "screenFile": "packages/client/src/pages/admin/AdminEmergency.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AdminGuard"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/admin"
+        ]
+      },
+      {
+        "path": "/admin/error-reports",
+        "screen": "AdminErrorReports",
+        "screenFile": "packages/client/src/pages/admin/AdminErrorReports.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AdminGuard"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/admin"
+        ]
+      },
+      {
+        "path": "/admin/flagged",
+        "screen": "AdminFlaggedUsers",
+        "screenFile": "packages/client/src/pages/admin/AdminFlaggedUsers.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AdminGuard"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/admin"
+        ]
+      },
+      {
+        "path": "/admin/funnel",
+        "screen": "AdminFunnel",
+        "screenFile": "packages/client/src/pages/admin/AdminFunnel.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AdminGuard"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/admin"
+        ]
+      },
+      {
+        "path": "/admin/payouts",
+        "screen": "AdminPayouts",
+        "screenFile": "packages/client/src/pages/admin/AdminPayouts.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AdminGuard"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/admin",
+          "screen:/admin/payouts/driver/:driverId"
+        ]
+      },
+      {
+        "path": "/admin/payouts/driver/:driverId",
+        "screen": "AdminPayoutDriver",
+        "screenFile": "packages/client/src/pages/admin/AdminPayoutDriver.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AdminGuard"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/admin/payouts"
+        ]
+      },
+      {
+        "path": "/admin/verifications",
+        "screen": "AdminVerifications",
+        "screenFile": "packages/client/src/pages/admin/AdminVerifications.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AdminGuard"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/admin"
+        ]
+      },
+      {
+        "path": "/check-driver",
+        "screen": "CheckDriverPage",
+        "screenFile": "packages/client/src/pages/public/CheckDriverPage.tsx",
+        "guards": [],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/welcome"
+        ]
+      },
+      {
+        "path": "/consent",
+        "screen": "ConsentPage",
+        "screenFile": "packages/client/src/pages/onboarding/ConsentPage.tsx",
+        "guards": [
+          "ConsentRoute"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "seed:redirect:/consent"
+        ]
+      },
+      {
+        "path": "/customer/priority",
+        "screen": "UrgentMessengerPage",
+        "screenFile": "packages/client/src/pages/customer/UrgentMessengerPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/journey/goods"
+        ]
+      },
+      {
+        "path": "/customer/urgent",
+        "screen": "UrgentMessengerPage",
+        "screenFile": "packages/client/src/pages/customer/UrgentMessengerPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/journey/goods"
+        ]
+      },
+      {
+        "path": "/diagnostics",
+        "screen": "DiagnosticsPage",
+        "screenFile": "packages/client/src/pages/shared/DiagnosticsPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/profile"
+        ]
+      },
+      {
+        "path": "/driver",
+        "screen": "DashboardPage",
+        "screenFile": "packages/client/src/pages/driver/DashboardPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "DriverRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/driver/approach/:id",
+          "screen:/driver/goods/:id",
+          "screen:/driver/ride/:id",
+          "screen:/driver/verification",
+          "seed:bottomnav:/driver",
+          "seed:bottomnav:/driver"
+        ]
+      },
+      {
+        "path": "/driver/account",
+        "screen": "AccountPage",
+        "screenFile": "packages/client/src/pages/driver/AccountPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "DriverRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/driver",
+          "screen:/driver/auto-bid",
+          "screen:/profile"
+        ]
+      },
+      {
+        "path": "/driver/approach/:id",
+        "screen": "ApproachPage",
+        "screenFile": "packages/client/src/pages/driver/ApproachPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "DriverRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/",
+          "screen:/driver"
+        ]
+      },
+      {
+        "path": "/driver/auto-bid",
+        "screen": "AutoBidRulesPage",
+        "screenFile": "packages/client/src/pages/driver/AutoBidRulesPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "DriverRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/driver/account"
+        ]
+      },
+      {
+        "path": "/driver/bid/:id",
+        "screen": "BidPage",
+        "screenFile": "packages/client/src/pages/driver/BidPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "DriverRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/driver"
+        ]
+      },
+      {
+        "path": "/driver/goods/:id",
+        "screen": "GoodsPickupPage",
+        "screenFile": "packages/client/src/pages/driver/GoodsPickupPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "DriverRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/",
+          "screen:/driver"
+        ]
+      },
+      {
+        "path": "/driver/no-show-disputes",
+        "screen": "NoShowDisputesPage",
+        "screenFile": "packages/client/src/pages/driver/NoShowDisputesPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "DriverRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/driver/account"
+        ]
+      },
+      {
+        "path": "/driver/ride/:id",
+        "screen": "ActiveRidePage",
+        "screenFile": "packages/client/src/pages/driver/ActiveRidePage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "DriverRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/",
+          "screen:/driver"
+        ]
+      },
+      {
+        "path": "/driver/scheduled",
+        "screen": "ScheduledRidesPage",
+        "screenFile": "packages/client/src/pages/driver/ScheduledRidesPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "DriverRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "seed:bottomnav:/driver/scheduled",
+          "seed:bottomnav:/driver/scheduled"
+        ]
+      },
+      {
+        "path": "/driver/screener",
+        "screen": "DriverScreenerPage",
+        "screenFile": "packages/client/src/pages/onboarding/DriverScreenerPage.tsx",
+        "guards": [
+          "ProtectedRoute"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/consent"
+        ]
+      },
+      {
+        "path": "/driver/verification",
+        "screen": "DriverVerificationPage",
+        "screenFile": "packages/client/src/pages/onboarding/DriverVerificationPage.tsx",
+        "guards": [
+          "ProtectedRoute"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/driver",
+          "screen:/driver/screener",
+          "screen:/profile"
+        ]
+      },
+      {
+        "path": "/guide",
+        "screen": "UserGuidePage",
+        "screenFile": "packages/client/src/pages/shared/UserGuidePage.tsx",
+        "guards": [],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/profile",
+          "screen:/welcome"
+        ]
+      },
+      {
+        "path": "/intel",
+        "screen": "IntelPage",
+        "screenFile": "packages/client/src/pages/intel/IntelPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "IntelGuard",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/admin",
+          "seed:redirect:/intel"
+        ]
+      },
+      {
+        "path": "/journey/:id/bids",
+        "screen": "BidListPage",
+        "screenFile": "packages/client/src/pages/customer/BidListPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/",
+          "screen:/customer/priority",
+          "screen:/customer/urgent",
+          "screen:/driver",
+          "screen:/journey/:id/matched",
+          "screen:/journey/:id/scheduled",
+          "screen:/journey/goods",
+          "screen:/journey/new"
+        ]
+      },
+      {
+        "path": "/journey/:id/chat",
+        "screen": "ChatPage",
+        "screenFile": "packages/client/src/pages/shared/ChatPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/driver/approach/:id",
+          "screen:/driver/goods/:id",
+          "screen:/driver/ride/:id",
+          "screen:/journey/:id/matched",
+          "screen:/journey/:id/progress"
+        ]
+      },
+      {
+        "path": "/journey/:id/matched",
+        "screen": "MatchedPage",
+        "screenFile": "packages/client/src/pages/customer/MatchedPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/",
+          "screen:/driver",
+          "screen:/journey/:id/bids"
+        ]
+      },
+      {
+        "path": "/journey/:id/progress",
+        "screen": "InProgressPage",
+        "screenFile": "packages/client/src/pages/customer/InProgressPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/",
+          "screen:/driver"
+        ]
+      },
+      {
+        "path": "/journey/:id/receipt",
+        "screen": "RideReceiptPage",
+        "screenFile": "packages/client/src/pages/shared/RideReceiptPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/payments",
+          "screen:/rides"
+        ]
+      },
+      {
+        "path": "/journey/:id/scheduled",
+        "screen": "ScheduledRidePage",
+        "screenFile": "packages/client/src/pages/customer/ScheduledRidePage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/",
+          "screen:/journey/new"
+        ]
+      },
+      {
+        "path": "/journey/goods",
+        "screen": "GoodsRequestPage",
+        "screenFile": "packages/client/src/pages/customer/GoodsRequestPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/",
+          "screen:/customer/priority",
+          "screen:/customer/urgent"
+        ]
+      },
+      {
+        "path": "/journey/new",
+        "screen": "NewJourneyPage",
+        "screenFile": "packages/client/src/pages/customer/NewJourneyPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/"
+        ]
+      },
+      {
+        "path": "/login",
+        "screen": "LoginPage",
+        "screenFile": "packages/client/src/pages/auth/LoginPage.tsx",
+        "guards": [
+          "AuthRoute"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/login",
+          "screen:/profile",
+          "screen:/register",
+          "screen:/settings",
+          "screen:/welcome",
+          "seed:boot:/login",
+          "seed:redirect:/login",
+          "seed:redirect:/login",
+          "seed:redirect:/login"
+        ]
+      },
+      {
+        "path": "/payments",
+        "screen": "PaymentsPage",
+        "screenFile": "packages/client/src/pages/customer/PaymentsPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/profile"
+        ]
+      },
+      {
+        "path": "/profile",
+        "screen": "ProfilePage",
+        "screenFile": "packages/client/src/pages/shared/ProfilePage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "seed:bottomnav:/profile",
+          "seed:bottomnav:/profile",
+          "seed:bottomnav:/profile"
+        ]
+      },
+      {
+        "path": "/register",
+        "screen": "RegisterPage",
+        "screenFile": "packages/client/src/pages/auth/RegisterPage.tsx",
+        "guards": [
+          "RegisterRoute"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/login",
+          "seed:redirect:/register",
+          "seed:redirect:/register"
+        ]
+      },
+      {
+        "path": "/rides",
+        "screen": "HistoryPage",
+        "screenFile": "packages/client/src/pages/shared/HistoryPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "seed:bottomnav:/rides",
+          "seed:bottomnav:/rides",
+          "seed:bottomnav:/rides"
+        ]
+      },
+      {
+        "path": "/settings",
+        "screen": "SettingsPage",
+        "screenFile": "packages/client/src/pages/shared/SettingsPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/profile",
+          "screen:/settings/delete-account"
+        ]
+      },
+      {
+        "path": "/settings/delete-account",
+        "screen": "DeleteAccountPage",
+        "screenFile": "packages/client/src/pages/shared/DeleteAccountPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/settings"
+        ]
+      },
+      {
+        "path": "/settings/maps",
+        "screen": "MapsSettingsPage",
+        "screenFile": "packages/client/src/pages/shared/MapsSettingsPage.tsx",
+        "guards": [
+          "ProtectedRoute",
+          "AppShell"
+        ],
+        "reachable": true,
+        "reachedFrom": [
+          "screen:/settings"
+        ]
+      },
+      {
+        "path": "/welcome",
+        "screen": "WelcomePage",
+        "screenFile": "packages/client/src/pages/onboarding/WelcomePage.tsx",
+        "guards": [],
+        "reachable": true,
+        "reachedFrom": [
+          "seed:boot:/welcome",
+          "seed:redirect:/welcome"
+        ]
+      }
+    ],
+    "unmatchedCalls": [
+      {
+        "path": "/api/documents/",
+        "method": null,
+        "file": "packages/client/src/lib/document-ref.ts",
+        "line": 20,
+        "via": "literal",
+        "deadFile": false
+      }
+    ],
+    "deadClientFiles": [],
+    "unmatchedNavTargets": []
+  }
+}

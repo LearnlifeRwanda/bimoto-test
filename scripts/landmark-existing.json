@@ -1,0 +1,282 @@
+[
+  {
+    "name": "Nyabugogo Bus Station",
+    "spoken": "Nyabugogo Bus Station",
+    "expansion": null,
+    "nameRw": "Sitasiyo ya Nyabugogo",
+    "nameFr": "Gare routière de Nyabugogo",
+    "category": "transport"
+  },
+  {
+    "name": "Kigali Bus Park",
+    "spoken": "Kigali Bus Park",
+    "expansion": null,
+    "nameRw": "Pariki ya bisi ya Kigali",
+    "nameFr": "Parc de bus de Kigali",
+    "category": "transport"
+  },
+  {
+    "name": "Remera Taxi Park",
+    "spoken": "Remera Taxi Park",
+    "expansion": null,
+    "nameRw": "Pariki ya tagisi ya Remera",
+    "nameFr": "Parc de taxis de Remera",
+    "category": "transport"
+  },
+  {
+    "name": "Kimironko Market",
+    "spoken": "Kimironko Market",
+    "expansion": null,
+    "nameRw": "Isoko rya Kimironko",
+    "nameFr": "Marché de Kimironko",
+    "category": "market"
+  },
+  {
+    "name": "Nyabugogo Market",
+    "spoken": "Nyabugogo Market",
+    "expansion": null,
+    "nameRw": "Isoko rya Nyabugogo",
+    "nameFr": "Marché de Nyabugogo",
+    "category": "market"
+  },
+  {
+    "name": "Kicukiro Center",
+    "spoken": "Kicukiro Center",
+    "expansion": null,
+    "nameRw": "Kicukiro",
+    "nameFr": "Centre de Kicukiro",
+    "category": "neighborhood"
+  },
+  {
+    "name": "Nyamirambo",
+    "spoken": "Nyamirambo",
+    "expansion": null,
+    "nameRw": "Nyamirambo",
+    "nameFr": "Nyamirambo",
+    "category": "neighborhood"
+  },
+  {
+    "name": "Gikondo",
+    "spoken": "Gikondo",
+    "expansion": null,
+    "nameRw": "Gikondo",
+    "nameFr": "Gikondo",
+    "category": "neighborhood"
+  },
+  {
+    "name": "Remera",
+    "spoken": "Remera",
+    "expansion": null,
+    "nameRw": "Remera",
+    "nameFr": "Remera",
+    "category": "neighborhood"
+  },
+  {
+    "name": "Kimihurura",
+    "spoken": "Kimihurura",
+    "expansion": null,
+    "nameRw": "Kimihurura",
+    "nameFr": "Kimihurura",
+    "category": "neighborhood"
+  },
+  {
+    "name": "Kibagabaga",
+    "spoken": "Kibagabaga",
+    "expansion": null,
+    "nameRw": "Kibagabaga",
+    "nameFr": "Kibagabaga",
+    "category": "neighborhood"
+  },
+  {
+    "name": "Kanombe",
+    "spoken": "Kanombe",
+    "expansion": null,
+    "nameRw": "Kanombe",
+    "nameFr": "Kanombe",
+    "category": "neighborhood"
+  },
+  {
+    "name": "Kacyiru",
+    "spoken": "Kacyiru",
+    "expansion": null,
+    "nameRw": "Kacyiru",
+    "nameFr": "Kacyiru",
+    "category": "neighborhood"
+  },
+  {
+    "name": "Gatsata",
+    "spoken": "Gatsata",
+    "expansion": null,
+    "nameRw": "Gatsata",
+    "nameFr": "Gatsata",
+    "category": "neighborhood"
+  },
+  {
+    "name": "Gisozi",
+    "spoken": "Gisozi",
+    "expansion": null,
+    "nameRw": "Gisozi",
+    "nameFr": "Gisozi",
+    "category": "neighborhood"
+  },
+  {
+    "name": "Kagugu",
+    "spoken": "Kagugu",
+    "expansion": null,
+    "nameRw": "Kagugu",
+    "nameFr": "Kagugu",
+    "category": "neighborhood"
+  },
+  {
+    "name": "Kabeza",
+    "spoken": "Kabeza",
+    "expansion": null,
+    "nameRw": "Kabeza",
+    "nameFr": "Kabeza",
+    "category": "neighborhood"
+  },
+  {
+    "name": "CHUK (Centre Hospitalier Universitaire de Kigali)",
+    "spoken": "CHUK",
+    "expansion": "Centre Hospitalier Universitaire de Kigali",
+    "nameRw": "CHUK",
+    "nameFr": "Centre Hospitalier Universitaire de Kigali (CHUK)",
+    "category": "hospital"
+  },
+  {
+    "name": "King Faisal Hospital",
+    "spoken": "King Faisal Hospital",
+    "expansion": null,
+    "nameRw": "Ibitaro bya King Faisal",
+    "nameFr": "Hôpital King Faisal",
+    "category": "hospital"
+  },
+  {
+    "name": "Kibagabaga Hospital",
+    "spoken": "Kibagabaga Hospital",
+    "expansion": null,
+    "nameRw": "Ibitaro bya Kibagabaga",
+    "nameFr": "Hôpital de Kibagabaga",
+    "category": "hospital"
+  },
+  {
+    "name": "University of Rwanda - Kigali Campus",
+    "spoken": "University of Rwanda - Kigali Campus",
+    "expansion": null,
+    "nameRw": "Kaminuza y'u Rwanda - Campus ya Kigali",
+    "nameFr": "Université du Rwanda - Campus de Kigali",
+    "category": "education"
+  },
+  {
+    "name": "AUCA (Adventist University of Central Africa)",
+    "spoken": "AUCA",
+    "expansion": "Adventist University of Central Africa",
+    "nameRw": "Kaminuza y'Abadivantiste bo muri Afurika yo Hagati",
+    "nameFr": "Université Adventiste d'Afrique Centrale (AUCA)",
+    "category": "education"
+  },
+  {
+    "name": "Kigali City Hall",
+    "spoken": "Kigali City Hall",
+    "expansion": null,
+    "nameRw": "Urwego rw'Umujyi wa Kigali",
+    "nameFr": "Hôtel de Ville de Kigali",
+    "category": "government"
+  },
+  {
+    "name": "RDB Offices (Rwanda Development Board)",
+    "spoken": "RDB Offices",
+    "expansion": "Rwanda Development Board",
+    "nameRw": "Ibiro bya RDB",
+    "nameFr": "Bureaux du RDB (Office Rwandais de Développement)",
+    "category": "government"
+  },
+  {
+    "name": "Kigali Convention Centre",
+    "spoken": "Kigali Convention Centre",
+    "expansion": null,
+    "nameRw": "Ikigo cy'inama cy'i Kigali",
+    "nameFr": "Centre de Conventions de Kigali",
+    "category": "venue"
+  },
+  {
+    "name": "Kigali Arena",
+    "spoken": "Kigali Arena",
+    "expansion": null,
+    "nameRw": "Kigali Arena",
+    "nameFr": "Kigali Arena",
+    "category": "venue"
+  },
+  {
+    "name": "Kigali Genocide Memorial",
+    "spoken": "Kigali Genocide Memorial",
+    "expansion": null,
+    "nameRw": "Urwibutso rwa Jenoside rwa Kigali",
+    "nameFr": "Mémorial du Génocide de Kigali",
+    "category": "memorial"
+  },
+  {
+    "name": "Amahoro Stadium",
+    "spoken": "Amahoro Stadium",
+    "expansion": null,
+    "nameRw": "Sitade y'Amahoro",
+    "nameFr": "Stade Amahoro",
+    "category": "venue"
+  },
+  {
+    "name": "Camp Kigali Memorial",
+    "spoken": "Camp Kigali Memorial",
+    "expansion": null,
+    "nameRw": "Urwibutso rwa Camp Kigali",
+    "nameFr": "Mémorial Camp Kigali",
+    "category": "memorial"
+  },
+  {
+    "name": "Kigali Marriott Hotel",
+    "spoken": "Kigali Marriott Hotel",
+    "expansion": null,
+    "nameRw": "Hoteli Marriott ya Kigali",
+    "nameFr": "Hôtel Marriott de Kigali",
+    "category": "hotel"
+  },
+  {
+    "name": "Kigali Serena Hotel",
+    "spoken": "Kigali Serena Hotel",
+    "expansion": null,
+    "nameRw": "Hoteli Serena ya Kigali",
+    "nameFr": "Hôtel Serena de Kigali",
+    "category": "hotel"
+  },
+  {
+    "name": "Radisson Blu Hotel & Convention Centre",
+    "spoken": "Radisson Blu Hotel & Convention Centre",
+    "expansion": null,
+    "nameRw": "Hoteli Radisson Blu n'Ikigo cy'inama",
+    "nameFr": "Hôtel Radisson Blu et Centre de Conventions",
+    "category": "hotel"
+  },
+  {
+    "name": "Kigali International Airport",
+    "spoken": "Kigali International Airport",
+    "expansion": null,
+    "nameRw": "Ikibuga cy'indege cya Kigali",
+    "nameFr": "Aéroport International de Kigali",
+    "category": "transport"
+  },
+  {
+    "name": "Kigali Heights",
+    "spoken": "Kigali Heights",
+    "expansion": null,
+    "nameRw": "Kigali Heights",
+    "nameFr": "Kigali Heights",
+    "category": "business"
+  },
+  {
+    "name": "MTN Center",
+    "spoken": "MTN Center",
+    "expansion": null,
+    "nameRw": "Ikigo cya MTN",
+    "nameFr": "Centre MTN",
+    "category": "business"
+  }
+]

@@ -1,0 +1,1930 @@
+[
+  {
+    "entry": "Chez Lando (Remera junction)",
+    "name": "Chez Lando",
+    "parens": [
+      "Remera junction"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Sonatubes (Kicukiro / Remera intersection)",
+    "name": "Sonatubes",
+    "parens": [
+      "Kicukiro / Remera intersection"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Giporoso (Remera / Airport road stop)",
+    "name": "Giporoso",
+    "parens": [
+      "Remera / Airport road stop"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Gishushu (Near Parliament & UoK)",
+    "name": "Gishushu",
+    "parens": [
+      "Near Parliament & UoK"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Prince House (Remera / Kanombe direction)",
+    "name": "Prince House",
+    "parens": [
+      "Remera / Kanombe direction"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Rwandex (Major industrial intersection connecting Kicukiro & Town)",
+    "name": "Rwandex",
+    "parens": [
+      "Major industrial intersection connecting Kicukiro & Town"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Kinamba (Near Kigali Genocide Memorial / Gisozi turnoff)",
+    "name": "Kinamba",
+    "parens": [
+      "Near Kigali Genocide Memorial / Gisozi turnoff"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Rubangura (Downtown central landmark)",
+    "name": "Rubangura",
+    "parens": [
+      "Downtown central landmark"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Kwa Mutwe (Nyamirambo)",
+    "name": "Kwa Mutwe",
+    "parens": [
+      "Nyamirambo"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Onatracom (Nyamirambo)",
+    "name": "Onatracom",
+    "parens": [
+      "Nyamirambo"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Kanogo (Valley connecting Downtown & Rugunga / Nyarutarama)",
+    "name": "Kanogo",
+    "parens": [
+      "Valley connecting Downtown & Rugunga / Nyarutarama"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Ziniya (Kicukiro)",
+    "name": "Ziniya",
+    "parens": [
+      "Kicukiro"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Giticyinyoni (Nyabugogo exit towards South & West)",
+    "name": "Giticyinyoni",
+    "parens": [
+      "Nyabugogo exit towards South & West"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Chez Rasta (Gikondo / Poids Lourds area)",
+    "name": "Chez Rasta",
+    "parens": [
+      "Gikondo / Poids Lourds area"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "KMT (Kibagabaga / Kimironko stop)",
+    "name": "KMT",
+    "parens": [
+      "Kibagabaga / Kimironko stop"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Chez Lando Roundabout",
+    "name": "Chez Lando Roundabout",
+    "parens": [],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Kimihurura Roundabout (Near Ministry of Foreign Affairs / KCC)",
+    "name": "Kimihurura Roundabout",
+    "parens": [
+      "Near Ministry of Foreign Affairs / KCC"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "KBC Roundabout",
+    "name": "KBC Roundabout",
+    "parens": [],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Nyarutarama Top Tower Stop",
+    "name": "Nyarutarama Top Tower Stop",
+    "parens": [],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Gikondo Merez",
+    "name": "Gikondo Merez",
+    "parens": [],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Kwa Ryenyana (Gisozi)",
+    "name": "Kwa Ryenyana",
+    "parens": [
+      "Gisozi"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Kwa Jules (Gisozi)",
+    "name": "Kwa Jules",
+    "parens": [
+      "Gisozi"
+    ],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Kagugu Centre",
+    "name": "Kagugu Centre",
+    "parens": [],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Kinyinya Centre",
+    "name": "Kinyinya Centre",
+    "parens": [],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Gatenga Stop",
+    "name": "Gatenga Stop",
+    "parens": [],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Kagarama Stop",
+    "name": "Kagarama Stop",
+    "parens": [],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Gahanga Stop",
+    "name": "Gahanga Stop",
+    "parens": [],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Nyabugogo Poids Lourds Turnoff",
+    "name": "Nyabugogo Poids Lourds Turnoff",
+    "parens": [],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Rwezamenyo Stop",
+    "name": "Rwezamenyo Stop",
+    "parens": [],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Kimisagara Maison des Jeunes Stop",
+    "name": "Kimisagara Maison des Jeunes Stop",
+    "parens": [],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Kabuga Centre",
+    "name": "Kabuga Centre",
+    "parens": [],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Kanombe Military Turnoff",
+    "name": "Kanombe Military Turnoff",
+    "parens": [],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Gisozi Gaposho",
+    "name": "Gisozi Gaposho",
+    "parens": [],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Gatenga Sonatubes Turnoff",
+    "name": "Gatenga Sonatubes Turnoff",
+    "parens": [],
+    "category": "orientation",
+    "categoryLabel": "Orientation points"
+  },
+  {
+    "entry": "Gare ya Nyabugogo (Main national & international intercity hub)",
+    "name": "Gare ya Nyabugogo",
+    "parens": [
+      "Main national & international intercity hub"
+    ],
+    "category": "transport",
+    "categoryLabel": "Bus terminals & transport parks (Gare)"
+  },
+  {
+    "entry": "Gare y'Umujyi (Downtown local bus park)",
+    "name": "Gare y'Umujyi",
+    "parens": [
+      "Downtown local bus park"
+    ],
+    "category": "transport",
+    "categoryLabel": "Bus terminals & transport parks (Gare)"
+  },
+  {
+    "entry": "Gare ya Remera (Remera taxi park)",
+    "name": "Gare ya Remera",
+    "parens": [
+      "Remera taxi park"
+    ],
+    "category": "transport",
+    "categoryLabel": "Bus terminals & transport parks (Gare)"
+  },
+  {
+    "entry": "Gare ya Kimironko",
+    "name": "Gare ya Kimironko",
+    "parens": [],
+    "category": "transport",
+    "categoryLabel": "Bus terminals & transport parks (Gare)"
+  },
+  {
+    "entry": "Gare ya Kicukiro (Kicukiro Centre terminal)",
+    "name": "Gare ya Kicukiro",
+    "parens": [
+      "Kicukiro Centre terminal"
+    ],
+    "category": "transport",
+    "categoryLabel": "Bus terminals & transport parks (Gare)"
+  },
+  {
+    "entry": "Gare ya Kabuga",
+    "name": "Gare ya Kabuga",
+    "parens": [],
+    "category": "transport",
+    "categoryLabel": "Bus terminals & transport parks (Gare)"
+  },
+  {
+    "entry": "Gare ya Gisozi",
+    "name": "Gare ya Gisozi",
+    "parens": [],
+    "category": "transport",
+    "categoryLabel": "Bus terminals & transport parks (Gare)"
+  },
+  {
+    "entry": "Gare ya Nyarutarama / Kibagabaga",
+    "name": "Gare ya Nyarutarama / Kibagabaga",
+    "parens": [],
+    "category": "transport",
+    "categoryLabel": "Bus terminals & transport parks (Gare)"
+  },
+  {
+    "entry": "Gare ya Bugesera Turnoff / Nyanza Park",
+    "name": "Gare ya Bugesera Turnoff / Nyanza Park",
+    "parens": [],
+    "category": "transport",
+    "categoryLabel": "Bus terminals & transport parks (Gare)"
+  },
+  {
+    "entry": "Isoko ya Kimironko (Largest open-air market)",
+    "name": "Isoko ya Kimironko",
+    "parens": [
+      "Largest open-air market"
+    ],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko y'Umujyi / City Market (Kigali City Market / CHIC Market)",
+    "name": "Isoko y'Umujyi / City Market",
+    "parens": [
+      "Kigali City Market / CHIC Market"
+    ],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko ya Nyabugogo",
+    "name": "Isoko ya Nyabugogo",
+    "parens": [],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko ya Nyamirambo",
+    "name": "Isoko ya Nyamirambo",
+    "parens": [],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko ya Kicukiro Centre",
+    "name": "Isoko ya Kicukiro Centre",
+    "parens": [],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko ya Gikondo",
+    "name": "Isoko ya Gikondo",
+    "parens": [],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko ya Gisozi (Building materials, wood & furniture hub)",
+    "name": "Isoko ya Gisozi",
+    "parens": [
+      "Building materials, wood & furniture hub"
+    ],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko ya Kibagabaga",
+    "name": "Isoko ya Kibagabaga",
+    "parens": [],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko ya Miduha (Nyamirambo / Rwezamenyo)",
+    "name": "Isoko ya Miduha",
+    "parens": [
+      "Nyamirambo / Rwezamenyo"
+    ],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko ya Nyarutarama",
+    "name": "Isoko ya Nyarutarama",
+    "parens": [],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko ya Gatenga",
+    "name": "Isoko ya Gatenga",
+    "parens": [],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko ya Masaka",
+    "name": "Isoko ya Masaka",
+    "parens": [],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko ya Ziniya",
+    "name": "Isoko ya Ziniya",
+    "parens": [],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko ya Kagugu",
+    "name": "Isoko ya Kagugu",
+    "parens": [],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko ya Kinyinya",
+    "name": "Isoko ya Kinyinya",
+    "parens": [],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko y'I Gitikinyoni",
+    "name": "Isoko y'I Gitikinyoni",
+    "parens": [],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko ya Rwezamenyo",
+    "name": "Isoko ya Rwezamenyo",
+    "parens": [],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko ya Kimisagara",
+    "name": "Isoko ya Kimisagara",
+    "parens": [],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko y'I Gahanga",
+    "name": "Isoko y'I Gahanga",
+    "parens": [],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Isoko ya Nyarugunga / Kamashashi",
+    "name": "Isoko ya Nyarugunga / Kamashashi",
+    "parens": [],
+    "category": "market",
+    "categoryLabel": "Markets & trading centers (Isoko)"
+  },
+  {
+    "entry": "Kigali Heights (KH)",
+    "name": "Kigali Heights",
+    "parens": [
+      "KH"
+    ],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "Kigali City Tower (KCT)",
+    "name": "Kigali City Tower",
+    "parens": [
+      "KCT"
+    ],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "CHIC Building",
+    "name": "CHIC Building",
+    "parens": [],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "M. Peace Plaza",
+    "name": "M. Peace Plaza",
+    "parens": [],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "MTN Centre (Nyarutarama)",
+    "name": "MTN Centre",
+    "parens": [
+      "Nyarutarama"
+    ],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "KBC (Kigali Business Center)",
+    "name": "KBC",
+    "parens": [
+      "Kigali Business Center"
+    ],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "Norrsken House Kigali (Old École Belge site)",
+    "name": "Norrsken House Kigali",
+    "parens": [
+      "Old École Belge site"
+    ],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "Centenary House (Downtown)",
+    "name": "Centenary House",
+    "parens": [
+      "Downtown"
+    ],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "Downtown Building (Inkundamahoro Mall)",
+    "name": "Downtown Building",
+    "parens": [
+      "Inkundamahoro Mall"
+    ],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "Grand Pension Plaza",
+    "name": "Grand Pension Plaza",
+    "parens": [],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "Simba Gishushu Center",
+    "name": "Simba Gishushu Center",
+    "parens": [],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "Simba Kimironko",
+    "name": "Simba Kimironko",
+    "parens": [],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "UTC (Union Trade Center Building)",
+    "name": "UTC",
+    "parens": [
+      "Union Trade Center Building"
+    ],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "Plaza House Ziniya",
+    "name": "Plaza House Ziniya",
+    "parens": [],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "Rubangura Commercial House",
+    "name": "Rubangura Commercial House",
+    "parens": [],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "Market Plaza (CBD)",
+    "name": "Market Plaza",
+    "parens": [
+      "CBD"
+    ],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "City Plaza (Downtown)",
+    "name": "City Plaza",
+    "parens": [
+      "Downtown"
+    ],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "Kanombe Plaza",
+    "name": "Kanombe Plaza",
+    "parens": [],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "Nyanza Plaza (Kicukiro)",
+    "name": "Nyanza Plaza",
+    "parens": [
+      "Kicukiro"
+    ],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "Kicukiro Commercial Complex",
+    "name": "Kicukiro Commercial Complex",
+    "parens": [],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "Kagugu Plaza",
+    "name": "Kagugu Plaza",
+    "parens": [],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "Gisozi Commercial Center",
+    "name": "Gisozi Commercial Center",
+    "parens": [],
+    "category": "business",
+    "categoryLabel": "Malls, office towers & commercial centers"
+  },
+  {
+    "entry": "Kiyovu (Upper Kiyovu & Lower Kiyovu)",
+    "name": "Kiyovu",
+    "parens": [
+      "Upper Kiyovu & Lower Kiyovu"
+    ],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Nyamirambo (Biryogo, Rwezamenyo, Cyahafi, Miduha)",
+    "name": "Nyamirambo",
+    "parens": [
+      "Biryogo, Rwezamenyo, Cyahafi, Miduha"
+    ],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Remera (Giporoso, Rukiri I & II)",
+    "name": "Remera",
+    "parens": [
+      "Giporoso, Rukiri I & II"
+    ],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Kimironko (Bibare, Kibagabaga border)",
+    "name": "Kimironko",
+    "parens": [
+      "Bibare, Kibagabaga border"
+    ],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Kacyiru (Ministry area, Golf course side)",
+    "name": "Kacyiru",
+    "parens": [
+      "Ministry area, Golf course side"
+    ],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Kimihurura (Rugando, Papa)",
+    "name": "Kimihurura",
+    "parens": [
+      "Rugando, Papa"
+    ],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Gisozi (Museo side, Gaposho, ULK area)",
+    "name": "Gisozi",
+    "parens": [
+      "Museo side, Gaposho, ULK area"
+    ],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Nyarutarama (Bungalow area, Golf side)",
+    "name": "Nyarutarama",
+    "parens": [
+      "Bungalow area, Golf side"
+    ],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Kibagabaga",
+    "name": "Kibagabaga",
+    "parens": [],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Gikondo (Industrial zone, Merez, Kanserege)",
+    "name": "Gikondo",
+    "parens": [
+      "Industrial zone, Merez, Kanserege"
+    ],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Kicukiro (Kagarama, Niboye, Centre)",
+    "name": "Kicukiro",
+    "parens": [
+      "Kagarama, Niboye, Centre"
+    ],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Kanombe (Airport zone, Rubyirizi, Busanza)",
+    "name": "Kanombe",
+    "parens": [
+      "Airport zone, Rubyirizi, Busanza"
+    ],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Gahanga",
+    "name": "Gahanga",
+    "parens": [],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Masaka",
+    "name": "Masaka",
+    "parens": [],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Kagugu",
+    "name": "Kagugu",
+    "parens": [],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Kinyinya",
+    "name": "Kinyinya",
+    "parens": [],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Nyabugogo",
+    "name": "Nyabugogo",
+    "parens": [],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Kimisagara",
+    "name": "Kimisagara",
+    "parens": [],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Gishushu",
+    "name": "Gishushu",
+    "parens": [],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Ndera",
+    "name": "Ndera",
+    "parens": [],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Bumbogo",
+    "name": "Bumbogo",
+    "parens": [],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Kabuga",
+    "name": "Kabuga",
+    "parens": [],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Rebero",
+    "name": "Rebero",
+    "parens": [],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "Muhima",
+    "name": "Muhima",
+    "parens": [],
+    "category": "neighborhood",
+    "categoryLabel": "Neighborhoods & zones"
+  },
+  {
+    "entry": "CHUK (Centre Hospitalier Universitaire de Kigali)",
+    "name": "CHUK",
+    "parens": [
+      "Centre Hospitalier Universitaire de Kigali"
+    ],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "King Faisal Hospital (KFH)",
+    "name": "King Faisal Hospital",
+    "parens": [
+      "KFH"
+    ],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Kibagabaga Hospital",
+    "name": "Kibagabaga Hospital",
+    "parens": [],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Kanombe Military Hospital (Rwanda Military Hospital)",
+    "name": "Kanombe Military Hospital",
+    "parens": [
+      "Rwanda Military Hospital"
+    ],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Hopital ya Muhima (Maternity & General)",
+    "name": "Hopital ya Muhima",
+    "parens": [
+      "Maternity & General"
+    ],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Hopital ya Nyamirambo (Nyarugenge District Hospital)",
+    "name": "Hopital ya Nyamirambo",
+    "parens": [
+      "Nyarugenge District Hospital"
+    ],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Hopital La Croix du Sud (Kwa Nyirinkwaya - Remera)",
+    "name": "Hopital La Croix du Sud",
+    "parens": [
+      "Kwa Nyirinkwaya - Remera"
+    ],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Kacyiru Police Hospital",
+    "name": "Kacyiru Police Hospital",
+    "parens": [],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "CARAES Ndera Hospital (Neuropsychiatric hospital)",
+    "name": "CARAES Ndera Hospital",
+    "parens": [
+      "Neuropsychiatric hospital"
+    ],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Masaka Hospital",
+    "name": "Masaka Hospital",
+    "parens": [],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Dream Medical Center (DMC)",
+    "name": "Dream Medical Center",
+    "parens": [
+      "DMC"
+    ],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Inkurunziza Orthopedic Hospital (Gikondo)",
+    "name": "Inkurunziza Orthopedic Hospital",
+    "parens": [
+      "Gikondo"
+    ],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Legacy Clinics (Kibagabaga & Nyandungu)",
+    "name": "Legacy Clinics",
+    "parens": [
+      "Kibagabaga & Nyandungu"
+    ],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Baho International Hospital (Nyarutarama)",
+    "name": "Baho International Hospital",
+    "parens": [
+      "Nyarutarama"
+    ],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Mediheal Hospital",
+    "name": "Mediheal Hospital",
+    "parens": [],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Polyclinique du Carrefour",
+    "name": "Polyclinique du Carrefour",
+    "parens": [],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Polyclinique du Plateau",
+    "name": "Polyclinique du Plateau",
+    "parens": [],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Dr. Agarwal's Eye Hospital (Kiyovu)",
+    "name": "Dr. Agarwal's Eye Hospital",
+    "parens": [
+      "Kiyovu"
+    ],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "WIWO Specialized Hospital",
+    "name": "WIWO Specialized Hospital",
+    "parens": [],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Polyfam Clinic",
+    "name": "Polyfam Clinic",
+    "parens": [],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Clinique Medicale Saint-Michel",
+    "name": "Clinique Medicale Saint-Michel",
+    "parens": [],
+    "category": "hospital",
+    "categoryLabel": "Hospitals & health facilities"
+  },
+  {
+    "entry": "Radisson Blu Hotel & Convention Centre",
+    "name": "Radisson Blu Hotel & Convention Centre",
+    "parens": [],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Kigali Marriott Hotel",
+    "name": "Kigali Marriott Hotel",
+    "parens": [],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Kigali Serena Hotel",
+    "name": "Kigali Serena Hotel",
+    "parens": [],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Hôtel des Mille Collines (Historic landmark in Kiyovu)",
+    "name": "Hôtel des Mille Collines",
+    "parens": [
+      "Historic landmark in Kiyovu"
+    ],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Ubumwe Grande Hotel",
+    "name": "Ubumwe Grande Hotel",
+    "parens": [],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Onomo Hotel",
+    "name": "Onomo Hotel",
+    "parens": [],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Lemigo Hotel",
+    "name": "Lemigo Hotel",
+    "parens": [],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Park Inn by Radisson (Kacyiru)",
+    "name": "Park Inn by Radisson",
+    "parens": [
+      "Kacyiru"
+    ],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Grand Legacy Hotel (Remera)",
+    "name": "Grand Legacy Hotel",
+    "parens": [
+      "Remera"
+    ],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "The Manor Hotel (Nyarutarama)",
+    "name": "The Manor Hotel",
+    "parens": [
+      "Nyarutarama"
+    ],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "The Retreat by Heaven (Kiyovu)",
+    "name": "The Retreat by Heaven",
+    "parens": [
+      "Kiyovu"
+    ],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Heaven Restaurant & Boutique Hotel",
+    "name": "Heaven Restaurant & Boutique Hotel",
+    "parens": [],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Chez Lando Hotel",
+    "name": "Chez Lando Hotel",
+    "parens": [],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Gorillas City Centre / Gorillas Golf Hotel",
+    "name": "Gorillas City Centre / Gorillas Golf Hotel",
+    "parens": [],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Five To Five Hotel (Remera)",
+    "name": "Five To Five Hotel",
+    "parens": [
+      "Remera"
+    ],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Okapi Hotel",
+    "name": "Okapi Hotel",
+    "parens": [],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "2000 Hotel",
+    "name": "2000 Hotel",
+    "parens": [],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Gloria Hotel (Downtown)",
+    "name": "Gloria Hotel",
+    "parens": [
+      "Downtown"
+    ],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "City Blue Hotel (Kiyovu & Kacyiru)",
+    "name": "City Blue Hotel",
+    "parens": [
+      "Kiyovu & Kacyiru"
+    ],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Golf Hills Residence (Nyarutarama)",
+    "name": "Golf Hills Residence",
+    "parens": [
+      "Nyarutarama"
+    ],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Kagarama Heights Hotel",
+    "name": "Kagarama Heights Hotel",
+    "parens": [],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Hilltop Hotel (Remera)",
+    "name": "Hilltop Hotel",
+    "parens": [
+      "Remera"
+    ],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Crown Conference Hotel (Nyandungu)",
+    "name": "Crown Conference Hotel",
+    "parens": [
+      "Nyandungu"
+    ],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Keba Hotel (Gisozi)",
+    "name": "Keba Hotel",
+    "parens": [
+      "Gisozi"
+    ],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Airport Grand Hotel (Kanombe)",
+    "name": "Airport Grand Hotel",
+    "parens": [
+      "Kanombe"
+    ],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Olympic Hotel (Kimironko)",
+    "name": "Olympic Hotel",
+    "parens": [
+      "Kimironko"
+    ],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "Green Page Hotel (Gikondo)",
+    "name": "Green Page Hotel",
+    "parens": [
+      "Gikondo"
+    ],
+    "category": "hotel",
+    "categoryLabel": "Hotels & accommodations"
+  },
+  {
+    "entry": "BK Arena",
+    "name": "BK Arena",
+    "parens": [],
+    "category": "recreation",
+    "categoryLabel": "Sports, parks & recreation"
+  },
+  {
+    "entry": "Stade Amahoro (Amahoro National Stadium)",
+    "name": "Stade Amahoro",
+    "parens": [
+      "Amahoro National Stadium"
+    ],
+    "category": "recreation",
+    "categoryLabel": "Sports, parks & recreation"
+  },
+  {
+    "entry": "Kigali Golf Resort & Villas (Nyarutarama)",
+    "name": "Kigali Golf Resort & Villas",
+    "parens": [
+      "Nyarutarama"
+    ],
+    "category": "recreation",
+    "categoryLabel": "Sports, parks & recreation"
+  },
+  {
+    "entry": "Gahanga International Cricket Stadium",
+    "name": "Gahanga International Cricket Stadium",
+    "parens": [],
+    "category": "recreation",
+    "categoryLabel": "Sports, parks & recreation"
+  },
+  {
+    "entry": "Nyandungu Eco-Park",
+    "name": "Nyandungu Eco-Park",
+    "parens": [],
+    "category": "recreation",
+    "categoryLabel": "Sports, parks & recreation"
+  },
+  {
+    "entry": "Kigali Pele Stadium (Nyamirambo / Regional Stadium)",
+    "name": "Kigali Pele Stadium",
+    "parens": [
+      "Nyamirambo / Regional Stadium"
+    ],
+    "category": "recreation",
+    "categoryLabel": "Sports, parks & recreation"
+  },
+  {
+    "entry": "Mont Kigali Hiking Trails & Zipline",
+    "name": "Mont Kigali Hiking Trails & Zipline",
+    "parens": [],
+    "category": "recreation",
+    "categoryLabel": "Sports, parks & recreation"
+  },
+  {
+    "entry": "Imbuga City Walk (Downtown Car-Free Zone)",
+    "name": "Imbuga City Walk",
+    "parens": [
+      "Downtown Car-Free Zone"
+    ],
+    "category": "recreation",
+    "categoryLabel": "Sports, parks & recreation"
+  },
+  {
+    "entry": "Biryogo Car-Free Food Street (Green Tea & Chapati Street)",
+    "name": "Biryogo Car-Free Food Street",
+    "parens": [
+      "Green Tea & Chapati Street"
+    ],
+    "category": "recreation",
+    "categoryLabel": "Sports, parks & recreation"
+  },
+  {
+    "entry": "Umusambi Village (Grey Crowned Crane sanctuary near Kabuga)",
+    "name": "Umusambi Village",
+    "parens": [
+      "Grey Crowned Crane sanctuary near Kabuga"
+    ],
+    "category": "recreation",
+    "categoryLabel": "Sports, parks & recreation"
+  },
+  {
+    "entry": "Ekurhuleni Park (Gikondo)",
+    "name": "Ekurhuleni Park",
+    "parens": [
+      "Gikondo"
+    ],
+    "category": "recreation",
+    "categoryLabel": "Sports, parks & recreation"
+  },
+  {
+    "entry": "Maison des Jeunes Kimisagara",
+    "name": "Maison des Jeunes Kimisagara",
+    "parens": [],
+    "category": "recreation",
+    "categoryLabel": "Sports, parks & recreation"
+  },
+  {
+    "entry": "Kigali Genocide Memorial (Gisozi)",
+    "name": "Kigali Genocide Memorial",
+    "parens": [
+      "Gisozi"
+    ],
+    "category": "memorial",
+    "categoryLabel": "Cultural landmarks, museums & memorials"
+  },
+  {
+    "entry": "Kigali Convention Centre (KCC Dome)",
+    "name": "Kigali Convention Centre",
+    "parens": [
+      "KCC Dome"
+    ],
+    "category": "memorial",
+    "categoryLabel": "Cultural landmarks, museums & memorials"
+  },
+  {
+    "entry": "Campaign Against Genocide Museum (Parliament Building)",
+    "name": "Campaign Against Genocide Museum",
+    "parens": [
+      "Parliament Building"
+    ],
+    "category": "memorial",
+    "categoryLabel": "Cultural landmarks, museums & memorials"
+  },
+  {
+    "entry": "Kandt House Museum (Kwa Kandt - Nyarugenge)",
+    "name": "Kandt House Museum",
+    "parens": [
+      "Kwa Kandt - Nyarugenge"
+    ],
+    "category": "memorial",
+    "categoryLabel": "Cultural landmarks, museums & memorials"
+  },
+  {
+    "entry": "Belgian Peacekeepers Memorial (Camp Kigali)",
+    "name": "Belgian Peacekeepers Memorial",
+    "parens": [
+      "Camp Kigali"
+    ],
+    "category": "memorial",
+    "categoryLabel": "Cultural landmarks, museums & memorials"
+  },
+  {
+    "entry": "Nyanza Genocide Memorial (Kicukiro)",
+    "name": "Nyanza Genocide Memorial",
+    "parens": [
+      "Kicukiro"
+    ],
+    "category": "memorial",
+    "categoryLabel": "Cultural landmarks, museums & memorials"
+  },
+  {
+    "entry": "Inema Arts Center",
+    "name": "Inema Arts Center",
+    "parens": [],
+    "category": "memorial",
+    "categoryLabel": "Cultural landmarks, museums & memorials"
+  },
+  {
+    "entry": "Niyo Art Gallery",
+    "name": "Niyo Art Gallery",
+    "parens": [],
+    "category": "memorial",
+    "categoryLabel": "Cultural landmarks, museums & memorials"
+  },
+  {
+    "entry": "Ivuka Arts Studio",
+    "name": "Ivuka Arts Studio",
+    "parens": [],
+    "category": "memorial",
+    "categoryLabel": "Cultural landmarks, museums & memorials"
+  },
+  {
+    "entry": "Nyamirambo Women's Center",
+    "name": "Nyamirambo Women's Center",
+    "parens": [],
+    "category": "memorial",
+    "categoryLabel": "Cultural landmarks, museums & memorials"
+  },
+  {
+    "entry": "Parliament of Rwanda (Ingoro y'Inteko Ishinga Amategeko)",
+    "name": "Parliament of Rwanda",
+    "parens": [
+      "Ingoro y'Inteko Ishinga Amategeko"
+    ],
+    "category": "government",
+    "categoryLabel": "Government & diplomatic"
+  },
+  {
+    "entry": "Kigali City Hall (Umujyi wa Kigali)",
+    "name": "Kigali City Hall",
+    "parens": [
+      "Umujyi wa Kigali"
+    ],
+    "category": "government",
+    "categoryLabel": "Government & diplomatic"
+  },
+  {
+    "entry": "MINJUST / Ministry of Justice (Kacyiru)",
+    "name": "MINJUST / Ministry of Justice",
+    "parens": [
+      "Kacyiru"
+    ],
+    "category": "government",
+    "categoryLabel": "Government & diplomatic"
+  },
+  {
+    "entry": "Ministry of Foreign Affairs (MINAFFET) (Kimihurura)",
+    "name": "Ministry of Foreign Affairs",
+    "parens": [
+      "MINAFFET",
+      "Kimihurura"
+    ],
+    "category": "government",
+    "categoryLabel": "Government & diplomatic"
+  },
+  {
+    "entry": "RDB (Rwanda Development Board - Gishushu)",
+    "name": "RDB",
+    "parens": [
+      "Rwanda Development Board - Gishushu"
+    ],
+    "category": "government",
+    "categoryLabel": "Government & diplomatic"
+  },
+  {
+    "entry": "Rwanda Revenue Authority (RRA) (Kimihurura)",
+    "name": "Rwanda Revenue Authority",
+    "parens": [
+      "RRA",
+      "Kimihurura"
+    ],
+    "category": "government",
+    "categoryLabel": "Government & diplomatic"
+  },
+  {
+    "entry": "Prime Minister's Office (Kimihurura)",
+    "name": "Prime Minister's Office",
+    "parens": [
+      "Kimihurura"
+    ],
+    "category": "government",
+    "categoryLabel": "Government & diplomatic"
+  },
+  {
+    "entry": "US Embassy Rwanda (Kacyiru)",
+    "name": "US Embassy Rwanda",
+    "parens": [
+      "Kacyiru"
+    ],
+    "category": "government",
+    "categoryLabel": "Government & diplomatic"
+  },
+  {
+    "entry": "BRD Building (Development Bank of Rwanda - CBD)",
+    "name": "BRD Building",
+    "parens": [
+      "Development Bank of Rwanda - CBD"
+    ],
+    "category": "government",
+    "categoryLabel": "Government & diplomatic"
+  },
+  {
+    "entry": "National Bank of Rwanda (BNR) (Downtown)",
+    "name": "National Bank of Rwanda",
+    "parens": [
+      "BNR",
+      "Downtown"
+    ],
+    "category": "government",
+    "categoryLabel": "Government & diplomatic"
+  },
+  {
+    "entry": "University of Rwanda (UR) - Remera Campus",
+    "name": "University of Rwanda - Remera Campus",
+    "parens": [
+      "UR"
+    ],
+    "category": "education",
+    "categoryLabel": "Universities & high schools"
+  },
+  {
+    "entry": "University of Rwanda (UR) - Gikondo Campus (Ex-SFB)",
+    "name": "University of Rwanda - Gikondo Campus",
+    "parens": [
+      "UR",
+      "Ex-SFB"
+    ],
+    "category": "education",
+    "categoryLabel": "Universities & high schools"
+  },
+  {
+    "entry": "ULK (Université Libre de Kigali - Gisozi)",
+    "name": "ULK",
+    "parens": [
+      "Université Libre de Kigali - Gisozi"
+    ],
+    "category": "education",
+    "categoryLabel": "Universities & high schools"
+  },
+  {
+    "entry": "IPRC Kigali (formerly ETO Kicukiro)",
+    "name": "IPRC Kigali",
+    "parens": [
+      "formerly ETO Kicukiro"
+    ],
+    "category": "education",
+    "categoryLabel": "Universities & high schools"
+  },
+  {
+    "entry": "Carnegie Mellon University Africa (CMU-Africa) (Bumbogo Innovation City)",
+    "name": "Carnegie Mellon University Africa",
+    "parens": [
+      "CMU-Africa",
+      "Bumbogo Innovation City"
+    ],
+    "category": "education",
+    "categoryLabel": "Universities & high schools"
+  },
+  {
+    "entry": "University of Kigali (UoK) (Gishushu)",
+    "name": "University of Kigali",
+    "parens": [
+      "UoK",
+      "Gishushu"
+    ],
+    "category": "education",
+    "categoryLabel": "Universities & high schools"
+  },
+  {
+    "entry": "Mount Kenya University Rwanda (Kagarama)",
+    "name": "Mount Kenya University Rwanda",
+    "parens": [
+      "Kagarama"
+    ],
+    "category": "education",
+    "categoryLabel": "Universities & high schools"
+  },
+  {
+    "entry": "Green Hills Academy (Nyarutarama)",
+    "name": "Green Hills Academy",
+    "parens": [
+      "Nyarutarama"
+    ],
+    "category": "education",
+    "categoryLabel": "Universities & high schools"
+  },
+  {
+    "entry": "Lycée de Kigali (LDK)",
+    "name": "Lycée de Kigali",
+    "parens": [
+      "LDK"
+    ],
+    "category": "education",
+    "categoryLabel": "Universities & high schools"
+  },
+  {
+    "entry": "College Saint-Andre (Nyamirambo)",
+    "name": "College Saint-Andre",
+    "parens": [
+      "Nyamirambo"
+    ],
+    "category": "education",
+    "categoryLabel": "Universities & high schools"
+  },
+  {
+    "entry": "FAWE Girls' School (Gisozi)",
+    "name": "FAWE Girls' School",
+    "parens": [
+      "Gisozi"
+    ],
+    "category": "education",
+    "categoryLabel": "Universities & high schools"
+  },
+  {
+    "entry": "APACOPE (CBD)",
+    "name": "APACOPE",
+    "parens": [
+      "CBD"
+    ],
+    "category": "education",
+    "categoryLabel": "Universities & high schools"
+  },
+  {
+    "entry": "Kigali Parents' School (Kimironko)",
+    "name": "Kigali Parents' School",
+    "parens": [
+      "Kimironko"
+    ],
+    "category": "education",
+    "categoryLabel": "Universities & high schools"
+  },
+  {
+    "entry": "Riviera High School (Kabuga road)",
+    "name": "Riviera High School",
+    "parens": [
+      "Kabuga road"
+    ],
+    "category": "education",
+    "categoryLabel": "Universities & high schools"
+  },
+  {
+    "entry": "African Leadership University (ALU) (Bumbogo)",
+    "name": "African Leadership University",
+    "parens": [
+      "ALU",
+      "Bumbogo"
+    ],
+    "category": "education",
+    "categoryLabel": "Universities & high schools"
+  },
+  {
+    "entry": "Sainte-Famille (Cathédrale Sainte-Famille - Muhima)",
+    "name": "Sainte-Famille",
+    "parens": [
+      "Cathédrale Sainte-Famille - Muhima"
+    ],
+    "category": "worship",
+    "categoryLabel": "Churches & mosques"
+  },
+  {
+    "entry": "Saint-Michel (Cathédrale Saint-Michel - Kiyovu)",
+    "name": "Saint-Michel",
+    "parens": [
+      "Cathédrale Saint-Michel - Kiyovu"
+    ],
+    "category": "worship",
+    "categoryLabel": "Churches & mosques"
+  },
+  {
+    "entry": "Regina Pacis (Remera / Kicukiro border)",
+    "name": "Regina Pacis",
+    "parens": [
+      "Remera / Kicukiro border"
+    ],
+    "category": "worship",
+    "categoryLabel": "Churches & mosques"
+  },
+  {
+    "entry": "Christian Life Assembly (CLA) (Nyarutarama)",
+    "name": "Christian Life Assembly",
+    "parens": [
+      "CLA",
+      "Nyarutarama"
+    ],
+    "category": "worship",
+    "categoryLabel": "Churches & mosques"
+  },
+  {
+    "entry": "Zion Temple Celebration Center (Gatenga)",
+    "name": "Zion Temple Celebration Center",
+    "parens": [
+      "Gatenga"
+    ],
+    "category": "worship",
+    "categoryLabel": "Churches & mosques"
+  },
+  {
+    "entry": "Restoration Church Kimironko",
+    "name": "Restoration Church Kimironko",
+    "parens": [],
+    "category": "worship",
+    "categoryLabel": "Churches & mosques"
+  },
+  {
+    "entry": "EPR Remera",
+    "name": "EPR Remera",
+    "parens": [],
+    "category": "worship",
+    "categoryLabel": "Churches & mosques"
+  },
+  {
+    "entry": "EPR Nyarugenge",
+    "name": "EPR Nyarugenge",
+    "parens": [],
+    "category": "worship",
+    "categoryLabel": "Churches & mosques"
+  },
+  {
+    "entry": "Eglise Vivante Kicukiro & Kimironko",
+    "name": "Eglise Vivante Kicukiro & Kimironko",
+    "parens": [],
+    "category": "worship",
+    "categoryLabel": "Churches & mosques"
+  },
+  {
+    "entry": "New Life Bible Church (Kicukiro)",
+    "name": "New Life Bible Church",
+    "parens": [
+      "Kicukiro"
+    ],
+    "category": "worship",
+    "categoryLabel": "Churches & mosques"
+  },
+  {
+    "entry": "Masjid al-Fath (Green Mosque y'I Biryogo)",
+    "name": "Masjid al-Fath",
+    "parens": [
+      "Green Mosque y'I Biryogo"
+    ],
+    "category": "worship",
+    "categoryLabel": "Churches & mosques"
+  },
+  {
+    "entry": "Masjid al-Madina (Onatracom Mosque - Nyamirambo)",
+    "name": "Masjid al-Madina",
+    "parens": [
+      "Onatracom Mosque - Nyamirambo"
+    ],
+    "category": "worship",
+    "categoryLabel": "Churches & mosques"
+  },
+  {
+    "entry": "Paroisse Saint-Pierre Kacyiru",
+    "name": "Paroisse Saint-Pierre Kacyiru",
+    "parens": [],
+    "category": "worship",
+    "categoryLabel": "Churches & mosques"
+  },
+  {
+    "entry": "Eglise Catholique Kibagabaga",
+    "name": "Eglise Catholique Kibagabaga",
+    "parens": [],
+    "category": "worship",
+    "categoryLabel": "Churches & mosques"
+  },
+  {
+    "entry": "Special Economic Zone (SEZ) (Masaka / Nyandungu)",
+    "name": "Special Economic Zone",
+    "parens": [
+      "SEZ",
+      "Masaka / Nyandungu"
+    ],
+    "category": "industrial",
+    "categoryLabel": "Industrial & logistics"
+  },
+  {
+    "entry": "Gikondo Industrial Zone (Ex-Industrial area)",
+    "name": "Gikondo Industrial Zone",
+    "parens": [
+      "Ex-Industrial area"
+    ],
+    "category": "industrial",
+    "categoryLabel": "Industrial & logistics"
+  },
+  {
+    "entry": "Bralirwa Gikondo Depot",
+    "name": "Bralirwa Gikondo Depot",
+    "parens": [],
+    "category": "industrial",
+    "categoryLabel": "Industrial & logistics"
+  },
+  {
+    "entry": "Inyange Industries (Masaka)",
+    "name": "Inyange Industries",
+    "parens": [
+      "Masaka"
+    ],
+    "category": "industrial",
+    "categoryLabel": "Industrial & logistics"
+  },
+  {
+    "entry": "DP World Kigali (Masaka Logistics Hub)",
+    "name": "DP World Kigali",
+    "parens": [
+      "Masaka Logistics Hub"
+    ],
+    "category": "industrial",
+    "categoryLabel": "Industrial & logistics"
+  },
+  {
+    "entry": "Magerwa (Customs bonded warehouse - Gikondo)",
+    "name": "Magerwa",
+    "parens": [
+      "Customs bonded warehouse - Gikondo"
+    ],
+    "category": "industrial",
+    "categoryLabel": "Industrial & logistics"
+  },
+  {
+    "entry": "Villa Portofino (Nyarutarama)",
+    "name": "Villa Portofino",
+    "parens": [
+      "Nyarutarama"
+    ],
+    "category": "venue",
+    "categoryLabel": "Wedding & event venues"
+  },
+  {
+    "entry": "Intare Conference Arena (Rusororo)",
+    "name": "Intare Conference Arena",
+    "parens": [
+      "Rusororo"
+    ],
+    "category": "venue",
+    "categoryLabel": "Wedding & event venues"
+  },
+  {
+    "entry": "The Retreat by Heaven (Kiyovu)",
+    "name": "The Retreat by Heaven",
+    "parens": [
+      "Kiyovu"
+    ],
+    "category": "venue",
+    "categoryLabel": "Wedding & event venues"
+  },
+  {
+    "entry": "Rebero Cultural Village / Rebero Resort (Rebero)",
+    "name": "Rebero Cultural Village / Rebero Resort",
+    "parens": [
+      "Rebero"
+    ],
+    "category": "venue",
+    "categoryLabel": "Wedding & event venues"
+  },
+  {
+    "entry": "La Palisse Hotel (Gahanga / Nyamata road)",
+    "name": "La Palisse Hotel",
+    "parens": [
+      "Gahanga / Nyamata road"
+    ],
+    "category": "venue",
+    "categoryLabel": "Wedding & event venues"
+  },
+  {
+    "entry": "Kagarama Garden Venues (Kicukiro)",
+    "name": "Kagarama Garden Venues",
+    "parens": [
+      "Kicukiro"
+    ],
+    "category": "venue",
+    "categoryLabel": "Wedding & event venues"
+  },
+  {
+    "entry": "Mount Kigali Gardens (Nyamirambo)",
+    "name": "Mount Kigali Gardens",
+    "parens": [
+      "Nyamirambo"
+    ],
+    "category": "venue",
+    "categoryLabel": "Wedding & event venues"
+  },
+  {
+    "entry": "Jannah Hotel & Lawns (Kacyiru)",
+    "name": "Jannah Hotel & Lawns",
+    "parens": [
+      "Kacyiru"
+    ],
+    "category": "venue",
+    "categoryLabel": "Wedding & event venues"
+  },
+  {
+    "entry": "Jalia Hall & Gardens (Gikondo / Rebero road)",
+    "name": "Jalia Hall & Gardens",
+    "parens": [
+      "Gikondo / Rebero road"
+    ],
+    "category": "venue",
+    "categoryLabel": "Wedding & event venues"
+  },
+  {
+    "entry": "Les Tentes Camp Kigali (Camp Kigali Tents / Events Park)",
+    "name": "Les Tentes Camp Kigali",
+    "parens": [
+      "Camp Kigali Tents / Events Park"
+    ],
+    "category": "venue",
+    "categoryLabel": "Wedding & event venues"
+  },
+  {
+    "entry": "Intare arena (Gisozi)",
+    "name": "Intare arena",
+    "parens": [
+      "Gisozi"
+    ],
+    "category": "venue",
+    "categoryLabel": "Wedding & event venues"
+  }
+]

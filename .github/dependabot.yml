@@ -1,0 +1,50 @@
+# SUPPLY-CHAIN G3 — AUDIT-BATTERY §K-5.
+#
+# Until this file existed, `.github/` held `workflows/` and nothing
+# else: no dependency automation of any kind under ~1,400 installed
+# packages. scripts/dep-guard/ is the gate that catches a new HIGH
+# advisory; this is the pump that keeps one from arriving in the first
+# place.
+#
+# Grouped on purpose. Ungrouped npm updates on a five-package pnpm
+# workspace open a PR per package per week, which is how dependency
+# automation gets muted a fortnight after it is switched on. One grouped
+# PR per ecosystem is one review.
+#
+# Note what this does NOT do: `pnpm.overrides` in the root package.json
+# carries this repo's security floors, and Dependabot does not raise
+# override entries. Those are the dep-guard's job — a floor that stops
+# being needed shows up as a STALE baseline entry, not as a PR here.
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      # Everything routine in one PR. A major is deliberately excluded:
+      # §0's out-of-scope list (Express 4->5, Prisma 5->6, Sentry 8->10,
+      # React 18->19, zod 3->4, helmet 7->8, Vite 5->7, React Router
+      # 6->7) is out of scope precisely because each needs its own
+      # migration, not a lockfile bump.
+      minor-and-patch:
+        patterns: ['*']
+        update-types: [minor, patch]
+    ignore:
+      - dependency-name: '*'
+        update-types: [version-update:semver-major]
+    commit-message:
+      prefix: deps
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ['*']
+    commit-message:
+      prefix: ci

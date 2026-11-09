@@ -1,0 +1,27 @@
+[
+  {
+    "key": "processJourneyExpiry in packages/server/src/jobs/journey-expiry.job.ts",
+    "class": "c",
+    "reason": "Self-healing. The two writes the walker sees here are the REQUESTED-expiry block: journey.update to EXPIRED, then bid.update to DECLINED for each pending bid, each inside its own try/catch so one bad bid does not abort the sweep. A decline that fails leaves a PENDING bid on an expired journey — which bid-expiry.job sweeps independently (where: { status: PENDING, createdAt: { lt: threshold } } -> EXPIRED), so the state converges without operator action. No money moves in this block. The stale-MATCHED block below it, where money DOES move, is D-5 and is now one transaction per journey."
+  },
+  {
+    "key": "startJourney in packages/server/src/services/journey.service.ts",
+    "class": "c",
+    "reason": "Idempotent. journey.update stamps IN_PROGRESS; driverProfile.update refreshes lastLat/lastLng/lastLocationAt. A failure between them loses one location refresh on a driver whose next GPS ping overwrites it seconds later — nothing decides anything on that row's freshness at this moment. This is the class-(c) precedent D-6's identical location refresh cites for staying outside its transaction."
+  },
+  {
+    "key": "interruptJourney in packages/server/src/services/journey.service.ts",
+    "class": "b",
+    "reason": "Best-effort supplementary records. The writes flagged here are the optional gpsPoint.create (only when the caller sent coordinates) and the optional message.create carrying the interruption reason (only when one was given). Both are records ABOUT an interruption that the journey.update and the escrow freeze have already decided; neither is read by a state machine and neither moves money. Losing one costs a line of context in the reconciliation view, not a state."
+  },
+  {
+    "key": "POST /:id/emergency in packages/server/src/routes/journey.routes.ts",
+    "class": "b",
+    "reason": "Best-effort by design, and the handler says so: both writes sit in their own swallowing try/catch because the alarm must reach the admin channel whether or not its bookkeeping lands. emergencyAlert.create backs the live follow (its comment: alertId undefined 'costs the live follow, never the alarm'), and syncEvent.create is the event-ledger row that doubles as the storm guard. A panic button that fails because a diagnostic row failed is the worse outcome."
+  },
+  {
+    "key": "processEvents in packages/server/src/services/sync.service.ts",
+    "class": "b",
+    "reason": "Best-effort by design, stated in the code: syncEvent.create is the offline event being accepted; syncRejection.create is the diagnostic row written in the catch when acceptance failed, and its own inner catch captures to Sentry rather than halting because 'the client already received the rejection in the response and the sync path is more critical than the diagnostic row'. The two writes are the success and failure arms of one event — never both for the same event — so there is no half-state between them to protect."
+  }
+]

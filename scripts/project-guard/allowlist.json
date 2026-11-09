@@ -1,0 +1,94 @@
+[
+  {
+    "path": "scripts/constants-guard/tests/fixtures/fakerepo",
+    "reason": "Guard fixture tree. These files MUST NOT compile as part of any project: they are a synthetic mini-repo the constants guard walks as DATA, and several of them are deliberately malformed against the real rules (a constant declared with no consumer, an unattested literal). Pulling them under a compiler would either fail the typecheck or force them to be made valid, which would destroy what they test."
+  },
+  {
+    "path": "scripts/i18n-review/tests/fixtures/fakerepo",
+    "reason": "Guard fixture tree, same rule as the constants-guard fixtures: the i18n reviewer walks these as data. They restate locale-constant shapes it must parse, including ones the real tree would reject."
+  },
+  {
+    "path": "scripts/wiring-audit/tests/fixtures/fakerepo",
+    "reason": "Guard fixture tree. The wiring audit's whole subject is reachability, so this fakerepo deliberately contains an unreachable page (DeadFile.tsx) and an orphan endpoint \u2014 the defects it must detect. It is input, not source."
+  },
+  {
+    "path": "scripts/route-guard/tests/fixtures",
+    "reason": "Guard fixture tree. These route/service files deliberately contain the over-reaching reads and unattested selectors rule 1 and rule 2 must flag; they are parsed as text, never imported."
+  },
+  {
+    "path": "scripts/serialization-guard/tests/fixtures",
+    "reason": "Guard fixture tree (CUTGUARD v2 G1). These route/service files deliberately return raw Prisma rows so rules S1 and S2 have something to condemn; they are parsed as text by the self-test, never imported and never built. Their imports point at paths that do not exist from here, which is why a compiler must not look at them."
+  },
+  {
+    "path": "scripts/txn-guard/tests/fixtures",
+    "reason": "Guard fixture tree. planted.service.ts is a transaction defect by construction and batched.service.ts is its sanctioned counterpart; the walker reads both as text."
+  },
+  {
+    "path": "scripts/livewire",
+    "reason": "HYGIENE W3 G3 (DEVIATION, see the PR body). The dispatch scoped this root for deletion on the premise of zero references; docs/live-wire-measurements.md references measure.ts and payload-diff.ts three times as the re-runnable instrument that produced the merged before/after tables, so deleting it would strand a merged document \u2014 a \u00a76 STOP. It also cannot be brought under a project as it stands: its imports (@prisma/client, socket.io-client, jsonwebtoken) live in packages/server/node_modules and pnpm's isolated layout gives a root-level project no way to resolve them, and the files carry pre-existing strict-mode errors. It is scanned instead by the phone-access-convention test's UNTYPECHECKED_ROOTS rule (packages/server/src/__tests__/phone-access-convention.test.ts). Owner: whoever next re-runs the live-wire measurement."
+  },
+  {
+    "path": "packages/e2e/blackbox-probe.mjs",
+    "reason": "VALIDATE-MEND G5 / FT B6 \u2014 a one-off diagnostic probe, run by hand against a live stack to reproduce the BLACKBOX error-ledger walk outside Playwright. It talks to a running server over HTTP and imports nothing from the tree, so no project has anything to gain from compiling it. Conversion candidate only if it ever grows assertions somebody relies on."
+  },
+  {
+    "path": "packages/e2e/quota-probe.mjs",
+    "reason": "VALIDATE-MEND G5 / FT B6 \u2014 a one-off diagnostic probe for the storage-quota behaviour, run by hand against a live stack. Same shape as blackbox-probe: HTTP in, console out, no imports from the tree."
+  },
+  {
+    "path": "packages/e2e/tile-probe.mjs",
+    "reason": "VALIDATE-MEND G5 / FT B6 \u2014 a one-off diagnostic probe for map-tile availability, run by hand when the tile stack is suspect. Same shape as the other two probes."
+  },
+  {
+    "path": "packages/client/scripts/profile-crash-repro/repro.mjs",
+    "reason": "VALIDATE-MEND G5 / FT B6 \u2014 a repro harness for the profile crash, kept so the failure can be re-staged rather than re-remembered. It drives a browser against a built bundle and is deliberately outside the client's project: bringing it under a compiler would pull Node and browser globals into one program for no benefit."
+  },
+  {
+    "path": "packages/client/scripts/profile-crash-repro/mock-api.mjs",
+    "reason": "VALIDATE-MEND G5 / FT B6 \u2014 the stub API the profile-crash repro runs against. Part of that harness, meaningless on its own, same reason."
+  },
+  {
+    "path": "packages/client/scripts/profile-crash-repro/serve-dist.mjs",
+    "reason": "VALIDATE-MEND G5 / FT B6 \u2014 the static server the profile-crash repro loads the built bundle from. Part of that harness, same reason."
+  },
+  {
+    "path": "packages/client/scripts/profile-crash-repro/walk.mjs",
+    "reason": "VALIDATE-MEND G5 / FT B6 \u2014 the scripted walk through the screens the profile-crash repro replays. Part of that harness, same reason."
+  },
+  {
+    "path": "packages/client/scripts/generate-brand-assets.mjs",
+    "reason": "VALIDATE-MEND G5 / FT B6 \u2014 the icon and splash-screen generator. It is run when the brand assets change and writes into the native app directories, which are themselves outside every project (SKIP_DIRS). A build-time asset producer, not application source."
+  },
+  {
+    "path": "scripts/geojson-to-poly.mjs",
+    "reason": "VALIDATE-MEND G5 / FT B6 \u2014 MAP-RWANDA G3's GeoJSON-to-osmosis-.poly converter, one step of the by-hand map-region pipeline (map:build). It is invoked by a shell script, not imported by anything, and its behaviour is pinned by scripts/tests/geojson-to-poly.test.mjs."
+  },
+  {
+    "path": "scripts/select-admin4.mjs",
+    "reason": "VALIDATE-MEND G5 / FT B6 \u2014 SHIPSHAPE G2's admin_level=4 feature selector, the step before geojson-to-poly in the same by-hand map-region pipeline. Pinned by scripts/tests/select-admin4.test.mjs."
+  },
+  {
+    "path": "scripts/add-locale-keys.mjs",
+    "reason": "VALIDATE-MEND G5 / FT B6 \u2014 appends locale keys to the three translation.json files without disturbing key order. Twenty-five lines of readFileSync/writeFileSync with no imports from the tree; the i18n review pipeline (i18n:review, i18n:review:check) is what actually gates the result. Converting it would buy nothing a type could catch."
+  },
+  {
+    "path": "scripts/tests/geojson-to-poly.test.mjs",
+    "reason": "VALIDATE-MEND G5 / FT B6 \u2014 a node:test file for geojson-to-poly.mjs. A test follows its subject: it imports the .mjs directly, so it can only be brought under a compiler after the subject is."
+  },
+  {
+    "path": "scripts/tests/select-admin4.test.mjs",
+    "reason": "VALIDATE-MEND G5 / FT B6 \u2014 a node:test file for select-admin4.mjs, following its subject for the same reason."
+  },
+  {
+    "path": "scripts/tests/verify-landmarks.test.mjs",
+    "reason": "VALIDATE-MEND G5 / FT B6 \u2014 a node:test file for verify-landmarks.mjs, following its subject for the same reason."
+  },
+  {
+    "path": "scripts/build-landmarks.mjs",
+    "reason": "VALIDATE-MEND G5 / FT B6 \u2014 conversion candidate, produces shipped data. LANDMARKS G2 rebuilds the Kigali landmark catalogue that ships inside @bimoto/shared, so unlike the probes and the pipeline steps its OUTPUT is application data a passenger sees. That is exactly why it should be TypeScript and be typechecked against the Landmark type it emits. Held out here only because the conversion is its own dispatch, not because no compiler should look at it."
+  },
+  {
+    "path": "scripts/verify-landmarks.mjs",
+    "reason": "VALIDATE-MEND G5 / FT B6 \u2014 conversion candidate, produces shipped data. LANDMARKS G1's audit of the same catalogue, and the reason the UNVERIFIED_LANDMARKS split exists. Same argument as build-landmarks: it reasons about shipped data using shapes a compiler could check, and is held out only until that conversion is dispatched."
+  }
+]

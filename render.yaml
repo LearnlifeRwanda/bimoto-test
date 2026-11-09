@@ -1,0 +1,171 @@
+# Render Blueprint — Bimoto API
+# https://render.com/docs/blueprint-spec
+#
+# Apply via: Render dashboard → New → Blueprint → connect this repo.
+# Set every `sync: false` env var via the dashboard before first deploy.
+# See docs/deployment/render-env-vars.md for the canonical list.
+
+services:
+  - type: web
+    name: bimoto-api
+    runtime: docker
+    repo: https://github.com/Joschll/bimoto
+    branch: main
+    plan: free                     # upgrade to "starter" ($7/mo) to disable sleep
+    region: frankfurt              # closest to Kigali on free tier
+    dockerfilePath: packages/server/Dockerfile
+    dockerContext: .               # repo root — Dockerfile COPYs workspace manifests
+    healthCheckPath: /api/health
+    autoDeploy: true               # deploy every push to `main`
+    envVars:
+      # ----- Required (set in dashboard) -----
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_REFRESH_SECRET
+        sync: false
+      - key: ENCRYPTION_KEY
+        sync: false
+
+      # ----- Static -----
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "3000"
+      - key: CLIENT_URL
+        sync: false                # depends on where the client is hosted
+
+      # ----- Flutterwave -----
+      - key: FLW_PUBLIC_KEY
+        sync: false
+      - key: FLW_SECRET_KEY
+        sync: false
+      - key: FLW_SECRET_HASH
+        sync: false
+      - key: FLW_ENCRYPTION_KEY
+        sync: false
+      - key: FLW_ENV
+        value: sandbox             # flip to "production" when Flutterwave approves
+
+      # ----- Africa's Talking -----
+      - key: AT_API_KEY
+        sync: false
+      - key: AT_USERNAME
+        sync: false
+      - key: AT_INBOUND_HMAC_SECRET
+        sync: false
+      - key: AT_INBOUND_SHORTCODE
+        sync: false
+
+      # ----- Sentry (optional) -----
+      - key: SENTRY_DSN
+        sync: false
+
+      # ----- Push notifications (optional; no-op until set) -----
+      # See docs/deployment/mobile-push-setup.md for provisioning.
+      - key: FCM_SERVICE_ACCOUNT_JSON
+        sync: false
+      - key: APNS_TEAM_ID
+        sync: false
+      - key: APNS_KEY_ID
+        sync: false
+      - key: APNS_BUNDLE_ID
+        sync: false
+      - key: APNS_PRIVATE_KEY
+        sync: false
+      - key: APNS_PRODUCTION
+        value: "true"
+
+      # ----- Cron schedules (defaults are fine) -----
+      - key: BNR_TIMEZONE
+        value: Africa/Kigali
+      - key: GRAPH_DETECTION_CRON
+        value: "0 3 * * *"
+      - key: MOBILITY_AGGREGATION_CRON
+        value: "0 4 * * *"
+
+      # ----- GROUNDSKEEPER G5 — keys .env.example declared and this file
+      # did not. The two disagreed in both directions, and the gap was not
+      # cosmetic: a Render deploy silently shipped without address search
+      # (LOCATIONIQ_API_KEY), without the offline Kigali map
+      # (MAP_PMTILES_PATH) and without the SOS ops-SMS leg
+      # (EMERGENCY_OPS_PHONE), each of which fails soft by design and so
+      # says nothing when it is missing.
+      #
+      # Secrets follow this file's own convention and are set in the
+      # dashboard (sync: false). Everything with a safe default is stated
+      # at its default so the deployed value is readable here rather than
+      # inferred from source.
+
+      # Address autocomplete + reverse geocoding + route directions. Empty
+      # = /api/geocode answers 503 and the app falls back to map + GPS.
+      - key: LOCATIONIQ_API_KEY
+        sync: false
+
+      # Designated ops phone for the rider-emergency SMS. Empty = that leg
+      # is skipped with a log warning; socket alerts and contact SMS still
+      # fire.
+      - key: EMERGENCY_OPS_PHONE
+        sync: false
+
+      # Absolute path to the Kigali PMTiles extract served at
+      # /api/map/kigali.pmtiles. Empty = the default data/kigali.pmtiles is
+      # used, and a clean 404 if neither resolves.
+      - key: MAP_PMTILES_PATH
+        value: ""
+
+      # BNR report output directory. Empty = ~/.bimoto/reports/bnr.
+      - key: BNR_REPORT_DIR
+        value: ""
+
+      # ----- PREPROTO-SIM switches. A deploy that does not state these is
+      # a deploy whose mode has to be inferred; startup-guard.ts refuses any
+      # combination that could be mistaken for the other.
+      - key: PAYMENTS_MODE
+        value: live
+      - key: SMS_MODE
+        value: live
+      - key: SIMULATED_FAILURE_MODE
+        value: none
+      # SENDER-MATCH-2 — SMS authenticates by caller ID, so money and
+      # marketplace commands are off. 'full' + PAYMENTS_MODE=live is a hard
+      # startup refusal, by design.
+      - key: SMS_COMMAND_TIER
+        value: safe
+      # Support number offered by the HELP SMS reply, E.164. Unset omits the
+      # clause entirely — never a placeholder.
+      - key: SUPPORT_PHONE
+        sync: false
+      # COUNTER-READY — the one-counter-per-bid experiment ships ASLEEP in
+      # APK 14 and Update 7 is this value becoming "true". Flipping it needs
+      # a restart, not a new build: the app reads it from /api/health at
+      # boot. Default false; an unreachable health endpoint never enables a
+      # dormant feature.
+      - key: COUNTER_BID_ENABLED
+        value: "false"
+      - key: ALLOW_SIMULATED_IN_PROD
+        value: "false"
+      # Simulated-SMS inbox token. Only meaningful under SMS_MODE=simulated,
+      # and it delivers login OTPs, so it is a dashboard secret (>= 32 chars
+      # or unset).
+      - key: SIM_INBOX_TOKEN
+        sync: false
+      - key: SKIP_DRIVER_VERIFICATION
+        value: "false"
+
+      # ----- Auth / transport settings this file left to their defaults.
+      # Render terminates TLS in front of the container, so the proxy hop
+      # must be trusted or every IP-keyed rate limit collapses onto one
+      # bucket.
+      - key: TRUST_PROXY
+        value: "true"
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: OTP_MAX_ATTEMPTS
+        value: "5"
+      # Comma-separated CORS allow-list. Empty = allow only CLIENT_URL. The
+      # Capacitor WebView origin (https://localhost) belongs here for the
+      # native app.
+      - key: CORS_ORIGINS
+        sync: false

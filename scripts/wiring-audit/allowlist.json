@@ -1,0 +1,206 @@
+[
+  {
+    "key": "endpoint DELETE /api/journeys/:id/bids/:bidId",
+    "reason": "server-orphan pending founder wire-or-delete decision (wiring-report §2.2)"
+  },
+  {
+    "key": "endpoint GET /api/admin/aml-flags",
+    "reason": "AML runbook curl surface (aml-review-runbook.md) — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/admin/aml-flags/:flagId",
+    "reason": "AML runbook curl surface (aml-review-runbook.md) — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/admin/aml-flags/export",
+    "reason": "AML runbook curl surface (aml-review-runbook.md) — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/admin/aml-flags/precision",
+    "reason": "AML runbook curl surface (aml-review-runbook.md) — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/admin/bnr-reports",
+    "reason": "BNR compliance ops surface (API.md, monthly job) — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/admin/bnr-reports/:id",
+    "reason": "BNR compliance ops surface (API.md, monthly job) — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/admin/bnr-reports/:id/download.csv",
+    "reason": "BNR compliance ops surface (API.md, monthly job) — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/admin/bnr-reports/:id/download.pdf",
+    "reason": "BNR compliance ops surface (API.md, monthly job) — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/admin/escrow/:id/verify",
+    "reason": "ops-consumed admin endpoint — intentionally headless, medium confidence (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/admin/freeze",
+    "reason": "freeze inspection reads for runbook ops — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/admin/freeze/:userId",
+    "reason": "freeze inspection reads for runbook ops — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/admin/freeze/:userId/audit",
+    "reason": "freeze inspection reads for runbook ops — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/admin/payouts/batches/:id",
+    "reason": "server-orphan pending founder wire-or-delete decision (wiring-report §2.2)"
+  },
+  {
+    "key": "endpoint GET /api/admin/pickup-verifications/summary",
+    "reason": "ops-consumed admin endpoint — intentionally headless, medium confidence (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/admin/reports/monthly",
+    "reason": "BNR compliance ops surface (API.md, monthly job) — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/admin/sms-inbound",
+    "reason": "ops review surface for the SMS webhook — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/admin/sms-inbound/:id",
+    "reason": "ops review surface for the SMS webhook — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/admin/sms-inbound/stats",
+    "reason": "ops review surface for the SMS webhook — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/cooperative/dashboard",
+    "reason": "cooperative-leader backend awaiting Jean dashboard — dormant-by-decision (wiring-report §2.3)"
+  },
+  {
+    "key": "endpoint GET /api/cooperative/drivers",
+    "reason": "cooperative-leader backend awaiting Jean dashboard — dormant-by-decision (wiring-report §2.3)"
+  },
+  {
+    "key": "endpoint GET /api/cooperative/drivers/:driverProfileId",
+    "reason": "cooperative-leader backend awaiting Jean dashboard — dormant-by-decision (wiring-report §2.3)"
+  },
+  {
+    "key": "endpoint GET /api/cooperative/financials",
+    "reason": "cooperative-leader backend awaiting Jean dashboard — dormant-by-decision (wiring-report §2.3)"
+  },
+  {
+    "key": "endpoint GET /api/cooperative/me",
+    "reason": "cooperative-leader backend awaiting Jean dashboard — dormant-by-decision (wiring-report §2.3)"
+  },
+  {
+    "key": "endpoint GET /api/docs.json",
+    "reason": "public OpenAPI contract by design — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/drivers/me/screener",
+    "reason": "server-orphan pending founder wire-or-delete decision (wiring-report §2.2)"
+  },
+  {
+    "key": "endpoint GET /api/journeys/:id/customer-mode-status",
+    "reason": "customer-modes forward wiring for unbuilt UI (socket-wiring-audit.md) — dormant-by-decision (wiring-report §2.3)"
+  },
+  {
+    "key": "endpoint GET /api/journeys/:id/reconciliation-status",
+    "reason": "server-orphan pending founder wire-or-delete decision (wiring-report §2.2)"
+  },
+  {
+    "key": "endpoint GET /api/journeys/:id/supply",
+    "reason": "customer-modes forward wiring for unbuilt UI (socket-wiring-audit.md) — dormant-by-decision (wiring-report §2.3)"
+  },
+  {
+    "key": "endpoint GET /api/sim/messages",
+    "reason": "documented curl/ops surface (pre-prototype-runbook.md) — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint GET /api/users/:id/profile",
+    "reason": "server-orphan pending founder wire-or-delete decision (wiring-report §2.2)"
+  },
+  {
+    "key": "endpoint PATCH /api/driver/auto-bid-rules/:id",
+    "reason": "auto-bid rules screen (TEAM-SAID G4) creates, lists and deletes rules; editing in place is not built — a driver deletes and rewrites. Server-orphan by decision (wiring-report §2.3)"
+  },
+  {
+    "key": "endpoint POST /api/admin/aml-flags/:flagId/dismiss",
+    "reason": "AML runbook curl surface (aml-review-runbook.md) — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint POST /api/admin/aml-flags/:flagId/mark-for-freeze",
+    "reason": "AML runbook curl surface (aml-review-runbook.md) — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint POST /api/admin/bnr-reports/generate",
+    "reason": "BNR compliance ops surface (API.md, monthly job) — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint POST /api/admin/push/test",
+    "reason": "ops-consumed admin endpoint — intentionally headless, medium confidence (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint POST /api/admin/sms-inbound/:id/dismiss",
+    "reason": "ops review surface for the SMS webhook — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint POST /api/admin/sms-inbound/:id/replay",
+    "reason": "ops review surface for the SMS webhook — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint POST /api/cooperative/dispatch",
+    "reason": "cooperative-leader backend awaiting Jean dashboard — dormant-by-decision (wiring-report §2.3)"
+  },
+  {
+    "key": "endpoint POST /api/cooperative/drivers/:driverProfileId/add-to-cooperative",
+    "reason": "cooperative-leader backend awaiting Jean dashboard — dormant-by-decision (wiring-report §2.3)"
+  },
+  {
+    "key": "endpoint POST /api/cooperative/drivers/:driverProfileId/approve",
+    "reason": "cooperative-leader backend awaiting Jean dashboard — dormant-by-decision (wiring-report §2.3)"
+  },
+  {
+    "key": "endpoint POST /api/cooperative/drivers/:driverProfileId/reject",
+    "reason": "cooperative-leader backend awaiting Jean dashboard — dormant-by-decision (wiring-report §2.3)"
+  },
+  {
+    "key": "endpoint POST /api/cooperative/drivers/:driverProfileId/remove-from-cooperative",
+    "reason": "cooperative-leader backend awaiting Jean dashboard — dormant-by-decision (wiring-report §2.3)"
+  },
+  {
+    "key": "endpoint POST /api/cooperative/drivers/:driverProfileId/set-active",
+    "reason": "cooperative-leader backend awaiting Jean dashboard — dormant-by-decision (wiring-report §2.3)"
+  },
+  {
+    "key": "endpoint POST /api/journeys/:id/cancel-scheduled",
+    "reason": "server-orphan pending founder wire-or-delete decision (wiring-report §2.2)"
+  },
+  {
+    "key": "endpoint POST /api/journeys/:id/dispute",
+    "reason": "customer-side dispute stays an orphan BY DECISION. OPEN DECISIONS item 15 (Kigali team, 18 August) answered the dispute question with 'no dispute button': a 1-2 star passenger rating reveals an optional reason instead (TEAM-ANSWERS G2), and the driver's side is an incident report feeding admin review (TEAM-ANSWERS G3). So this endpoint has no client caller and is not waiting for one. Its earlier note read 'needs a reachable surface, which is a product decision' — that decision has now been made, and it was no. Exercised by e2e (disputed-flow) through the API (wiring-report §2.2)"
+  },
+  {
+    "key": "endpoint POST /api/journeys/:id/reconcile",
+    "reason": "server-orphan pending founder wire-or-delete decision (wiring-report §2.2)"
+  },
+  {
+    "key": "endpoint POST /api/journeys/:id/suggest-up",
+    "reason": "customer-modes forward wiring for unbuilt UI (socket-wiring-audit.md) — dormant-by-decision (wiring-report §2.3)"
+  },
+  {
+    "key": "endpoint POST /api/scheduled-rides/:id/conflict-acknowledge",
+    "reason": "server-orphan pending founder wire-or-delete decision (wiring-report §2.2)"
+  },
+  {
+    "key": "endpoint POST /api/sms/inbound",
+    "reason": "external caller, not the app client — intentionally headless (wiring-report §2.4)"
+  },
+  {
+    "key": "endpoint POST /api/webhooks/flutterwave",
+    "reason": "external caller, not the app client — intentionally headless (wiring-report §2.4)"
+  }
+]

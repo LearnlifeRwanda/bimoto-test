@@ -1,0 +1,19 @@
+{
+  "welcome": {
+    "languageRw": "Kinyarwanda"
+  },
+  "app": {
+    "name": "Bimoto",
+    "tagline": "Your ride, your price"
+  },
+  "journey": {
+    "moto": "Moto",
+    "distance": "{{distance}} km",
+    "legend": "left | right",
+    "multiline": "first line\nsecond line"
+  },
+  "errors": {
+    "invalid": "Invalid status transition.",
+    "fresh": "Brand new string"
+  }
+}

@@ -1,0 +1,54 @@
+[
+  {
+    "key": "AML_DAILY_VOLUME_LIMIT",
+    "reason": "specified by founder; implementation wave pending (Trello: missing-rules discussion)"
+  },
+  {
+    "key": "BIDS_PER_RIDE_GO_NO_GO_MIN_MEAN",
+    "reason": "specified by founder; implementation wave pending (Trello: missing-rules discussion)"
+  },
+  {
+    "key": "BIDS_PER_RIDE_TARGET_MEAN",
+    "reason": "specified by founder; implementation wave pending (Trello: missing-rules discussion)"
+  },
+  {
+    "key": "CANCELLATION_MIN_RIDES",
+    "reason": "specified by founder; implementation wave pending (Trello: missing-rules discussion)"
+  },
+  {
+    "key": "CANCELLATION_PENALTY_THRESHOLD",
+    "reason": "specified by founder; implementation wave pending (Trello: missing-rules discussion)"
+  },
+  {
+    "key": "FREQUENT_WITHDRAWAL_THRESHOLD",
+    "reason": "specified by founder; implementation wave pending (Trello: missing-rules discussion)"
+  },
+  {
+    "key": "FUNNEL_STAGE_KEYS",
+    "reason": "specified by founder; implementation wave pending (Trello: missing-rules discussion)"
+  },
+  {
+    "key": "LOW_RATING_WARNING",
+    "reason": "specified by founder; implementation wave pending (Trello: missing-rules discussion)"
+  },
+  {
+    "key": "MAX_ACTIVE_BIDS_PER_DRIVER",
+    "reason": "specified by founder; implementation wave pending (Trello: missing-rules discussion)"
+  },
+  {
+    "key": "MIN_RIDES_FOR_RATING_ACTION",
+    "reason": "specified by founder; implementation wave pending (Trello: missing-rules discussion)"
+  },
+  {
+    "key": "SUSPENSION_THRESHOLD",
+    "reason": "specified by founder; implementation wave pending (Trello: missing-rules discussion)"
+  },
+  {
+    "key": "TIME_TO_FIRST_BID_GO_NO_GO_MAX_MINUTES",
+    "reason": "specified by founder; implementation wave pending (Trello: missing-rules discussion)"
+  },
+  {
+    "key": "TIME_TO_FIRST_BID_TARGET_MEDIAN_MINUTES",
+    "reason": "specified by founder; implementation wave pending (Trello: missing-rules discussion)"
+  }
+]

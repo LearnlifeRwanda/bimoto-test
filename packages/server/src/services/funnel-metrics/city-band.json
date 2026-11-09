@@ -1,0 +1,24 @@
+{
+  "version": "0.1.0-placeholder",
+  "comment": "Bounding-box coordinates are placeholders. Field-verified coordinates to be supplied by the LLR co-shareholder before pilot launch via a follow-up commit. This is a configuration update, not a code change. Lookup priority: kigali_dense -> kigali_periphery -> bugesera_corridor; first-match-wins; 'other' is the default for unmatched coordinates.",
+  "cityBands": {
+    "kigali_dense": {
+      "label": "Kigali Dense (Nyamirambo + Kicukiro + Remera)",
+      "boundingBoxes": [
+        { "name": "kigali_central", "minLat": -1.97, "maxLat": -1.93, "minLng": 30.05, "maxLng": 30.12 }
+      ]
+    },
+    "kigali_periphery": {
+      "label": "Kigali Periphery (Kanombe + Kabuga + Gisozi + Kimironko)",
+      "boundingBoxes": [
+        { "name": "kigali_outer", "minLat": -2.00, "maxLat": -1.92, "minLng": 30.02, "maxLng": 30.16 }
+      ]
+    },
+    "bugesera_corridor": {
+      "label": "Bugesera Corridor",
+      "boundingBoxes": [
+        { "name": "bugesera_main", "minLat": -2.20, "maxLat": -1.95, "minLng": 30.05, "maxLng": 30.20 }
+      ]
+    }
+  }
+}

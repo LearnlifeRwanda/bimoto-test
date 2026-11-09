@@ -1,0 +1,42 @@
+[
+  {
+    "key": "GET /:id/messages in packages/server/src/routes/message.routes.ts",
+    "delegatesTo": "messageService.getMessages",
+    "reason": "AUTH-READ G2 — getMessages calls assertJourneyParticipant(journeyId, callerId) before the findMany, the same check createMessage makes before writing. 404 for a journey that does not exist, 403 for one the caller is not a party to. Verified at message.service.ts."
+  },
+  {
+    "key": "GET / in packages/server/src/routes/journey.routes.ts",
+    "delegatesTo": "journeyService.getJourneys",
+    "reason": "getJourneys(userId, role, ...) is row-scoped in its customer branch (where: { customerId: userId }). Its driver branch is the open bid feed — journeys a driver may bid on are meant to be visible to drivers, which is the product, not a leak. Verified at journey.service.ts:433+."
+  },
+  {
+    "key": "GET /me in packages/server/src/routes/user.routes.ts",
+    "delegatesTo": "userService.getMe",
+    "reason": "getMe(userId) reads where: { id: userId } — the caller's own row by construction, and the path takes no id from the URL. Verified at user.service.ts:51."
+  },
+  {
+    "key": "GET / in packages/server/src/routes/driver-auto-bid.routes.ts",
+    "delegatesTo": "rulesStore.listRulesForDriver",
+    "reason": "listRulesForDriver(prisma, driverId) reads where: { driverId } with the caller's own id; the route is additionally behind driverOnly. Verified at services/auto-bid/rules-store.ts:94."
+  },
+  {
+    "key": "GET /screener in packages/server/src/routes/driver-screener.routes.ts",
+    "delegatesTo": "getScreenerForDriver",
+    "reason": "getScreenerForDriver(userId) resolves the driver profile by where: { userId } and reads the screener row keyed to that profile, so it can only return the caller's own. Verified at driver-screener.service.ts:161."
+  },
+  {
+    "key": "GET /sync/events in packages/server/src/routes/sync.routes.ts",
+    "delegatesTo": "syncService.getEventsSince",
+    "reason": "getEventsSince(userId, since) is row-scoped by OR: [{ userId }, { journey: { OR: [{ customerId: userId }, { driverId: userId }] } }] — the caller's own events plus those of journeys they are a party to. Verified at sync.service.ts:184."
+  },
+  {
+    "key": "GET /:id/bids in packages/server/src/routes/bid.routes.ts",
+    "delegatesTo": "bidService.getBidsForJourney",
+    "reason": "ATTESTED WITH A CAVEAT, deliberately recorded rather than hidden. getBidsForJourney(journeyId, requestingUserId) queries where: { journeyId } with NO caller scope; the caller id selects a bidViewerScope ('customer' | 'driver') that REDACTS the projection instead of restricting the rows. So a non-participant reads a redacted bid list for a journey UUID they know. That is a disclosure-shaping decision of the same family as AUDIT-BATTERY §G-2 (GET /users/:id/profile), which is parked on founder decision D11 and explicitly out of AUTH-READ's scope. Rule 1 is satisfied — the handler passes the caller and the service uses it — but this entry exists so the next reader knows the check shapes the view, not the row set. Verified at bid.service.ts:84-99."
+  },
+  {
+    "key": "GET /me/money-pin in packages/server/src/routes/user.routes.ts",
+    "delegatesTo": "moneyPin.getMoneyPinStatus",
+    "reason": "MONEY-PIN G2 — getMoneyPinStatus(userId) takes the caller's OWN id from req.user!.userId and reads a single row by that id (prisma.user.findUnique where:{id:userId}). There is no path by which a caller can name another user: the route accepts no id parameter at all. What it returns carries no secret either — a state enum, an activation instant and a lockout instant, never the PIN or its hash. Verified at money-pin.service.ts."
+  }
+]

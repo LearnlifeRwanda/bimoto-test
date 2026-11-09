@@ -1,0 +1,14 @@
+{
+  "generatedFrom": "fixture0000000000000000000000000000000000",
+  "generatedFromDescription": "Fixture baseline — errors.fresh is deliberately absent so it flags NEW.",
+  "keys": [
+    "app.name",
+    "app.tagline",
+    "errors.invalid",
+    "journey.distance",
+    "journey.legend",
+    "journey.moto",
+    "journey.multiline",
+    "welcome.languageRw"
+  ]
+}

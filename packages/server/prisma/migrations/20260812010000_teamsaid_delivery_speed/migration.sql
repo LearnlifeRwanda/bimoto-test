@@ -1,0 +1,18 @@
+-- TEAM-SAID G3 — delivery speed: exactly two tiers, standard and express.
+--
+-- Jean settled item 13: two tiers and no more. Standard carries the
+-- "about 1 to 3 hours" promise. Express is NOT a fixed surcharge and
+-- NOT a percentage — it is a label the motari sees, and the fare is
+-- agreed through the same passenger-suggests / driver-bids mechanic as
+-- every other journey on Bimoto. So this column tags a request; it
+-- never multiplies a price.
+--
+-- Stored as TEXT rather than a new PostgreSQL enum type on purpose.
+-- Creating an enum would force every existing Journey row into one of
+-- its values, and NULL is the honest value for a parcel booked before
+-- tiers existed: it was never asked, and it is not "standard by
+-- default" after the fact. Additive and nullable, so no existing row
+-- is touched and a server running this schema still accepts bodies
+-- from clients that have never heard of the field. The two legal
+-- values are enforced at the API edge by createJourneySchema.
+ALTER TABLE "Journey" ADD COLUMN "deliverySpeed" TEXT;

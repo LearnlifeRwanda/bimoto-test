@@ -1,0 +1,14 @@
+{
+  "_readme": "Rules for the 'same as EN' column of the generated review workbook. A Kinyarwanda value byte-identical to its English source is not automatically a gap — 'Bimoto' and '+250 7XX XXX XXX' are supposed to be identical — but a reviewer scanning the file cannot tell which is which. These lists let the generator name the reason where it is unambiguous. Anything not matched here is marked needs-decision rather than guessed at: an honest question beats a confident wrong answer.",
+  "brand": [
+    "Bimoto",
+    "Mobile Money",
+    "MoMo",
+    "LocationIQ",
+    "Visa, Mastercard, Apple Pay, Google Pay"
+  ],
+  "properNoun": ["Kinyarwanda", "English", "Français", "Rwanda", "Kigali", "RURA", "MTN", "Airtel"],
+  "genuinelyUntranslated": [],
+  "formatTokens": ["km", "m", "RWF", "%", "kg"],
+  "stubPrefixes": ["[RW]", "TODO"]
+}

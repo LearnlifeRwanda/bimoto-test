@@ -1,0 +1,17 @@
+-- TEAM-SAID G1 — "Travelling with a child?", a flag and not a flow.
+--
+-- The team turned the child-passenger declaration off for the pilot
+-- (item 9, 6 of 7) and asked for one honest signal in its place: a
+-- passenger can warn the motari that a child is coming, so he knows
+-- before he arrives rather than at the kerb.
+--
+-- This is NOT a revival of hasChildPassenger. It shares none of that
+-- column's paths: no CHILD_PASSENGER_MULTIPLIER premium, no
+-- acknowledgment modal, no child-safety booking validator, none of the
+-- 422 child taxonomy. It is advisory text-as-boolean and nothing else.
+--
+-- Purely additive and nullable: no existing row is touched, every
+-- existing journey keeps NULL, and a server running this schema still
+-- accepts bodies from clients that have never heard of the field. NULL
+-- ("was never asked") stays distinct from FALSE ("answered no").
+ALTER TABLE "Journey" ADD COLUMN "travellingWithChild" BOOLEAN;

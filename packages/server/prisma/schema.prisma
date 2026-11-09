@@ -1,0 +1,1848 @@
+// Cascade discipline (Dispatch Q): every @relation MUST have an explicit
+// onDelete directive. Default is Restrict (parent deletion rejected if
+// children exist). Use Cascade only for tightly-coupled derived rows.
+// Use SetNull only for soft references (e.g., Bid.autoBidRuleId where a
+// historical bid survives rule deletion).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  CUSTOMER
+  DRIVER
+  BOTH
+  ADMIN
+  COOPERATIVE_LEADER
+
+  // INTEL-DECK G4 — read-only mobility intelligence. An ANALYST can open
+  // the k-anonymised aggregate surface at /intel and nothing else: every
+  // other guard in middleware/auth.ts refuses any role it does not name,
+  // so this value is locked out of the operational product by
+  // construction rather than by a denylist somebody has to maintain.
+  ANALYST
+}
+
+enum Language {
+  rw
+  en
+  fr
+}
+
+enum VehicleType {
+  BIKE
+  MOTO
+  E_MOTO
+  E_BIKE
+}
+
+enum JourneyType {
+  PASSENGER
+  GOODS
+  // R3-PRIORITY — intermediate-urgency parcel. 1.15x fare premium +
+  // half-speed cascade expansion. Faster broadcast to the wider radius
+  // than NORMAL but no SLA-window stamping (URGENT_MESSENGER stamps
+  // targetCompletionAt = now + 30min on acceptBid; PRIORITY does not).
+  PRIORITY_MESSENGER
+  // R3-T — time-sensitive parcel. Cascade bypass + 1.3x urgency
+  // premium + 30-min target completion window stamped at acceptBid.
+  URGENT_MESSENGER
+}
+
+// R3-LEGS — multi-stop trip foundation. Adds intermediate stops to a
+// journey between pickup (Journey.pickup*) and destination (Journey.destination*).
+// Single-leg journeys ship with legs: [] (the v1 default).
+// Multi-leg journeys are introduced by R3-DELIVERY (sub-case B, customer+parcel)
+// and R3-POOL (sub-case C, driver-bundled deliveries).
+enum LegType {
+  PASSENGER_PICKUP
+  PASSENGER_DROPOFF
+  GOODS_PICKUP
+  GOODS_DROPOFF
+  WAIT
+}
+
+enum LegStatus {
+  PENDING
+  ACTIVE
+  COMPLETED
+  SKIPPED
+}
+
+// R3-DELIVERY — parcel size for goods-drop / goods-pickup legs.
+// Drives the 4th compositional fare axis via parcelMultiplier in
+// fair-price.service.ts. Non-goods legs (PASSENGER_PICKUP/DROPOFF/WAIT)
+// MUST have parcelSize: null (enforced by validateLegSequence post-R3-DELIVERY).
+enum ParcelSize {
+  SMALL // <= 5kg, fits in driver's bag — courier envelope, small box
+  MEDIUM // 5-15kg, fits in motorcycle box — typical retail package
+  LARGE // 15-30kg, requires cargo bicycle or larger — bulk goods
+}
+
+// R3-DELIVERY-V2 — parcel content category surfaced to the driver as a
+// handling-expectation badge. Optional even on goods legs (UI defaults
+// to OTHER on submit). Forbidden on non-goods legs (enforced by
+// validateLegSequence's PARCEL_CATEGORY_ON_NON_GOODS_LEG block code).
+enum ParcelCategory {
+  FOOD
+  ELECTRONICS
+  DOCUMENTS
+  FRAGILE
+  OTHER
+}
+
+// R3-RECIPIENT-CONFIRM-2 — how the GOODS_DROPOFF leg reached the
+// "recipient acknowledged" state. NULL when recipientConfirmedAt is
+// NULL. Legacy R3-RECIPIENT-CONFIRM rows have recipientConfirmedAt set
+// + recipientConfirmStatus NULL — the customer-side UI treats this as
+// "EXPLICIT_REPLY (legacy)" for display purposes (no backfill — the
+// data-layer additive-only invariant forbids it).
+enum RecipientConfirmStatus {
+  EXPLICIT_REPLY
+  AUTO_TIMEOUT
+  DISPUTED
+}
+
+enum JourneyStatus {
+  SCHEDULED
+  REQUESTED
+  MATCHED
+  IN_PROGRESS
+  AWAITING_CONFIRMATION
+  COMPLETED
+  CANCELLED
+  INTERRUPTED
+  DISPUTED
+  EXPIRED
+}
+
+enum BookingMode {
+  IMMEDIATE
+  SCHEDULED
+}
+
+enum JourneyRequestMode {
+  WAIT_AND_COMPARE
+  NEED_TO_GO
+}
+
+enum ReconciliationResponse {
+  ARRIVED_SAFELY
+  NEVER_ARRIVED
+  NEED_HELP
+}
+
+enum BidStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+  WITHDRAWN
+  EXPIRED
+}
+
+// Who moved a bid to WITHDRAWN: a human (driver via app/SMS) or server
+// machinery. Nullable on Bid — pre-migration rows stay null and keep
+// counting in the bid-cycle detector.
+enum BidWithdrawnSource {
+  USER
+  SYSTEM
+}
+
+// COUNTER-READY G1 — how a bid's one counter-offer ended.
+//
+// Null (no member) is the fourth and commonest state: no counter was
+// ever made. ACCEPTED means the driver took the countered price and the
+// bid went on through the ordinary accept path at that price; DECLINED
+// means he said no and the bid stays PENDING at its ORIGINAL price, so
+// the customer can still accept what he first offered; LAPSED is written
+// by bid expiry when a counter was never answered.
+enum CounterOutcome {
+  ACCEPTED
+  DECLINED
+  LAPSED
+}
+
+enum EscrowStatus {
+  PENDING
+  HELD
+  RELEASED
+  REFUNDED
+  FROZEN
+  FAILED
+}
+
+enum DriverPayoutStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+// DRIVER-ID v3 — REVOKED is the terminal identity state: the driver's
+// number is no longer valid and the public lookup answers "not active".
+// It is distinct from freeze (money investigation, User.frozenAt) and
+// suspension (behaviour, User.suspendedUntil) and changes neither. The
+// only way out is re-application: the driver-verification submission
+// flow resets REVOKED -> PENDING; no code path may set REVOKED ->
+// VERIFIED directly.
+enum VerificationStatus {
+  PENDING
+  UNDER_REVIEW
+  VERIFIED
+  REJECTED
+  REVOKED
+}
+
+enum PayoutPreference {
+  AT_SHIFT_END
+  TWICE_DAILY
+  DAILY_22H
+}
+
+enum PayoutBatchTrigger {
+  SCHEDULED_22H
+  SCHEDULED_06
+  SCHEDULED_18
+  SHIFT_END
+  PREFERENCE_CHANGE
+  FALLBACK_24H
+  ADMIN
+}
+
+enum AmlFlagType {
+  HARD_LIMIT_EXCEEDED
+  SOFT_LIMIT_EXCEEDED
+  DAILY_CUMULATIVE_EXCEEDED
+  VELOCITY_EXCEEDED
+  PAIR_FREQUENCY
+  NEW_ACCOUNT_HIGH_VALUE
+  BURST_SILENCE
+  FAILURE_CLUSTERING
+  PAYOUT_CONCENTRATION
+  COLLUSION_RING
+  MONEY_FUNNEL
+  REPUTATION_RING
+  GEO_ANOMALY
+  SYNC_RATING_ATTACK
+  BID_CYCLE_RING
+}
+
+enum AmlFlagSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum AmlFlagStatus {
+  OPEN
+  DISMISSED
+  MARKED_FOR_FREEZE
+  RESOLVED
+}
+
+enum BidAmountMode {
+  FLAT
+  PERCENT_OF_FAIR_PRICE
+}
+
+enum PushPlatform {
+  IOS
+  ANDROID
+}
+
+// R3-N-1 — cancellation taxonomy. BOTH_NO_SHOW is system-derived only
+// (R3-N-2 auto-timeout job will emit it) and is rejected if a user
+// supplies it via the cancel route.
+enum CancelReason {
+  CUSTOMER_CHANGED_MIND
+  DRIVER_NO_SHOW
+  DRIVER_LATE
+  DRIVER_WRONG_VEHICLE
+  SAFETY_CONCERN
+  CUSTOMER_NO_SHOW
+  DRIVER_CAN_NOT_MAKE_IT
+  BOTH_NO_SHOW
+}
+
+model User {
+  id                String   @id @default(uuid()) @db.Uuid
+  /// AES-256-GCM ciphertext (iv:ct:tag hex) — NEVER dialable, NEVER
+  /// displayable. Read it only through services/user-phone.ts.
+  phoneEncrypted    String   @unique @map("phone")
+  phoneHash         String   @unique
+  nickname          String
+  role              UserRole
+  language          Language @default(rw)
+  idVerified        Boolean  @default(false)
+  licenseVerified   Boolean  @default(false)
+  /// AES-256-GCM ciphertext of JSON.stringify(string[]); legacy rows may
+  /// hold plain JSON. Read it only through services/user-phone.ts.
+  emergencyContactsEncrypted String? @map("emergencyContacts")
+  completedRides    Int      @default(0)
+  cancellationCount Int      @default(0)
+  totalRequests     Int      @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  driverProfile      DriverProfile?
+  journeysAsCustomer Journey[]       @relation("CustomerJourneys")
+  journeysAsDriver   Journey[]       @relation("DriverJourneys")
+  bids               Bid[]
+  sentMessages       Message[]
+  ratingsGiven       Rating[]        @relation("RatingsGiven")
+  ratingsReceived    Rating[]        @relation("RatingsReceived")
+  // TEAM-ANSWERS G3 — reports this driver FILED. There is deliberately
+  // no `rideReportsReceived` back-relation: a report is about a ride,
+  // and giving a person a collection of reports is the first step
+  // toward the per-passenger number this design refuses to create.
+  rideReportsFiled   RideReport[]    @relation("RideReportsFiled")
+  syncEvents         SyncEvent[]
+  syncRejections     SyncRejection[]
+  emergencyAlertsRaised    EmergencyAlert[] @relation("EmergencyAlertsRaised")
+  emergencyAlertsResolved  EmergencyAlert[] @relation("EmergencyAlertsResolved")
+  escrowsAsCustomer  Escrow[]        @relation("CustomerEscrows")
+  escrowsAsDriver    Escrow[]        @relation("DriverEscrows")
+
+  privacyConsentAt      DateTime?
+  privacyConsentVersion String?
+  termsAcceptedAt       DateTime?
+  termsAcceptedVersion  String?
+  driverTermsAcceptedAt DateTime?
+  driverTermsVersion    String?
+  accountDeletedAt      DateTime?
+  isDeleted             Boolean   @default(false)
+  disputeCount          Int       @default(0)
+  disputeRate           Float     @default(0)
+  isFlagged             Boolean   @default(false)
+  flagReason            String?
+
+  payoutPreference PayoutPreference @default(AT_SHIFT_END)
+  completedShifts  Int              @default(0)
+
+  // MONEY-PIN G1 — the four-digit number that stands between a borrowed
+  // phone and a motari's money surfaces. Founder ruling D25.
+  //
+  // STORAGE FOLLOWS OtpCode EXACTLY (PREPROTO-AUTH G1): only hmacOtp(pin)
+  // is ever at rest, comparisons are constant-time, and wrong guesses are
+  // counted rather than merely rate-limited. The plaintext PIN exists in
+  // the user's head and in one TLS request body, nowhere else — never in
+  // a log, never on the device, never in a column.
+  moneyPinHash String?
+
+  // The RESET pair. A reset proven only by SMS OTP does not take effect
+  // for 24 hours (moneyPinPendingActivatesAt), and an SMS says so at the
+  // moment it is requested. That window is the whole defence against the
+  // borrowed-phone hole: whoever holds the handset also holds the SMS,
+  // so proving possession of the phone must NOT be enough to reach the
+  // money today. The owner, who knows the live PIN, can cancel inside it.
+  //
+  // No job activates these. A pending hash past its activatesAt becomes
+  // live on the NEXT VERIFY — the state machine is read at the only
+  // moment it can matter.
+  moneyPinPendingHash        String?
+  moneyPinPendingActivatesAt DateTime?
+
+  // Brute-force budget, mirroring OtpCode.attemptCount. Reset to 0 on
+  // every successful verify; a lockout is a timestamp rather than a
+  // boolean so it expires without anything having to run.
+  moneyPinAttempts    Int       @default(0)
+  moneyPinLockedUntil DateTime?
+
+  scheduledCancellationCount Int @default(0)
+
+  customerInitiatedCompletionCount Int @default(0)
+  lateCompletionCount              Int @default(0)
+
+  // R3-N-1 — asymmetric cancel attribution. Float on noShowCount and
+  // lateMarkCount because BOTH_NO_SHOW (R3-N-2 system-derived) and
+  // DRIVER_LATE apply +0.5 to each side.
+  noShowCount                      Float @default(0)
+  driverInitiatedCancellationCount Int   @default(0)
+  wrongVehicleCount                Int   @default(0)
+  lateMarkCount                    Float @default(0)
+
+  // R3-N-4 — graduated penalty for driver no-shows. Set to a future
+  // timestamp by applyDriverPenaltyForNoShow when a no-show count
+  // crosses the SUSPENSION_24H_THRESHOLD; bid.service.createBid checks
+  // suspendedUntil > now() and rejects bids with DRIVER_SUSPENDED.
+  suspendedUntil DateTime?
+
+  payoutPreferenceChangeLogs PayoutPreferenceChangeLog[]
+  driverConflictOverrides    DriverConflictOverride[]
+  reconciliationResponses    JourneyReconciliationResponse[]
+  amlFlags                   AmlFlag[]
+
+  smsOptOut   Boolean      @default(false)
+  smsInbounds SmsInbound[]
+
+  frozenAt       DateTime?
+  frozenReason   String?
+  frozenBy       String?         @db.Uuid
+  frozenCategory FreezeCategory?
+  adminActions   AdminAction[]   @relation("AdminActions")
+
+  autoBidRules DriverAutoBidRule[] @relation("DriverAutoBidRules")
+
+  cooperativeId          String?
+  cooperative            Cooperative? @relation("UsersInCooperative", fields: [cooperativeId], references: [id], onDelete: SetNull)
+  cooperativeLed         Cooperative? @relation("CooperativeLed")
+  bidsDispatchedByLeader Bid[]        @relation("BidsDispatchedByLeader")
+
+  deviceTokens DeviceToken[]
+
+  vehicleChangeLogs VehicleChangeLog[]
+
+  feeWaivers FeeWaiver[] @relation("DriverFeeWaivers")
+
+  pickupVerifications PickupVerification[] @relation("CustomerPickupVerifications")
+
+  errorReports ErrorReport[]
+
+  // ACCOUNT-RIGHTS-CORE G1 — the deletion requests this user has made.
+  // A list, not a single row: cancelling and asking again creates a new
+  // one, and the partial unique index keeps at most one of them PENDING.
+  deletionRequests DeletionRequest[]
+
+  @@index([phoneHash])
+  @@index([smsOptOut])
+  @@index([frozenAt])
+  @@index([cooperativeId])
+}
+
+model DriverProfile {
+  id                 String      @id @default(uuid()) @db.Uuid
+  userId             String      @unique @db.Uuid
+  user               User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vehicleType        VehicleType
+  registrationPlate  String?
+  vehicleDescription String
+  avgRating          Decimal     @default(0) @db.Decimal(3, 2)
+  totalRides         Int         @default(0)
+  isOnline           Boolean     @default(false)
+  lastLat            Float?
+  lastLng            Float?
+  lastLocationAt     DateTime?
+
+  drivingLicenseNumber      String?
+  // DRIVER-ID v3 — the person-first identifier ("jacket number").
+  // Unique so the public validity lookup resolves to exactly one
+  // driver; Postgres unique indexes permit multiple NULLs, so legacy
+  // rows without a number are unaffected. Mandatory (with the plate)
+  // before a profile may be set VERIFIED — enforced in
+  // driver-verification.service, not the schema, because pre-approval
+  // rows legitimately have no number yet.
+  ruraAuthorizationNumber   String?            @unique
+  cooperativeName           String?
+  insuranceConfirmed        Boolean            @default(false)
+  verificationStatus        VerificationStatus @default(PENDING)
+  drivingLicensePhotoUrl    String?
+  ruraAuthorizationPhotoUrl String?
+  insurancePhotoUrl         String?
+  verifiedAt                DateTime?
+  rejectionReason           String?
+  // DRIVER-ID v3 — mirrors verificationStatus REVOKED (set on revoke,
+  // cleared when a re-application moves the profile back to PENDING).
+  // The permanent record of the revocation is the hash-chained
+  // AdminAction row, not this column.
+  revokedAt                 DateTime?
+
+  active Boolean @default(true)
+
+  cooperativeId String?
+  cooperative   Cooperative? @relation("DriversInCooperative", fields: [cooperativeId], references: [id], onDelete: Restrict)
+
+  // R3-DRIVER-SCREENER — 1:1 self-attested screener (eligibility +
+  // matching hints). Optional because legacy drivers (onboarded before
+  // R3-DRIVER-SCREENER landed) have no row yet.
+  screener DriverScreener?
+
+  @@index([isOnline])
+  @@index([cooperativeId])
+}
+
+// DRIVER-ID v3 — append-only ledger of driver vehicle changes (the
+// person is the identity; the motorcycle is a mutable, honestly-tracked
+// attribute). One row per self-service change of type/plate/description,
+// old -> new. The account-deletion anonymization write deliberately does
+// NOT log here: it is an erasure, not a switch. Deliberately shaped for
+// later fraud-pattern use (rapid serial changes), but no detector
+// consumes it in this dispatch.
+model VehicleChangeLog {
+  id        String   @id @default(uuid()) @db.Uuid
+  driverId  String   @db.Uuid
+  driver    User     @relation(fields: [driverId], references: [id], onDelete: Cascade)
+  changedAt DateTime @default(now())
+
+  oldVehicleType VehicleType
+  newVehicleType VehicleType
+  oldPlate       String?
+  newPlate       String?
+  oldDescription String
+  newDescription String
+
+  @@index([driverId, changedAt])
+}
+
+// R3-DRIVER-SCREENER — 8-question driver eligibility screener. 1:1 with
+// DriverProfile via @unique on driverProfileId. The catalogue (questions,
+// answer kinds, eligibility logic) lives in packages/shared/src/screener/
+// and is the single source of truth.
+model DriverScreener {
+  id              String @id @default(cuid())
+  driverProfileId String @unique @db.Uuid
+
+  driverProfile DriverProfile @relation(fields: [driverProfileId], references: [id], onDelete: Cascade)
+
+  // Catalogue answers — mirror packages/shared/src/screener/questions.ts
+  is18OrOlder             Boolean
+  holdsDriversLicence     ScreenerLicenceStatus
+  hasRuraAuthorisation    ScreenerRuraStatus
+  primaryVehicleType      VehicleType
+  cooperativeId           String?
+  cooperative             Cooperative? @relation("CooperativeScreenerAffiliation", fields: [cooperativeId], references: [id], onDelete: SetNull)
+  cooperativeNameProvided String?
+  // primaryCityBand is stored as the shared TS literal union value
+  // ('kigali_dense' | 'kigali_periphery' | 'bugesera_corridor' | 'other').
+  // Validated at the Zod boundary in screener.schema.ts.
+  primaryCityBand         String
+  weeklyAvailabilityHours Int
+  priorPlatformExperience Boolean
+  priorPlatformMonths     Int?
+
+  // Outcome — pure-function output from evaluateEligibility(answers).
+  eligibilityResult   ScreenerEligibilityResult
+  ineligibilityReason ScreenerIneligibilityReason?
+
+  completedAt DateTime @default(now())
+
+  @@index([eligibilityResult])
+  @@index([primaryCityBand])
+  @@index([completedAt])
+}
+
+enum ScreenerLicenceStatus {
+  YES
+  IN_PROGRESS
+  NO
+}
+
+enum ScreenerRuraStatus {
+  HAVE
+  APPLYING
+  NOT_YET
+}
+
+enum ScreenerEligibilityResult {
+  ELIGIBLE
+  INELIGIBLE
+  NEEDS_FOLLOW_UP
+}
+
+enum ScreenerIneligibilityReason {
+  UNDER_18
+  NO_DRIVERS_LICENCE
+  NEEDS_RURA_PATH
+  LOW_AVAILABILITY
+}
+
+model Journey {
+  id                String        @id @default(uuid()) @db.Uuid
+  customerId        String        @db.Uuid
+  customer          User          @relation("CustomerJourneys", fields: [customerId], references: [id], onDelete: Restrict)
+  driverId          String?       @db.Uuid
+  driver            User?         @relation("DriverJourneys", fields: [driverId], references: [id], onDelete: Restrict)
+  type              JourneyType   @default(PASSENGER)
+  status            JourneyStatus @default(REQUESTED)
+  pickupLat         Float
+  pickupLng         Float
+  pickupName        String
+  destinationLat    Float
+  destinationLng    Float
+  destinationName   String
+
+  // OUTBOX G2 — the client's name for the booking ATTEMPT that produced
+  // this journey, used to make POST /api/journeys idempotent for the
+  // offline outbox's replay.
+  //
+  // The dangerous failure is not the request that never arrived; it is
+  // the one that arrived, wrote this row, and whose 201 died on the way
+  // back to a phone in a dead zone. The phone cannot tell the two apart,
+  // so the replay re-sends — and without this column that is a second
+  // ride booked for a passenger who wanted one.
+  //
+  // Nullable with no default: every journey booked before this existed
+  // has none, and a client that does not send one is unaffected. The
+  // unique index is scoped to the customer, so two passengers can never
+  // collide with each other, and NULLs do not collide at all in
+  // Postgres — an unstamped create is never blocked by another.
+  clientRequestId   String?  @db.Uuid
+
+  // LANDMARKS G4 — the passenger's own words about each place, for the
+  // places no database knows. Optional everywhere; NULL on every journey
+  // created before this migration.
+  pickupDescription      String?  @db.VarChar(200)
+  destinationDescription String?  @db.VarChar(200)
+
+  // TEAM-SAID G1 — "Travelling with a child?", a flag and not a flow.
+  // The team voted the child-passenger declaration off for the pilot
+  // (6 of 7, item 9) and asked instead for one honest signal whose only
+  // job is to tell the motari before he arrives. It is deliberately NOT
+  // hasChildPassenger: it drives no fare multiplier, no acknowledgment
+  // modal and no 422 in the child taxonomy. Nullable with no default,
+  // so every journey booked before it existed simply has no answer,
+  // which is distinct from having answered "no".
+  travellingWithChild Boolean?
+  vehiclePreference VehicleType?
+  wishPrice         Int?
+  agreedPrice       Int?
+  commissionAmount  Int?
+  estimatedDistance Float?
+  startedAt         DateTime?
+  endedAt           DateTime?
+  confirmedAt       DateTime?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  // R3-N-1 — set in the same tx as the REQUESTED→MATCHED transition;
+  // R3-N-1 cancel-flow validates elapsed-since-matched against this.
+  matchedAt    DateTime?
+  cancelledAt  DateTime?
+  cancelReason CancelReason?
+
+  // R3-T — for URGENT_MESSENGER journeys, stamped at acceptBid as
+  // matchedAt + 30 min. Informational at this dispatch (UI surfaces
+  // it; existing R3-N-1 DRIVER_LATE flow handles missed-window
+  // cancellation).
+  targetCompletionAt DateTime?
+
+  // R3-CHILD — child-passenger declaration. Set at createJourney
+  // when the customer toggles "I am travelling with a child". Drives
+  // the 1.1x CHILD_PASSENGER_MULTIPLIER fare premium and surfaces
+  // the <ChildPassengerBadge> + <ChildAcknowledgmentModal> on the
+  // driver side. Validator at services/child-safety/booking-validator
+  // gates createJourney on (vehicleType, childAgeYears) under
+  // placeholder legal thresholds (TODO: legal-research).
+  hasChildPassenger             Boolean @default(false)
+  childAgeYears                 Int?
+  childIsUnaccompaniedMinor     Boolean @default(false)
+  childGuardianPhone            String?
+  childPassengerHelmetConfirmed Boolean @default(false)
+
+  // R3-N-4 — driver disputes a system-attributed DRIVER_NO_SHOW. Set
+  // by POST /api/journeys/:id/dispute-no-show; surfaces an admin
+  // conflict via the DRIVER_NO_SHOW_DISPUTE ConflictType.
+  driverDisputedAt DateTime?
+
+  // R3-N-4 — customer re-discovery lineage. Set on the NEW journey
+  // created by POST /api/journeys/:id/redispatch; redispatchedFromId
+  // points back at the cancelled DRIVER_NO_SHOW journey.
+  redispatchedFromId String?   @db.Uuid
+  redispatchedFrom   Journey?  @relation("Redispatch", fields: [redispatchedFromId], references: [id], onDelete: SetNull)
+  redispatches       Journey[] @relation("Redispatch")
+
+  goodsDescription  String?
+  goodsSizeCategory String?
+  // PARCEL-CATEGORY — what the parcel CONTAINS, asked of the sender on
+  // the send-a-package form exactly as the drop-a-package leg flow has
+  // asked it since R3-DELIVERY-V2. Same ParcelCategory enum, same five
+  // choices, same locale keys; a motari reads it before he accepts.
+  //
+  // Nullable for the same reason the Leg column is: every parcel row in
+  // the database predates the question, and NULL means "was never
+  // asked", which is not the same answer as OTHER. The customer-facing
+  // form defaults to OTHER on submit (the leg-flow convention), so rows
+  // created after this dispatch are non-NULL in practice.
+  //
+  // Distinct from goodsFragile, which stays exactly what it was: a
+  // handling boolean feeding the tier/handling logic. A fragile
+  // electronics parcel is legitimately ELECTRONICS + goodsFragile:true.
+  parcelCategory    ParcelCategory?
+  // FIELD-FIT G5 — declared parcel weight in kg. Nullable: the field is
+  // optional on create, and every journey booked before it existed has
+  // no value. Checked against the vehicle rules in
+  // shared/constants/parcel-weight.ts at create time.
+  goodsWeightKg     Float?
+  // TEAM-SAID G3 — delivery speed, exactly two tiers (Jean, item 13):
+  // STANDARD or EXPRESS. This is a tier TAG and not a price: express
+  // carries no surcharge and no percentage, because a parcel sender
+  // and a motari agree the fare through the same suggest/bid mechanic
+  // as every other journey. Stored as a String rather than a Prisma
+  // enum to stay additive — a new enum type would need every existing
+  // row migrated into it, and the whole point is that NULL (booked
+  // before tiers existed) remains a valid, meaningful state.
+  deliverySpeed     String?
+  /// LIVE-WIRE G5 — Jean's item 13(c): a STANDARD parcel may carry an
+  /// OPTIONAL delivery window of 1, 2 or 3 hours. Express means now and
+  /// never carries one. Like deliverySpeed this is a tag the motari
+  /// reads, never a price input: nothing multiplies a fare by it, and
+  /// NULL (no window asked for, or a body predating the field) stays a
+  /// meaningful state distinct from any number.
+  standardDeliveryHours Int?
+  goodsFragile      Boolean @default(false)
+  recipientName     String?
+  recipientPhone    String?
+  pickupPhotoUrl    String?
+  deliveryPhotoUrl  String?
+
+  bookingMode          BookingMode @default(IMMEDIATE)
+  scheduledFor         DateTime?
+  bidWindowOpensAt     DateTime?
+  autoFallbackAt       DateTime?
+  lastReminderSentAt   DateTime?
+  // R3-N-2 — set by no-show-timeout cron when the 20-min push reminder
+  // for a MATCHED+startedAt:null journey has fired. Separate from
+  // lastReminderSentAt (used by auto-confirm.job for the 12-h
+  // AWAITING_CONFIRMATION SMS) because a journey can pass through both
+  // states and reusing one field would cross-contaminate idempotency.
+  noShowReminderSentAt DateTime?
+
+  discoveryStartedAt DateTime? @default(now())
+
+  // Dispatch K3 — customer modes + suggest-up.
+  // requestMode is per-journey (not a sticky preference). When
+  // NEED_TO_GO, priceCeilingMultiplier (1.0..2.0) and the locked
+  // priceCeilingRwf (round(fairPrice * multiplier)) drive auto-accept.
+  // suggestUpCount tracks how many times the customer raised the
+  // wish-price via the +50/+100 progressive buttons.
+  requestMode            JourneyRequestMode @default(WAIT_AND_COMPARE)
+  priceCeilingMultiplier Float?
+  priceCeilingRwf        Int?
+  suggestUpCount         Int                @default(0)
+
+  lateCompletion              Boolean?  @default(false)
+  customerInitiatedCompletion Boolean?  @default(false)
+  staleDetectedAt             DateTime?
+  reconciliationOpenedAt      DateTime?
+  dueAt                       DateTime?
+
+  bids                    Bid[]
+  messages                Message[]
+  ratings                 Rating[]
+  rideReports             RideReport[]
+  escrow                  Escrow?
+  syncEvents              SyncEvent[]
+  gpsPoints               GpsPoint[]
+  emergencyAlerts         EmergencyAlert[]
+  reconciliationResponses JourneyReconciliationResponse[]
+  amlFlags                AmlFlag[]
+
+  // R3-LEGS — multi-stop foundation. Single-leg journeys ship with legs: []
+  // (the v1 default and the entirety of pilot v1 traffic to date). Multi-leg
+  // journeys are populated by R3-DELIVERY's customer + parcel multi-stop flow.
+  // Legs execute in `sequence` order between Journey.pickup* and Journey.destination*.
+  legs Leg[] @relation("JourneyLegs")
+
+  // PILOT-INSTRUMENT — at most one pickup-identity answer per journey.
+  pickupVerification PickupVerification?
+
+  @@index([status])
+  @@index([customerId])
+  @@index([driverId])
+  @@index([createdAt])
+  @@index([status, bidWindowOpensAt])
+  @@index([status, autoFallbackAt])
+  @@index([status, dueAt])
+  @@index([discoveryStartedAt])
+  @@index([requestMode])
+  @@index([redispatchedFromId])
+  @@index([driverDisputedAt])
+  // OUTBOX G2 — one journey per (customer, booking attempt). This is the
+  // whole no-double-booking guarantee: the pre-check in createJourney is
+  // the fast path, and this index is what makes the race safe when two
+  // replays of the same held booking arrive at once.
+  @@unique([customerId, clientRequestId])
+}
+
+// PILOT-INSTRUMENT — pickup-identity verification signal (the V-4
+// evidence trigger). One optional row per journey: the customer's
+// answer to "Is this your driver? (jacket #NNNN)" shown when the
+// server-derived approachStatus hits 'arrived' on the matched screen.
+// Evidence only, never enforcement: nothing may freeze, flag, cancel,
+// or notify off this table — it exists so the pilot can measure the
+// pickup-mismatch rate and decide whether the per-ride dynamic QR/PIN
+// second factor (V-4) is worth building. Read by humans via
+// GET /api/admin/pickup-verifications/summary.
+enum PickupOutcome {
+  MATCHED
+  MISMATCH
+  UNSURE
+}
+
+model PickupVerification {
+  id         String        @id @default(uuid()) @db.Uuid
+  journeyId  String        @unique @db.Uuid
+  journey    Journey       @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  customerId String        @db.Uuid
+  customer   User          @relation("CustomerPickupVerifications", fields: [customerId], references: [id], onDelete: Cascade)
+  outcome    PickupOutcome
+  // One-tap vocabulary only (WRONG_NUMBER / NO_VEST / DIFFERENT_PERSON,
+  // enforced by the shared zod schema) — never free text, so the ledger
+  // stays countable and collects no incidental PII.
+  reason     String?
+  createdAt  DateTime      @default(now())
+  // The prompt upserts (last answer wins); updatedAt records the final
+  // answer's time.
+  updatedAt  DateTime      @updatedAt
+
+  @@index([outcome, createdAt])
+  @@index([createdAt])
+}
+
+// R3-LEGS — multi-stop trip foundation. Each row represents an
+// intermediate stop on a journey, sitting between Journey.pickup*
+// (the origin) and Journey.destination* (the final dropoff). The
+// driver visits legs in increasing `sequence` order. Single-leg
+// journeys (the entirety of pilot v1 traffic to date) have no rows
+// in this table — `journey.legs` returns []. Cascade-on-delete: a
+// journey's legs have no meaning without their parent journey.
+model Leg {
+  id                      String                  @id @default(uuid()) @db.Uuid
+  journeyId               String                  @db.Uuid
+  journey                 Journey                 @relation("JourneyLegs", fields: [journeyId], references: [id], onDelete: Cascade)
+  // The position in the journey's leg ordering. 0-indexed. Legs
+  // execute in increasing `sequence` order; gaps are not permitted.
+  sequence                Int
+  type                    LegType
+  status                  LegStatus               @default(PENDING)
+  // Location (lat/lng/name follow the same conventions as
+  // Journey.pickup* / destination*).
+  lat                     Float
+  lng                     Float
+  name                    String
+  // Optional contact info — the recipient (or sender) at this stop.
+  // Used by R3-DELIVERY to surface "ring this number on arrival" hints
+  // to the driver.
+  contactName             String?
+  contactPhone            String?
+  // Optional expected duration in minutes. Drives ETA recomputation
+  // when R3-DELIVERY ships its UI surface.
+  expectedDurationMinutes Int?
+  // Set when the driver taps "I have completed this stop" via
+  // POST /api/journeys/:id/legs/:legId/complete. Status transitions
+  // to COMPLETED at the same time.
+  completedAt             DateTime?
+  // R3-DELIVERY — parcel size for goods stops. NULL for non-goods legs
+  // (PASSENGER_PICKUP/DROPOFF/WAIT). The journey's largest parcelSize
+  // across its legs determines the parcelMultiplier in fair-price.
+  parcelSize              ParcelSize?
+  // R3-DELIVERY-V2 — parcel content category for goods stops. NULL for
+  // non-goods legs and for legacy rows created before this dispatch.
+  // The customer-facing UI defaults to OTHER on submit, so new goods
+  // legs created post-R3-DELIVERY-V2 are non-NULL in practice.
+  parcelCategory          ParcelCategory?
+  // R3-RECIPIENT-CONFIRM — set when a parcel recipient SMS-replies to the
+  // delivered notification with a confirmation keyword (RECEIVED, OK,
+  // MURAKOZE, …). NULL for non-goods legs and for unconfirmed deliveries.
+  recipientConfirmedAt    DateTime?
+  // R3-DELIVERY-NOTIFICATIONS-2 — optional per-recipient language hint
+  // entered by the customer in GoodsStopEditor. When NULL, recipient SMS
+  // falls back to the journey customer's User.language. Set per-leg so a
+  // multi-recipient journey can address each recipient in their own tongue.
+  recipientLanguage       Language?
+  // R3-RECIPIENT-CONFIRM-2 — how the leg reached recipient-acknowledged
+  // state. Set in lock-step with recipientConfirmedAt by the
+  // recipient-confirm handler (EXPLICIT_REPLY), the auto-confirm-recipient
+  // cron (AUTO_TIMEOUT), or the recipient-dispute handler (DISPUTED).
+  // NULL on legacy rows (pre-R3-RECIPIENT-CONFIRM-2 confirmations) — the
+  // UI treats null + non-null recipientConfirmedAt as a legacy explicit
+  // confirmation.
+  recipientConfirmStatus  RecipientConfirmStatus?
+  // R3-RECIPIENT-CONFIRM-2 — verbatim SMS body when a recipient flags the
+  // parcel as wrong/damaged. NULL unless recipientConfirmStatus = DISPUTED.
+  recipientDisputeReason  String?
+  createdAt               DateTime                @default(now())
+  updatedAt               DateTime                @updatedAt
+
+  @@unique([journeyId, sequence])
+  @@index([journeyId, sequence])
+}
+
+model JourneyReconciliationResponse {
+  id               String                 @id @default(uuid()) @db.Uuid
+  journeyId        String                 @db.Uuid
+  journey          Journey                @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  respondingUserId String                 @db.Uuid
+  respondingUser   User                   @relation(fields: [respondingUserId], references: [id], onDelete: Restrict)
+  response         ReconciliationResponse
+  gpsLat           Float?
+  gpsLng           Float?
+  createdAt        DateTime               @default(now())
+
+  @@unique([journeyId, respondingUserId])
+  @@index([journeyId])
+}
+
+model DriverConflictOverride {
+  id                String   @id @default(uuid()) @db.Uuid
+  driverId          String   @db.Uuid
+  driver            User     @relation(fields: [driverId], references: [id], onDelete: Restrict)
+  scheduledRideId   String   @db.Uuid
+  conflictingRideId String   @db.Uuid
+  overriddenAt      DateTime @default(now())
+  resolved          Boolean  @default(false)
+  resolutionNotes   String?
+
+  @@index([driverId, overriddenAt])
+  @@index([scheduledRideId])
+}
+
+model Bid {
+  id         String    @id @default(uuid()) @db.Uuid
+  journeyId  String    @db.Uuid
+  journey    Journey   @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  driverId   String    @db.Uuid
+  driver     User      @relation(fields: [driverId], references: [id], onDelete: Restrict)
+  price      Int
+  etaMinutes Int
+  status     BidStatus @default(PENDING)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  // Set when status becomes WITHDRAWN; null on legacy rows, never defaulted.
+  withdrawnSource BidWithdrawnSource?
+
+  // COUNTER-READY G1 — the customer's ONE counter-offer on this bid.
+  //
+  // The columns ARE the singularity rule. One counter per bid, ever, is
+  // enforced by there being exactly one slot to write into: a second
+  // counter has nowhere to go, so the endpoint's 409 and the schema
+  // agree by construction. A separate table would have needed a unique
+  // index to say the same thing, and would have put the counter outside
+  // the row the AML graph detectors already scan.
+  //
+  // Same never-defaulted-on-legacy convention as withdrawnSource above:
+  // all three are null on every row that never carried a counter, and
+  // `counterOutcome == null && counterAmountRwf != null` is precisely
+  // "countered, still unanswered" — the state bid expiry lapses.
+  counterAmountRwf Int?
+  counterAt        DateTime?
+  counterOutcome   CounterOutcome?
+
+  autoBidRuleId String?            @db.Uuid
+  autoBidRule   DriverAutoBidRule? @relation("AutoBidsFromRule", fields: [autoBidRuleId], references: [id], onDelete: SetNull)
+
+  dispatchedByLeaderId String? @db.Uuid
+  dispatchedByLeader   User?   @relation("BidsDispatchedByLeader", fields: [dispatchedByLeaderId], references: [id], onDelete: SetNull)
+
+  @@unique([journeyId, driverId])
+  @@index([journeyId])
+  @@index([driverId])
+  @@index([autoBidRuleId])
+  @@index([dispatchedByLeaderId])
+}
+
+model DriverAutoBidRule {
+  id                 String        @id @default(uuid()) @db.Uuid
+  driverId           String        @db.Uuid
+  priority           Int
+  enabled            Boolean       @default(true)
+  maxPickupDistanceM Int
+  maxRideDistanceM   Int
+  vehicleTypeFilter  String?
+  bidAmountMode      BidAmountMode @default(FLAT)
+  bidAmountValue     Float
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
+  driver User  @relation("DriverAutoBidRules", fields: [driverId], references: [id], onDelete: Cascade)
+  bids   Bid[] @relation("AutoBidsFromRule")
+
+  @@unique([driverId, priority])
+  @@index([driverId, enabled])
+  @@index([enabled])
+}
+
+model Escrow {
+  id           String       @id @default(uuid()) @db.Uuid
+  journeyId    String       @unique @db.Uuid
+  journey      Journey      @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  customerId   String       @db.Uuid
+  customer     User         @relation("CustomerEscrows", fields: [customerId], references: [id], onDelete: Restrict)
+  driverId     String       @db.Uuid
+  driver       User         @relation("DriverEscrows", fields: [driverId], references: [id], onDelete: Restrict)
+  amount       Int
+  commission   Int
+  driverPayout Int
+  status       EscrowStatus @default(PENDING)
+  createdAt    DateTime     @default(now())
+  releasedAt   DateTime?
+
+  driverTier             String?
+  customerTier           String?
+  driverCommissionRate   Float?
+  customerCommissionRate Float?
+
+  txRef               String?   @unique
+  flwTxId             String?
+  lastChargeAttemptAt DateTime?
+
+  // LAUNCH-TRUTH G1 — compute-then-zero record. When a fee waiver is
+  // active at settlement, `commission` holds the CHARGED amount (0) and
+  // `waivedCommissionAmount` holds what the nominal tier rate would have
+  // charged, so receipts and the BNR aggregators keep telling the truth.
+  // Both null/absent on unwaived rides. onDelete: Restrict — a waiver
+  // that zeroed real money can never be deleted out from under its
+  // escrow rows (the audit must outlive the incentive).
+  waivedCommissionAmount Int?
+  feeWaiverId            String?    @db.Uuid
+  feeWaiver              FeeWaiver? @relation(fields: [feeWaiverId], references: [id], onDelete: Restrict)
+
+  auditLog         EscrowAuditLog[]
+  nameMismatchLogs NameMismatchLog[]
+  amlFlags         AmlFlag[]
+
+  @@index([status])
+  @@index([status, createdAt])
+  @@index([feeWaiverId])
+}
+
+// LAUNCH-TRUTH G1 — one audited grant per waived driver. A waiver is an
+// incentive, and incentives get farmed: every ride it zeroes points back
+// here via Escrow.feeWaiverId, so a future detector has the data even
+// though none is built in this dispatch. Keyed on User.id — the money
+// path (Escrow.driverId, DriverBalance.driverId) keys on the user, not
+// the DriverProfile. At most one non-revoked waiver per driver: enforced
+// by a partial unique index (raw SQL in the migration; Prisma cannot
+// express partial indexes) AND re-checked in the grant service.
+model FeeWaiver {
+  id             String        @id @default(uuid()) @db.Uuid
+  driverId       String        @db.Uuid
+  driver         User          @relation("DriverFeeWaivers", fields: [driverId], references: [id], onDelete: Restrict)
+  type           FeeWaiverType
+  campaign       String
+  grantedAt      DateTime      @default(now())
+  grantedBy      String        @db.Uuid
+  // Null for LIFETIME — it never expires.
+  expiresAt      DateTime?
+  extensionCount Int           @default(0)
+  revokedAt      DateTime?
+  revokedBy      String?       @db.Uuid
+  reason         String
+
+  escrows Escrow[]
+
+  @@index([driverId, revokedAt])
+  @@index([type, revokedAt])
+}
+
+model DriverBalance {
+  id            String   @id @default(uuid()) @db.Uuid
+  driverId      String   @unique @db.Uuid
+  pendingAmount Int      @default(0)
+  lastUpdatedAt DateTime @default(now()) @updatedAt
+}
+
+model DriverPayoutBatch {
+  id            String             @id @default(uuid()) @db.Uuid
+  driverId      String             @db.Uuid
+  amount        Int
+  txRef         String?            @unique
+  flwTransferId String?
+  status        DriverPayoutStatus @default(PENDING)
+  trigger       PayoutBatchTrigger @default(SCHEDULED_22H)
+  failureReason String?
+  createdAt     DateTime           @default(now())
+  paidOutAt     DateTime?
+  // Set by markBatchTransferReversed when a settled transfer bounces at the
+  // gateway (SUCCESS -> FAILED). Null for reversals from before 2026-07 —
+  // consumers fall back to paidOutAt for those.
+  reversedAt    DateTime?
+
+  held       Boolean   @default(false)
+  heldAt     DateTime?
+  heldBy     String?   @db.Uuid
+  heldReason String?
+
+  // PAYOUT-IDEMPOTENCY invariant: at most one un-settled (PENDING) batch
+  // per driver, enforced by a PARTIAL unique index that PSL cannot express
+  // (@@unique has no WHERE clause). It lives in raw SQL in migration
+  // 20260729000000_payout_idempotency_one_inflight_batch:
+  //   CREATE UNIQUE INDEX "DriverPayoutBatch_driverId_pending_key"
+  //     ON "DriverPayoutBatch"("driverId") WHERE "status" = 'PENDING'
+  // Prisma's introspection ignores partial indexes, so the e2e
+  // faithfulness gate (`migrate diff --from-url ... --exit-code`) does not
+  // see it and never proposes dropping it. Do not add a plain
+  // @@unique([driverId]) here — that would forbid a driver's payout
+  // history entirely, not just concurrent in-flight batches.
+  @@index([driverId, status])
+  @@index([createdAt])
+  @@index([held])
+}
+
+/// How a sensitive change was proven. OTP is the SMS step-up this flow
+/// used before MONEY-PIN G2; PIN is the money PIN that replaced it.
+enum StepUpMethod {
+  OTP
+  PIN
+}
+
+model PayoutPreferenceChangeLog {
+  id            String           @id @default(uuid()) @db.Uuid
+  userId        String           @db.Uuid
+  user          User             @relation(fields: [userId], references: [id], onDelete: Restrict)
+  oldPreference PayoutPreference
+  newPreference PayoutPreference
+  ipAddress     String?
+  /// TRUE only for rows whose step-up was an SMS OTP. Kept, rather than
+  /// folded into stepUpMethod, so every row written before MONEY-PIN G2
+  /// stays interpretable exactly as it was — a historical audit row must
+  /// not change meaning because a later dispatch added a second method.
+  otpVerified   Boolean          @default(false)
+  /// MONEY-PIN G2 — which proof actually gated this change. The PIN
+  /// REPLACED the OTP on this flow (ruling D25), so the audit row has to
+  /// say which one was given; recording every row as "otpVerified" once
+  /// PIN rows exist would make the column a lie.
+  stepUpMethod  StepUpMethod     @default(OTP)
+  payoutFired   Boolean          @default(false)
+  payoutDueAt   DateTime?
+  createdAt     DateTime         @default(now())
+
+  @@index([userId, createdAt])
+  @@index([payoutFired, payoutDueAt])
+}
+
+model NameMismatchLog {
+  id                  String   @id @default(uuid()) @db.Uuid
+  escrowId            String   @db.Uuid
+  escrow              Escrow   @relation(fields: [escrowId], references: [id], onDelete: Cascade)
+  customerId          String   @db.Uuid
+  walletNameOnReceipt String
+  accountName         String
+  txRef               String
+  createdAt           DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([customerId])
+}
+
+model EscrowAuditLog {
+  id             String   @id @default(uuid()) @db.Uuid
+  escrowId       String   @db.Uuid
+  escrow         Escrow   @relation(fields: [escrowId], references: [id], onDelete: Cascade)
+  sequenceNumber Int
+  action         String
+  previousHash   String
+  entryHash      String   @unique
+  amount         Int
+  triggeredBy    String
+  metadata       Json?
+  createdAt      DateTime @default(now())
+
+  // BID-ATOMICITY G3 — the hash chain cannot fork: at most one entry per
+  // (escrowId, sequenceNumber), enforced by the database. Two appends
+  // racing on one escrow both compute last+1; the loser's insert fails
+  // P2002 and appendAuditEntryTx re-reads, recomputes and retries
+  // (bounded) so legitimate concurrent appends serialize instead of
+  // forking the chain. The migration
+  // 20260731000000_bid_atomicity_audit_chain_unique pre-flights
+  // pre-existing duplicates: benign double-appends (same action, amount,
+  // previousHash) are resequenced past the chain tail with a metadata
+  // marker (reversible, nothing deleted); divergent-payload duplicates
+  // ABORT the migration for human review — this is the money audit
+  // trail, and no migration may pick a survivor between forked hashes.
+  @@unique([escrowId, sequenceNumber])
+}
+
+model GpsPoint {
+  id        String   @id @default(uuid()) @db.Uuid
+  journeyId String   @db.Uuid
+  journey   Journey  @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  lat       Float
+  lng       Float
+  accuracy  Float?
+  timestamp DateTime
+  syncedAt  DateTime @default(now())
+
+  @@index([journeyId, timestamp])
+  // Serves the nightly retention sweep's "timestamp < cutoff" deletes
+  // (jobs/gps-retention.job.ts) — the composite index above cannot.
+  @@index([timestamp])
+}
+
+// Expiry-based single-runner lease for long calendar jobs (withJobLease in
+// services/job-lock.ts). One row per job name while a run is in flight; a
+// crashed holder's stale row is claimable once expiresAt passes.
+model JobLease {
+  name       String   @id
+  holder     String
+  acquiredAt DateTime
+  expiresAt  DateTime
+}
+
+model Message {
+  id             String   @id @default(uuid()) @db.Uuid
+  journeyId      String   @db.Uuid
+  journey        Journey  @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  senderId       String   @db.Uuid
+  sender         User     @relation(fields: [senderId], references: [id], onDelete: Restrict)
+  text           String
+  isQuickMessage Boolean  @default(false)
+  quickMessageId String?
+  createdAt      DateTime @default(now())
+
+  @@index([journeyId, createdAt])
+}
+
+model Rating {
+  id        String   @id @default(uuid()) @db.Uuid
+  journeyId String   @db.Uuid
+  journey   Journey  @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  raterId   String   @db.Uuid
+  rater     User     @relation("RatingsGiven", fields: [raterId], references: [id], onDelete: Restrict)
+  ratedId   String   @db.Uuid
+  rated     User     @relation("RatingsReceived", fields: [ratedId], references: [id], onDelete: Restrict)
+  stars     Int
+  comment   String?
+  // TEAM-ANSWERS G2 (item 15) — optional low-star reason key. Nullable
+  // and additive: every existing row keeps meaning exactly what it
+  // meant. Values are RatingReason (packages/shared/src/types/rating.ts).
+  reason    String?
+  createdAt DateTime @default(now())
+
+  @@unique([journeyId, raterId])
+}
+
+// TEAM-ANSWERS G3 — the driver's half of item 15, as an incident report
+// rather than a grade.
+//
+// The team asked for driver-rates-passenger "to identify and manage
+// issues from both sides". The goal ships; the mechanism does not. This
+// row carries a reason, optional details, and the journey it is about —
+// no stars, no score, no per-customer aggregate. The admin sees who the
+// customer was THROUGH the journey, exactly as with every other conflict
+// type, and repeated reports about one rider are visible in the conflicts
+// list the same way repeated anything else is.
+//
+// One report per journey per driver (@@unique), so a report is a single
+// statement about a single ride and not a counter anyone can run up.
+model RideReport {
+  id         String   @id @default(uuid()) @db.Uuid
+  journeyId  String   @db.Uuid
+  journey    Journey  @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  reporterId String   @db.Uuid
+  reporter   User     @relation("RideReportsFiled", fields: [reporterId], references: [id], onDelete: Restrict)
+  reason     String
+  details    String?
+  createdAt  DateTime @default(now())
+
+  @@unique([journeyId, reporterId])
+  @@index([createdAt])
+}
+
+model SyncEvent {
+  id              String   @id @default(uuid()) @db.Uuid
+  journeyId       String?  @db.Uuid
+  journey         Journey? @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  userId          String   @db.Uuid
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  eventType       String
+  payload         Json
+  clientTimestamp DateTime
+  serverTimestamp DateTime @default(now())
+  clientEventId   String   @unique
+
+  @@index([journeyId, clientTimestamp])
+  @@index([userId, serverTimestamp])
+}
+
+// R3-SYNC-REJECTION-MODEL — values mirror packages/shared/src/types/sync-rejection.ts
+// (SyncRejectionCodes). Keep in lockstep: a divergence breaks the Prisma typecheck
+// against rejection.code in sync.service.ts.
+enum SyncRejectionCode {
+  FK_VIOLATION
+  DUPLICATE_EVENT_ID
+  VALIDATION_ERROR
+  STALE_TIMESTAMP
+  PERMISSION_DENIED
+  UNKNOWN
+}
+
+// R3-SYNC-REJECTION-MODEL — persisted server-side rejection of a sync-event upload
+// attempt. Sibling to SyncEvent: a persisted SyncEvent is a successful sync; a
+// persisted SyncRejection is a server-rejected sync. Together they form the
+// denominator for the funnel-metrics offline-sync-success ratio (see
+// services/funnel-metrics.service.ts).
+//
+// Out of scope: client-side failures that never reached the server (no network,
+// JS exception, etc.). Those are tracked via Sentry + client-side error reporting.
+model SyncRejection {
+  id               String            @id @default(uuid()) @db.Uuid
+  userId           String            @db.Uuid
+  user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  clientEventId    String
+  eventType        String
+  rejectionCode    SyncRejectionCode
+  rejectionMessage String
+  payloadSummary   String?
+  serverTimestamp  DateTime          @default(now())
+
+  @@index([serverTimestamp])
+  @@index([userId, serverTimestamp])
+}
+
+model OtpCode {
+  id        String   @id @default(uuid()) @db.Uuid
+  phoneHash String
+  userId    String?  @db.Uuid
+  purpose   String?
+  // PREPROTO-AUTH G1 — stores hmacOtp(plaintext), never the SMS code
+  // itself. Verification fetches by phoneHash/id and compares the HMAC
+  // in constant time, so no query ever filters on `code`.
+  code         String
+  attemptCount Int      @default(0)
+  expiresAt    DateTime
+  used         Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  @@index([phoneHash, purpose, used, expiresAt])
+  @@index([userId, purpose, used])
+}
+
+// PREPROTO-AUTH G3 — server-side session store (adversarial review #3).
+// One row per issued refresh token. `familyId` groups a rotation chain:
+// login mints a family, every refresh rotates to a new jti in the same
+// family (old row gets replacedByJti). Presenting an already-rotated or
+// revoked token is theft-detection and revokes the entire family.
+// hashedToken (sha256 of the signed JWT) binds the row to the exact
+// token string, never the raw token at rest.
+model RefreshToken {
+  id            String    @id @default(uuid()) @db.Uuid
+  jti           String    @unique
+  userId        String    @db.Uuid
+  familyId      String
+  hashedToken   String
+  expiresAt     DateTime
+  revokedAt     DateTime?
+  replacedByJti String?
+  createdAt     DateTime  @default(now())
+
+  @@index([userId, revokedAt])
+  @@index([familyId])
+}
+
+model AmlFlag {
+  id              String          @id @default(uuid()) @db.Uuid
+  userId          String          @db.Uuid
+  user            User            @relation(fields: [userId], references: [id], onDelete: Restrict)
+  journeyId       String?         @db.Uuid
+  journey         Journey?        @relation(fields: [journeyId], references: [id], onDelete: SetNull)
+  escrowId        String?         @db.Uuid
+  escrow          Escrow?         @relation(fields: [escrowId], references: [id], onDelete: SetNull)
+  type            AmlFlagType
+  severity        AmlFlagSeverity
+  status          AmlFlagStatus   @default(OPEN)
+  detectedAt      DateTime        @default(now())
+  resolvedAt      DateTime?
+  resolvedBy      String?         @db.Uuid
+  resolutionNotes String?
+  metadata        Json?
+
+  @@index([userId, detectedAt])
+  @@index([status, severity])
+  @@index([type, detectedAt])
+}
+
+enum BnrReportStatus {
+  PENDING
+  GENERATING
+  COMPLETED
+  FAILED
+}
+
+model BnrReport {
+  id           String          @id @default(cuid())
+  period       String
+  status       BnrReportStatus @default(PENDING)
+  generatedAt  DateTime?
+  generatedBy  String?
+  pdfPath      String?
+  csvPath      String?
+  pdfBytes     Int?
+  csvBytes     Int?
+  errorMessage String?
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  @@index([period])
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum SmsInboundIntent {
+  CONFIRM_JOURNEY
+  DISPUTE_JOURNEY
+  CONFIRM_SCHEDULED
+  CANCEL_SCHEDULED
+  ACCEPT_BID
+  DECLINE_BID
+  STATUS_QUERY
+  BALANCE_QUERY
+  RECIPIENT_CONFIRM
+  // R3-RECIPIENT-CONFIRM-2 — recipient SMS-replied with a dispute keyword
+  // (WRONG, DAMAGED, FAUX, SIBYO, …). Dispatcher routes to the
+  // recipient-dispute handler when sender-lookup also fails.
+  RECIPIENT_DISPUTE
+  HELP
+  STOP
+  UNKNOWN
+}
+
+enum SmsInboundStatus {
+  PENDING
+  PROCESSED
+  NO_MATCHING_JOURNEY
+  NO_MATCHING_BID
+  NO_MATCHING_SCHEDULED
+  UNMATCHED_SENDER
+  UNKNOWN_INTENT
+  OPT_OUT_RECORDED
+  ERROR
+}
+
+model SmsInbound {
+  id               String           @id @default(cuid())
+  atMessageId      String           @unique
+  fromMsisdn       String
+  toShortcode      String
+  rawBody          String
+  receivedAt       DateTime         @default(now())
+  userId           String?          @db.Uuid
+  intent           SmsInboundIntent @default(UNKNOWN)
+  status           SmsInboundStatus @default(PENDING)
+  resolvedEntityId String?
+  replyBody        String?
+  replySentAt      DateTime?
+  errorMessage     String?
+  processedAt      DateTime?
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([fromMsisdn])
+  @@index([receivedAt])
+  @@index([status])
+  @@index([userId])
+}
+
+enum AdminActionType {
+  FREEZE_USER
+  UNFREEZE_USER
+  HOLD_PAYOUT
+  RELEASE_PAYOUT
+  RESOLVE_JOURNEY_RECONCILIATION
+  RESOLVE_AML_APPEAL
+  RESOLVE_BID_MANIPULATION
+  RESOLVE_GPS_PLAUSIBILITY
+  RESOLVE_STALE_DRIVER_NO_SHOW
+  RESOLVE_PHOTO_MISMATCH
+  RESOLVE_GRAPH_ANOMALY
+  RESOLVE_DRIVER_NO_SHOW_DISPUTE
+  RESOLVE_RECIPIENT_DISPUTE
+  RESOLVE_RIDE_REPORT
+  COOPERATIVE_LEADER_ACTION
+  COOPERATIVE_DISPATCH
+  REVOKE_DRIVER
+  GRANT_FEE_WAIVER
+  EXTEND_FEE_WAIVER
+  REVOKE_FEE_WAIVER
+  // SOS-FOLLOW G3 — an admin closes a live emergency. Same RESOLVE_*
+  // convention as every conflict decision above, and written through
+  // the same appendAdminActionTx hash chain: an emergency that ends
+  // leaves an entry naming who ended it and why.
+  RESOLVE_EMERGENCY_ALERT
+}
+
+// LAUNCH-TRUTH G1 — the two pilot fee-waiver instruments.
+// LIFETIME: 12 grants total for the pre-prototype test drivers, never
+// expires. TEMPORARY: capped grants (500, env-tunable upward), 6 months,
+// extendable to 12 months total per driver. Both cover rides and parcels
+// alike — one rule, so "you keep 100% of what you earn" stays literal.
+enum FeeWaiverType {
+  LIFETIME
+  TEMPORARY
+}
+
+enum FreezeCategory {
+  AML_CRITICAL
+  FRAUD_SUSPECTED
+  SAFETY_CONCERN
+  KYC_PENDING
+  REGULATORY_REQUEST
+  ADMIN_DISCRETION
+}
+
+enum ConflictType {
+  JOURNEY_RECONCILIATION
+  AML_APPEAL
+  BID_MANIPULATION
+  GPS_PLAUSIBILITY
+  STALE_DRIVER_NO_SHOW
+  PHOTO_MISMATCH
+  GRAPH_ANOMALY
+  DRIVER_NO_SHOW_DISPUTE
+  RECIPIENT_DISPUTE
+  // TEAM-ANSWERS G3 (OPEN DECISIONS item 15, driver side) — a driver's
+  // incident report about a finished ride. The tenth conflict type, and
+  // deliberately a conflict rather than a score: it gives ops the same
+  // pattern visibility a passenger rating would (repeated reports about
+  // one rider are plainly visible in this dashboard) without creating a
+  // number attached to a person's ability to move through their city.
+  RIDE_REPORT
+}
+
+enum ConflictDecision {
+  RESOLVED_REFUND
+  RESOLVED_PAY
+  RESOLVED_SPLIT
+  UPHOLD_FLAG
+  OVERTURN_FLAG
+  FORCE_COMPLETE
+  NO_ACTION
+}
+
+model AdminAction {
+  id                          String            @id @default(cuid())
+  adminId                     String            @db.Uuid
+  action                      AdminActionType
+  targetType                  String
+  targetId                    String
+  payload                     Json
+  reason                      String
+  conflictType                ConflictType?
+  conflictDecision            ConflictDecision?
+  prevHash                    String            @default("")
+  entryHash                   String
+  crossLinkedEscrowAuditLogId String?           @db.Uuid
+  createdAt                   DateTime          @default(now())
+
+  admin User @relation("AdminActions", fields: [adminId], references: [id], onDelete: Restrict)
+
+  @@index([adminId])
+  @@index([action])
+  @@index([targetType, targetId])
+  @@index([conflictType])
+  @@index([createdAt])
+}
+
+enum MobilityTier {
+  DENSE
+  MEDIUM
+  LOW
+  SPARSE
+}
+
+enum MobilityAggregateType {
+  POINT_DENSITY
+  OD_MATRIX
+}
+
+// Dispatch M — first-class cooperative entity. The metadata: Json
+// field is the extensibility hatch: per-cooperative business rules
+// (commission overrides, membership criteria, reporting cadences)
+// land here without another schema migration. onDelete: Restrict on
+// FK references so a cooperative cannot be deleted while drivers /
+// leader still reference it.
+model Cooperative {
+  id                 String   @id @default(cuid())
+  name               String   @unique
+  registrationNumber String?
+  leaderId           String?  @unique @db.Uuid
+  commissionRate     Float    @default(0.0)
+  currency           String   @default("RWF")
+  metadata           Json     @default("{}")
+  active             Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  leader  User?           @relation("CooperativeLed", fields: [leaderId], references: [id], onDelete: SetNull)
+  drivers DriverProfile[] @relation("DriversInCooperative")
+  members User[]          @relation("UsersInCooperative")
+  // R3-DRIVER-SCREENER — drivers who self-declared affiliation in the screener.
+  screenerAffiliations DriverScreener[] @relation("CooperativeScreenerAffiliation")
+
+  @@index([leaderId])
+  @@index([active])
+  @@index([name])
+}
+
+model MobilityAggregate {
+  id             String                @id @default(cuid())
+  tier           MobilityTier
+  aggregateType  MobilityAggregateType
+  cellId         String
+  cellCenterLat  Float
+  cellCenterLng  Float
+  bucketStart    DateTime
+  bucketEnd      DateTime
+  count          Int
+  attributesJson Json?
+  computedAt     DateTime              @default(now())
+
+  @@unique([tier, aggregateType, cellId, bucketStart])
+  @@index([tier, bucketStart])
+  @@index([aggregateType])
+  @@index([cellId])
+  @@index([bucketStart])
+}
+
+model DeviceToken {
+  id           String       @id @default(uuid()) @db.Uuid
+  userId       String       @db.Uuid
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  platform     PushPlatform
+  token        String       @unique
+  isActive     Boolean      @default(true)
+  failureCount Int          @default(0)
+  createdAt    DateTime     @default(now())
+  lastSeenAt   DateTime     @default(now())
+
+  @@index([userId, isActive])
+}
+
+// PREPROTO-SIM G3 — outbound SMS captured when SMS_MODE=simulated. This
+// includes login OTP codes, so the rows are as sensitive as passwords:
+// the ONLY read path is the guarded /api/sim routes (admin session or
+// constant-time SIM_INBOX_TOKEN). No relation to User by design — the
+// simulated transport, like the real one, only knows a phone number.
+model SimulatedMessage {
+  id        String   @id @default(uuid()) @db.Uuid
+  toPhone   String
+  body      String
+  category  String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+// BLACKBOX G4 — an error-report bundle a user chose to send.
+//
+// The rows here are the client's error ledger as it stood when someone
+// tapped Send report on the Diagnostics screen. Nothing arrives here
+// automatically: the client has no background upload path, and this
+// table only ever grows by an explicit human action.
+//
+// `entries` is the ledger verbatim — already redacted on the device
+// (services/error-ledger.ts strips tokens, masks phone shapes and drops
+// query strings BEFORE persisting), already capped there, and capped
+// again on the way in by the route. It is stored as Json rather than
+// parsed into columns on purpose: the team reads and forwards bundles,
+// nothing queries inside them, and a schema that claimed to understand
+// the shape would go stale the first time a new entry kind appeared.
+model ErrorReport {
+  id     String @id @default(uuid()) @db.Uuid
+  userId String @db.Uuid
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  /// The reporter's role at the moment of sending — a driver's crash and
+  /// a customer's crash are different stories.
+  reporterRole UserRole
+  /// The app build the phone was running (__APP_BUILD_SHA__).
+  appBuild     String
+  /// How many ledger entries the bundle carries, denormalised so the
+  /// admin list does not have to open every bundle to count them.
+  entryCount   Int
+  entries      Json
+
+  /// FLIGHT-RECORDER G4 — the stable identity of the fault this bundle is
+  /// ABOUT, taken from its newest entry: what kind of failure, what it
+  /// said with ids and numbers flattened, and the top stack frame
+  /// (errorFingerprint in @bimoto/shared). Always computed here, never
+  /// read from the request — the route does not trust client shape, and a
+  /// deployed APK sends no fingerprint at all. NULL on every report
+  /// stored before this column existed; the admin read-out groups those
+  /// as "unfingerprinted" rather than guessing.
+  fingerprint  String?
+
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([userId])
+  @@index([fingerprint])
+}
+
+// SOS-FOLLOW G2 — an emergency becomes a state.
+//
+// Before this model there was only an event: the press wrote a SyncEvent
+// (the offline-capable ledger, which stays exactly as it is and remains
+// what the client's sync path uploads into) and fanned five channels
+// out. An event log can say "somebody pressed the button at 14:02". It
+// cannot say "this journey is IN an emergency right now", which is the
+// only question that matters to the two things this dispatch adds: may
+// this device stream its position, and has anybody closed this yet.
+//
+// So the row is the STATE and the SyncEvent is the LOG. They coexist
+// additively — no existing reader of either changes — and the invariant
+// that makes the state usable is ONE ACTIVE ROW PER JOURNEY, enforced by
+// a partial unique index in the migration (Prisma cannot express one;
+// see FeeWaiver_one_nonrevoked_per_driver in the LAUNCH-TRUTH migration
+// for the precedent this copies) and by a find-then-create in the press
+// handler.
+//
+// An alert ALWAYS ends. RESOLVED is an admin closing it with a written
+// note through the appendAdminActionTx hash chain; EXPIRED is the
+// 60-minute valve in jobs/emergency-expiry.job.ts closing one nobody
+// closed. There is no third resting state, and journey completion is
+// deliberately NOT one of them: an emergency can outlive the ride it
+// started on, and a ride that ends while somebody is still in trouble
+// must not quietly stop the follow.
+model EmergencyAlert {
+  id        String  @id @default(uuid()) @db.Uuid
+  journeyId String  @db.Uuid
+  journey   Journey @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+
+  /// WHO pressed the button — the caller, which on a driver-raised alert
+  /// is not the journey's customer. Kept alongside raisedByRole because
+  /// the role is what every surface branches on and resolving the id to
+  /// a role later would need a join the ops list cannot afford.
+  raisedById   String @db.Uuid
+  raisedBy     User   @relation("EmergencyAlertsRaised", fields: [raisedById], references: [id], onDelete: Restrict)
+  raisedByRole String
+
+  /// Where the phone was AT THE PRESS, when it could say. Nullable
+  /// throughout: a geolocation read that is slow, denied or unavailable
+  /// must never delay or block the alert, so an alert with no press
+  /// position is a normal alert, not a degraded one.
+  pressLat Float?
+  pressLng Float?
+
+  status    EmergencyAlertStatus @default(ACTIVE)
+  createdAt DateTime             @default(now())
+
+  resolvedAt   DateTime?
+  /// NULL when the valve expired it rather than a person closing it —
+  /// which is exactly the distinction `status` records, so the ops
+  /// history can say "closed by ops" or "timed out" without guessing.
+  resolvedById String?   @db.Uuid
+  resolvedBy   User?     @relation("EmergencyAlertsResolved", fields: [resolvedById], references: [id], onDelete: SetNull)
+  resolveNote  String?
+
+  /// Serves the ops ACTIVE list and the retention hold's NOT EXISTS.
+  @@index([status, createdAt])
+  /// Serves the press handler's "is there already an ACTIVE row" lookup
+  /// and the history tab's per-journey read.
+  @@index([journeyId, createdAt])
+}
+
+// SOS-FOLLOW G2 — the three states an emergency can be in, and there is
+// no fourth. ACTIVE is the only one that permits a follow stream; both
+// terminal states stop it, release the retention hold, and are announced
+// to the admins room and to the journey room alike.
+enum EmergencyAlertStatus {
+  ACTIVE
+  RESOLVED
+  EXPIRED
+}
+
+// ACCOUNT-RIGHTS-CORE G1 — a deletion becomes a request with a clock on
+// it, not a button that erases.
+//
+// The 72-hour hold (D1, 20 Aug) is the whole point: everything in the app
+// keeps working during the window, the request is cancellable, and only
+// when the clock runs out — and no blocking state is in the way — does the
+// erasure run. Law 058/2021 measures its 30-day compliance clock from
+// `requestedAt`, which is why the request timestamp and the execution
+// timestamp are two separate columns rather than one.
+//
+// ONE PENDING REQUEST PER USER, enforced by a PARTIAL unique index that
+// PSL cannot express (@@unique has no WHERE clause). It lives in raw SQL
+// in migration 20260824000000_account_rights_core_deletion_request:
+//   CREATE UNIQUE INDEX "DeletionRequest_one_pending_per_user"
+//     ON "DeletionRequest"("userId") WHERE "status" = 'PENDING'
+// — the same shape PAYOUT-IDEMPOTENCY used for the in-flight payout batch
+// (20260729000000) and SOS-FOLLOW for the active emergency alert
+// (20260819000000). Prisma's introspection ignores partial indexes, so
+// the migration-faithfulness gate never proposes dropping it. Do NOT add
+// a plain @@unique([userId]) here: that would forbid a user from ever
+// requesting deletion twice, when the whole cancel path exists so they
+// can change their mind and come back.
+//
+// The service still does a find-then-create as well. The index is what
+// makes the invariant true under a double-tap; the service check is what
+// makes the refusal a clean 409 instead of a database error.
+model DeletionRequest {
+  id     String @id @default(uuid()) @db.Uuid
+  userId String @db.Uuid
+  // Cascade, and it never fires: erasure ANONYMISES the User row, it
+  // never deletes it (29 relation fields at 297cb1d depend on that row
+  // existing). The cascade is here so the schema states the ownership
+  // truthfully, not because any code path hard-deletes a user.
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  status      DeletionRequestStatus @default(PENDING)
+  requestedAt DateTime              @default(now())
+  executesAt  DateTime
+  cancelledAt DateTime?
+  executedAt  DateTime?
+
+  /// Machine-readable reason the execution job skipped this row on its
+  /// last attempt (e.g. `NON_TERMINAL_JOURNEY`, `LIVE_ESCROW`). Null when
+  /// nothing is in the way. A deferral never cancels and never
+  /// force-executes: the row keeps retrying and this column is what the
+  /// admin surface reads to say why.
+  deferredReason String?
+
+  /// Serves the execution job's due-row sweep.
+  @@index([status, executesAt])
+  /// Serves the per-user "do I have a pending request" read on GET /me.
+  @@index([userId, status])
+}
+
+// ACCOUNT-RIGHTS-CORE G1 — the three states a deletion request can be in.
+// PENDING is cancellable; both terminal states are not. A user who
+// cancels and asks again gets a NEW row, so the history of asking is
+// preserved rather than overwritten.
+enum DeletionRequestStatus {
+  PENDING
+  CANCELLED
+  EXECUTED
+}
+
+// ACCOUNT-RIGHTS-CORE G1 — what Bimoto is allowed to remember about a
+// deleted account, and nothing else.
+//
+// Founder ruling D2 (20 Aug), verbatim scope: after erasure Bimoto keeps
+// ONLY the phone hash, the deletion count, and a was-suspended flag. That
+// is three facts, and this table has exactly three columns beyond the key
+// they are keyed by. A test pins `Object.keys` against that list in both
+// directions, because the pressure on a table like this is always to grow
+// one more "harmless" column.
+//
+// Why it must exist at all: the erasure replaces the User row's phoneHash
+// with a hash of `DELETED-<id>`, which is the correct thing to do — the
+// account must stop being findable by phone number. But it also destroys
+// the only key by which a returner can be recognised, and without that a
+// suspended user could delete their account and re-register clean. That
+// is reactivation-by-deletion, which the founder ruled out. So the
+// ORIGINAL hash is copied here in the same transaction that destroys it
+// on the User row.
+//
+// Deliberately NOT here: any relation to User (the tombstone must outlive
+// and out-scope the row), the encrypted phone (a hash is one-way; a
+// ciphertext is not), the nickname, the user id, and the deletion
+// timestamps of every individual deletion. `lastDeletedAt` is the most
+// recent one; earlier ones are counted, not dated.
+//
+// The key is a HASH, never a number: the phone-access convention guard
+// (src/__tests__/phone-access-convention.test.ts) applies here as
+// everywhere else.
+model AccountTombstone {
+  /// The ORIGINAL phoneHash — the value the User row carried before
+  /// erasure overwrote it. hashPhone() output, never a dialable number.
+  phoneHash String @id
+
+  /// How many times an account on this number has been deleted. Read by
+  /// registration; never shown to the returner.
+  deletionCount Int @default(0)
+
+  /// True if the account was suspended or frozen at the moment of
+  /// erasure. Sticky: once true it stays true across later deletions, so
+  /// a suspended user cannot launder the flag with a second clean cycle.
+  wasSuspended Boolean @default(false)
+
+  /// When the most recent erasure on this number committed.
+  lastDeletedAt DateTime
+}

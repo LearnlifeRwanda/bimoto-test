@@ -1,0 +1,54 @@
+# Build context for packages/server/Dockerfile (Render builds from repo root).
+# Keep this list minimal: only exclude things that would inflate the image
+# or leak local state.
+
+# Dependencies — re-installed inside the builder stage.
+node_modules
+**/node_modules
+
+# Build outputs — re-built inside the builder stage.
+**/dist
+**/build
+**/.next
+
+# Local env — secrets must come from Render dashboard, not the image.
+.env
+.env.*
+!packages/server/.env.example
+
+# Logs / coverage / editor.
+*.log
+**/coverage
+**/.nyc_output
+.vscode
+.idea
+.DS_Store
+
+# Git metadata — not needed at runtime.
+.git
+.gitignore
+.github
+
+# Other workspaces — server build only needs `shared`.
+packages/client
+packages/e2e
+
+# Test fixtures and ad-hoc scripts.
+**/__tests__
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+
+# Docs and ops artefacts.
+docs
+*.md
+!packages/server/prisma/README.md
+
+# Prisma local SQLite or migrations cache (we use Postgres at runtime).
+**/dev.db
+**/dev.db-journal
+
+# Docker artefacts themselves.
+Dockerfile
+.dockerignore
+docker-compose.yml

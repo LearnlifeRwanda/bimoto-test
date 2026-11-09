@@ -1,0 +1,67 @@
+name: iOS Build
+
+# Manual-only until Apple Developer code-signing is configured. Once
+# provisioning profiles + certs are wired into the runner, add
+# `push` / `pull_request` triggers (mirroring android-build.yml) so
+# every commit produces an .xcarchive artifact.
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ios-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-xcarchive:
+    runs-on: macos-14
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: '9.15.0'
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client (server build needs it)
+        working-directory: packages/server
+        run: pnpm exec prisma generate
+
+      - name: Build shared + client
+        run: |
+          pnpm --filter @bimoto/shared build
+          pnpm --filter @bimoto/client build
+
+      - name: Capacitor sync (iOS)
+        working-directory: packages/client
+        run: npx cap sync ios
+
+      - name: CocoaPods install
+        working-directory: packages/client/ios/App
+        run: pod install --repo-update
+
+      - name: xcodebuild archive (unsigned)
+        run: |
+          xcodebuild \
+            -workspace packages/client/ios/App/App.xcworkspace \
+            -scheme App \
+            -configuration Release \
+            -archivePath /tmp/App.xcarchive \
+            -destination "generic/platform=iOS" \
+            CODE_SIGNING_ALLOWED=NO \
+            archive
+
+      - name: Upload xcarchive artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: bimoto-ios-${{ github.sha }}
+          path: /tmp/App.xcarchive
+          retention-days: 30
+          if-no-files-found: error

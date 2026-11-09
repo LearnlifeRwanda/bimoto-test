@@ -1,0 +1,124 @@
+{
+  "_comment": [
+    "CUTGUARD v2 G1 — the serialization guard's allowlist.",
+    "",
+    "`serializers` names the functions that launder a raw Prisma row into a",
+    "client-safe shape. A value assigned from one of these is safe to emit.",
+    "Seeded with the serializers that exist; add a new one here the day it is",
+    "written, or the guard will not know it laundered anything.",
+    "",
+    "`sites` is the escape hatch, and it is deliberately uncomfortable: every",
+    "entry needs a reason, a stale entry is a warning, and the reason has to",
+    "say why THIS row may travel raw — not merely that it currently does.",
+    "",
+    "The bar these entries clear: the row carries no credential (no hash, no",
+    "ciphertext, no PIN column), and its audience is entitled to every column",
+    "the model has. Two candidates did NOT clear it and were fixed in code",
+    "instead of listed here — admin.routes POST /flagged-users/:userId/unflag",
+    "(shipped moneyPinHash to the console) and scheduled-ride.routes",
+    "GET /customer (shipped agreedPrice + commissionAmount, which subtract to",
+    "the motari's net, plus every rival's raw bid)."
+  ],
+  "_gateSitesComment": [
+    "S4's exemptions. An entry here says: this CUSTOMER-projected commission",
+    "is attached with no version gate, and here is why no client of any",
+    "generation in the field can crash on it.",
+    "",
+    "It is EMPTY, and `check.test.ts` asserts that it is. All five customer",
+    "commission attaches in the tree are gated, which is the point — an",
+    "exemption is a claim about every APK that has ever been installed, and",
+    "the one time this dispatch tried to write one (the accept path, on the",
+    "ground that v13 reads the confirm-dialog breakdown off the bid ROW) the",
+    "claim turned out to be false: v13 puts the accept body straight into the",
+    "journey store, and MatchedPage renders it whenever the refetch that",
+    "would have overwritten it fails.",
+    "",
+    "If you add one, change that test on purpose and put the APK you checked",
+    "against in the reason."
+  ],
+  "gateSites": [],
+  "_gateCallSitesComment": [
+    "S5's exemptions. An entry here says: this route calls a version-gated",
+    "service function and does NOT declare a generation, because the object it",
+    "gets back never reaches a client at all.",
+    "",
+    "That is a different claim from S4's. An S4 exemption asserts something",
+    "about every APK in the field; an S5 exemption asserts something about this",
+    "handler's own response, which is a thing a reviewer can check by reading",
+    "twenty lines.",
+    "",
+    "All three shipped entries are participation checks: read customerId /",
+    "driverId, decide a 403, answer with something else entirely. Each was",
+    "verified by reading its handler to the closing brace before it was written",
+    "here."
+  ],
+  "gateCallSites": [
+    {
+      "key": "S5 packages/server/src/routes/journey.routes.ts POST /:id/emergency getJourneyById",
+      "reason": "Participation check only. The handler reads customerId / driverId / type to decide the 403 and then builds the emergency payload from its own queries; the journey object is never spread, returned or emitted. A savings preview here would be computed for nobody."
+    },
+    {
+      "key": "S5 packages/server/src/routes/journey.routes.ts GET /:id/emergency/active getJourneyById",
+      "reason": "Same participation check, same handler family. It answers `{ alert }` and nothing else — deliberately thin, per the note above the route."
+    },
+    {
+      "key": "S5 packages/server/src/routes/rating.routes.ts POST /:id/rate getJourneyById",
+      "reason": "Participation check only: customerId must be the rater and driverId must exist, then the response is the created rating (201). The journey never reaches the wire."
+    }
+  ],
+  "serializers": ["toClientUser"],
+  "sites": [
+    {
+      "key": "S1 packages/server/src/routes/admin-aml.routes.ts GET /:flagId flag:amlFlag",
+      "reason": "AmlFlag is an investigative row and the admin AML console is its only reader (router.use(authMiddleware) + adminOnly). Every column IS the finding — narrowing it would hide evidence from the reviewer the row exists for. No credential column on the model."
+    },
+    {
+      "key": "S1 packages/server/src/routes/admin-conflicts.routes.ts GET /audit actions:adminAction",
+      "reason": "AdminAction is the hash-chained audit trail; the audit surface must show the whole row or it is not an audit. adminOnly. No credential column on the model."
+    },
+    {
+      "key": "S1 packages/server/src/routes/admin-freeze.routes.ts GET /:userId actions:adminAction",
+      "reason": "Same audit row, same reason: the freeze console shows an operator every action taken on the account. adminOnly. No credential column on the model."
+    },
+    {
+      "key": "S1 packages/server/src/routes/admin-freeze.routes.ts GET /:userId/audit actions:adminAction",
+      "reason": "Same audit row, same reason as the sibling above. adminOnly. No credential column on the model."
+    },
+    {
+      "key": "S1 packages/server/src/routes/admin-sms-inbound.routes.ts GET / rows:smsInbound",
+      "reason": "SmsInbound is the raw inbound-SMS triage queue; the operator is reading exactly the message the gateway delivered, so a projection would be a redaction of the thing under review. adminOnly. No credential column on the model."
+    },
+    {
+      "key": "S1 packages/server/src/routes/admin-sms-inbound.routes.ts GET /:id row:smsInbound",
+      "reason": "Single-row read of the same triage queue, same reason. adminOnly."
+    },
+    {
+      "key": "S1 packages/server/src/routes/admin-sms-inbound.routes.ts POST /:id/dismiss updated:smsInbound",
+      "reason": "Echo of the row just dismissed, from the same triage queue. adminOnly."
+    },
+    {
+      "key": "S1 packages/server/src/routes/admin.routes.ts GET /verifications verifications:driverProfile",
+      "reason": "The driver-verification queue. Its whole job is to put the licence number and the three document photo URLs in front of a human reviewer, so those columns are the payload rather than a leak. adminOnly, and this is the endpoint AdminVerifications.tsx reads them from — no other surface does."
+    },
+    {
+      "key": "S1 packages/server/src/routes/admin.routes.ts POST /verifications/:userId/approve profile:driverProfile",
+      "reason": "Echo of the profile just approved, to the same admin queue that was already showing every column of it. adminOnly."
+    },
+    {
+      "key": "S1 packages/server/src/routes/admin.routes.ts POST /verifications/:userId/reject profile:driverProfile",
+      "reason": "Echo of the profile just rejected, including the rejectionReason the operator typed. adminOnly."
+    },
+    {
+      "key": "S1 packages/server/src/routes/admin.routes.ts GET /disputes journeys:journey",
+      "reason": "The dispute console. A disputed ride is adjudicated on its money columns (agreedPrice, commissionAmount) and its cancellation fields, so the full row is the point. adminOnly — this is NOT the customer-facing journey path, which projects through journey.service."
+    },
+    {
+      "key": "S1 packages/server/src/routes/scheduled-ride.routes.ts GET / rides:journey",
+      "reason": "The DRIVER's own scheduled rides (authMiddleware + driverOnly), and the included bids are filtered to `driverId: req.user.userId` — he sees his own offer and no rival's. A driver is entitled to the full commission arithmetic on a ride he is committed to (this is what MONEY-VIEW's driver arm hands him elsewhere), so agreedPrice + commissionAmount are his to read. The CUSTOMER sibling at GET /customer is a different matter and was fixed with a select rather than listed here."
+    },
+    {
+      "key": "S1 packages/server/src/routes/user.routes.ts PUT /me/online-status profile:driverProfile",
+      "reason": "The driver's own profile row, echoed to himself after his own online toggle (authMiddleware, scoped to req.user.userId). Every column is his own data and the model holds no credential — the document URLs are his own documents. Kept raw because the client replaces its stored profile from this response."
+    }
+  ]
+}

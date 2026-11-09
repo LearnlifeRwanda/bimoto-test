@@ -1,0 +1,17 @@
+-- INTEL-DECK G4 — a read-only role whose whole world is k-clean aggregates.
+--
+-- The mobility vault is worth nothing to the City if the only person who
+-- can open it is a platform administrator who can also read every
+-- passenger's phone number. ANALYST is the separation: it reads the
+-- suppressed, aggregated intelligence surface and nothing else. Every
+-- existing guard (adminOnly, driverOnly, customerOnly,
+-- requireCooperativeLeader) already refuses any role it does not name,
+-- so this value arrives locked out of everything by construction and is
+-- admitted only by the new intelRead guard.
+--
+-- Additive and safe on a live table: adding a value to an enum rewrites
+-- nothing, no existing User row changes, and no code path reads it until
+-- an account is deliberately given it. Postgres 15 (postgis/postgis:15-3.4)
+-- allows ADD VALUE inside a transaction as long as the value is not used
+-- in the same transaction, which it is not.
+ALTER TYPE "UserRole" ADD VALUE 'ANALYST' AFTER 'COOPERATIVE_LEADER';

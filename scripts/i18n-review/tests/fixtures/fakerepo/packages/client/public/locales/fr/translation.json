@@ -1,0 +1,19 @@
+{
+  "app": {
+    "name": "Bimoto",
+    "tagline": "Votre course, votre prix"
+  },
+  "welcome": {
+    "languageRw": "Kinyarwanda"
+  },
+  "journey": {
+    "moto": "Moto",
+    "distance": "{{distance}} km",
+    "legend": "gauche | droite",
+    "multiline": "première ligne\ndeuxième ligne"
+  },
+  "errors": {
+    "invalid": "Transition de statut invalide.",
+    "fresh": "Nouvelle chaîne"
+  }
+}

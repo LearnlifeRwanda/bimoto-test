@@ -1,0 +1,38 @@
+[
+  {
+    "key": "__README__",
+    "reason": "CUTGUARD v2 G4. Rule 3 refuses an ownership id sourced from a fetched row instead of the session — the shape that made POST /scheduled-rides/:id/conflict-acknowledge a check that could not fail, live on the pilot. Every entry below was read at abb6a26 and each names what DOES authorise its call: an entry that only says 'this is fine' is not an attestation. Two categories recur and both are real: an ENTITY REFERENCE (a row's own primary key handed to the function that updates that row — not an authorisation at all, and the authorisation stands separately above it), and NO SESSION EXISTS (a gateway webhook, authorised by the processor's own reference rather than by a user). A site that is neither belongs in code, not here."
+  },
+  {
+    "key": "rule3 packages/server/src/routes/payment.routes.ts markEscrowChargeSucceeded(escrow.id)",
+    "reason": "ENTITY REFERENCE, and the ownership check is done correctly one line above. Both handlers fetch the escrow by the id in the body and then compare `escrow.customerId !== req.user!.userId` → 403 FORBIDDEN — against the SESSION, which is exactly what conflict-acknowledge failed to do. `escrow.id` is then the row to mark, not a claim about who is asking."
+  },
+  {
+    "key": "rule3 packages/server/src/routes/payment.routes.ts markEscrowChargeFailed(escrow.id)",
+    "reason": "ENTITY REFERENCE. Same two handlers and the same session-sourced `escrow.customerId !== req.user!.userId` → 403 above it; this is the failure arm of the same charge."
+  },
+  {
+    "key": "rule3 packages/server/src/routes/payout.routes.ts getActiveWaiver(user.id)",
+    "reason": "A ROUND-TRIP, not a tautology. `user` is fetched as `prisma.user.findUnique({ where: { id: req.user!.userId } })`, so `user.id` IS the session id — it came from req.user and went back. Behind authMiddleware + driverOnly + requireMoneyStepUp. Passing req.user!.userId directly would read better and change nothing; it is left as-is because this dispatch does not touch payout handlers it has no defect in."
+  },
+  {
+    "key": "rule3 packages/server/src/routes/payout.routes.ts firePreferenceChangeBatch(user.id)",
+    "reason": "Same round-trip as the sibling above: `user` is fetched by `where: { id: req.user!.userId }`, so `user.id` is the session id. Behind authMiddleware + driverOnly + requireMoneyStepUp, and firePreferenceChangeBatch carries the freeze, AML hard-cap, in-flight-transfer and balance-floor guards itself."
+  },
+  {
+    "key": "rule3 packages/server/src/routes/webhook.routes.ts markBatchPaidOut(batch.driverId)",
+    "reason": "NO SESSION EXISTS. This is Flutterwave's transfer.completed callback — there is no req.user to source anything from, and there never can be. The batch is resolved by the processor's own `data.reference` against the unique DriverPayoutBatch.txRef, and the driver it pays is whichever driver that batch is for; taking the driver from anywhere else would be the bug. Authorisation for the request itself is the webhook signature check, not a user."
+  },
+  {
+    "key": "rule3 packages/server/src/routes/webhook.routes.ts markBatchPaidOut(batch.id)",
+    "reason": "NO SESSION EXISTS, and an ENTITY REFERENCE besides: the id of the batch resolved from the gateway's own txRef, handed to the function that settles that batch."
+  },
+  {
+    "key": "rule3 packages/server/src/routes/webhook.routes.ts markBatchFailed(batch.id)",
+    "reason": "NO SESSION EXISTS. The failure arm of the same gateway callback, on the same txRef-resolved batch."
+  },
+  {
+    "key": "rule3 packages/server/src/routes/webhook.routes.ts markBatchTransferReversed(batch.id)",
+    "reason": "NO SESSION EXISTS. The reversal arm of the same gateway callback, on the same txRef-resolved batch."
+  }
+]

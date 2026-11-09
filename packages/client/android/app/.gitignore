@@ -1,0 +1,7 @@
+/build/*
+!/build/.npmkeep
+
+# Firebase Cloud Messaging service-account file. Contains the project
+# ID + sender ID and is fetched per-environment from Firebase Console.
+# Commit only the .example template; the real file is ignored.
+google-services.json

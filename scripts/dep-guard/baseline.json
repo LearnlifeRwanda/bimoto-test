@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1119441,
+    "package": "uuid",
+    "path": "packages/server > firebase-admin@13.8.0 > @google-cloud/firestore@7.11.6 > google-gax@4.6.1 > google-auth-library@9.15.1 > gaxios@6.7.1 > uuid@9.0.1",
+    "severity": "moderate",
+    "reason": "Missing buffer bounds check in uuid v3/v5/v6 when `buf` is provided. The fix is uuid >=11.1.1 and the installed copy is 9.0.1 — TWO majors below it — pinned by google-auth-library inside firebase-admin's dependency chain, which this repo does not control. A pnpm override to 11.x would force a cross-major HTTP-auth dependency change under the push stack, which is exactly the class of override SUPPLY-CHAIN G4 refused to make. Bimoto passes no caller-controlled `buf` to uuid.",
+    "owner": "the firebase-admin 13 -> 14 migration (out of scope per SUPPLY-CHAIN §0; needs its own dispatch)"
+  },
+  {
+    "id": 1145811,
+    "package": "@opentelemetry/core",
+    "path": "packages/server > @sentry/node@8.55.2 > @opentelemetry/core@1.30.1",
+    "severity": "moderate",
+    "reason": "Unbounded memory allocation in W3C Baggage propagation (CVE-2026-54285, GHSA-8988-4f7v-96qf). RE-ISSUED UNDER A NEW ADVISORY ID: this is the same defect this file has carried since SUPPLY-CHAIN as 1120821, which the registry has since retired in favour of 1145811 — same package, same title, same fix. The guard's stale rule caught the swap and failed the build, which is the rule working: an entry keyed on an id nobody publishes any more attests nothing. NO PATCH-BUMP IS AVAILABLE, checked rather than assumed: the fix is >=2.8.0 and 1.30.1 is the LAST 1.x release the registry has, so there is no same-major version to move to. 1.30.1 is pinned by @sentry/node 8.x and by every one of its @opentelemetry/instrumentation-* packages, which expect the 1.x API; an override to 2.x would break Sentry's instrumentation rather than move a version. REVISIT: at the Sentry 8 -> 10 migration, or sooner if the severity moves off moderate — the guard fails on a severity change by itself, so that revisit is enforced rather than remembered.",
+    "owner": "the @sentry/node 8 -> 10 migration (out of scope per SUPPLY-CHAIN §0; needs its own dispatch). Re-anchored 2026-08-24 by EXPORT-AND-LEDGER G6(b)."
+  },
+  {
+    "id": 1124268,
+    "package": "react-router",
+    "path": "packages/client > react-router-dom@6.30.6 > react-router@6.30.6",
+    "severity": "moderate",
+    "reason": "Open redirect via backslash in <Link> and useNavigate (CVE-2025-68470 bypass). SUPPLY-CHAIN G4 took the 6.x line as far as it goes — ^6.26.0 -> ^6.30.6, which cleared the four other react-router/@remix-run advisories — but this one is patched only in >=7.18.0. React Router 6 -> 7 is a major migration of every route in the client. This ships to users; it is the most consequential entry in this file.",
+    "owner": "the React Router 6 -> 7 migration (out of scope per SUPPLY-CHAIN §0; needs its own dispatch)"
+  },
+  {
+    "id": 1124272,
+    "package": "react-router",
+    "path": "packages/client > react-router-dom@6.30.6 > react-router@6.30.6",
+    "severity": "moderate",
+    "reason": "Arbitrary Constructor Injection via deserializeErrors() in React Router SSR hydration. Patched only in >=7.18.0, same major migration as 1124268. Bimoto's client is a Vite SPA and does not server-side render, so the hydration path this advisory describes is not one the app enters — but the code is installed, and reachability is not exploitability in either direction, so it is recorded rather than dismissed.",
+    "owner": "the React Router 6 -> 7 migration (out of scope per SUPPLY-CHAIN §0; needs its own dispatch)"
+  }
+]

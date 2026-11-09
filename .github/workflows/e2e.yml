@@ -1,0 +1,222 @@
+name: E2E
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cross-locale-chat:
+    runs-on: ubuntu-latest
+    # Playwright Docker image — chromium pre-installed at /ms-playwright/.
+    # Eliminates GAP-P27 (cdn.playwright.dev throttling) by removing the
+    # browser-binary download from CI entirely.
+    container:
+      image: mcr.microsoft.com/playwright:v1.59.1-jammy
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_USER: bimoto
+          POSTGRES_PASSWORD: bimoto_dev
+          POSTGRES_DB: bimoto
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgresql://bimoto:bimoto_dev@postgres:5432/bimoto
+      # PREPROTO-AUTH G4 raised the config floor: secrets must be >= 32
+      # chars and not a known placeholder. These test-only values comply.
+      JWT_SECRET: test-jwt-secret-change-in-production-padding-padding
+      JWT_REFRESH_SECRET: test-refresh-secret-change-in-production-padding
+      ENCRYPTION_KEY: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+      # Explicit key for the OTP-at-rest HMAC (G1). Optional (falls back
+      # to ENCRYPTION_KEY) but pinned here so the fallback path is a
+      # choice, not an accident. Test-only value.
+      OTP_HMAC_KEY: e2e-otp-hmac-key-0123456789abcdef0123456789abcdef
+      # The e2e stack serves everything over plain http://localhost, so
+      # Secure-flagged cookies (G4 default) would never round-trip
+      # through Playwright's request contexts. Test-only override.
+      COOKIE_SECURE: 'false'
+      NODE_ENV: test
+      # PILOT-GUARD amendment — CI declares what it means, in both
+      # directions, instead of leaning on zod defaults it never chose.
+      #
+      # PAYMENTS_MODE was never set here, so this job inherited the
+      # schema default 'live' — and combined with E2E_FAKE_PAYMENTS=1
+      # below, CI had been running the exact live+fake combination
+      # Item 4's startup guard exists to refuse. The first boot under
+      # the new guard refused, wait-on timed out, and the job went red:
+      # the guard working, on our own pipeline. 'simulated' is also the
+      # truthful value — this stack's gateway is the in-process fake,
+      # and it is the mode the Kigali pilot itself runs.
+      # pilot-guard-ci-boot-combos.test.ts re-derives this job's env
+      # from THIS file and boots it through the real guards, so the
+      # next contradictory edit fails in unit tests, not in wait-on.
+      PAYMENTS_MODE: 'simulated'
+      # Declared for the same reason, same class of silent default: the
+      # SMS transport here is the [SMS-TEST] console branch, selected by
+      # NODE_ENV=test with any non-simulated mode. 'live' is the schema
+      # default this job has always relied on — now it says so. (NOT
+      # 'simulated': that would reroute OTPs into the DB inbox, which
+      # this job does not provision — SIM_INBOX_TOKEN is unset.)
+      SMS_MODE: 'live'
+      # E2E only: lets bid.service drive escrow PENDING→HELD when no payment
+      # gateway keys are configured, so dispute/refund/release flows are
+      # exercisable in CI. PAY-TRUTH G5 extended the same hatch to the
+      # RETRY rail (POST /api/payments/initiate), so payment-retry-flow.spec
+      # can prove that one tap turns a FAILED escrow into a held payment
+      # without losing the motari. Never set outside this workflow.
+      E2E_FAKE_PAYMENTS: '1'
+      # E2E only: the Flutterwave webhook receiver compares the
+      # `verif-hash` header against this. Setting it lets the specs make
+      # the machine release a failed match through the REAL webhook path
+      # (markEscrowChargeFailed → releaseMatchTx) instead of a test
+      # helper imitating it — which is the only way the bid-reopen proof
+      # is worth anything. Test-only value; never a real hash.
+      FLW_SECRET_HASH: e2e-only-flutterwave-verif-hash-not-a-real-secret
+      # E2E only: the client's chargeWithCard() guard reads VITE_FLW_PUBLIC_KEY
+      # and bails with CARD_WIDGET_NO_PUBLIC_KEY when it is absent. The
+      # payment-card-flow spec stubs window.FlutterwaveCheckout, so this only
+      # needs to be a non-empty placeholder to let the guard pass at build time.
+      # Never a real key.
+      VITE_FLW_PUBLIC_KEY: 'test-public-key-e2e-only'
+      CLIENT_URL: http://localhost:5173
+      VITE_API_URL: http://localhost:3000
+      VITE_E2E_TESTING: 'true'
+      AT_API_KEY: dummy-key-for-test-mode-only
+      AT_USERNAME: sandbox
+      CI: 'true'
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: '9.15.0'
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client (must precede build)
+        working-directory: packages/server
+        run: pnpm exec prisma generate
+
+      - name: Build shared, server, client
+        run: |
+          pnpm --filter @bimoto/shared build
+          pnpm --filter @bimoto/server build
+          pnpm --filter @bimoto/client build
+
+      # DB-BASELINE: the empty service database is built by the real
+      # migration history (baseline + all later migrations) — the same
+      # non-interactive command operators run. This is the standing proof
+      # that a fresh `migrate deploy` produces the complete schema.
+      - name: Build DB schema from migrations (fresh migrate deploy)
+        working-directory: packages/server
+        run: pnpm exec prisma migrate deploy
+
+      # Faithfulness gate: the migrate-deploy-built database must match
+      # schema.prisma exactly (non-zero exit on any difference).
+      - name: Assert migrations match schema.prisma
+        working-directory: packages/server
+        run: >-
+          pnpm exec prisma migrate diff
+          --from-url "$DATABASE_URL"
+          --to-schema-datamodel prisma/schema.prisma
+          --exit-code
+
+      # PAYOUT-IDEMPOTENCY: the payout-batch migration must also work on a
+      # database that ALREADY violates its invariant (duplicate PENDING
+      # batches — the live-pilot case). Asserts the partial unique index
+      # exists after the fresh deploy above, re-runs the real migration
+      # file against a seeded violating fixture, checks the deterministic
+      # resolution, and cleans up before seeding.
+      - name: Rehearse payout-idempotency migration (pre-existing violations)
+        working-directory: packages/server
+        run: pnpm exec tsx scripts/rehearse-payout-idempotency-migration.ts
+
+      # BID-ATOMICITY: same discipline for the audit-chain unique. Asserts
+      # the (escrowId, sequenceNumber) unique exists after the fresh
+      # deploy, re-runs the real migration file against a seeded
+      # benign-duplicate fixture (checking the deterministic, reversible
+      # resequencing), proves a divergent-hash fork ABORTS the migration
+      # untouched, and cleans up before seeding.
+      - name: Rehearse audit-chain-unique migration (pre-existing violations)
+        working-directory: packages/server
+        run: pnpm exec tsx scripts/rehearse-audit-chain-migration.ts
+
+      # PILOT-GUARD Item 3 — the seed's fixed-phone ADMIN (+250780000000,
+      # SEED_USERS.TestAdmin in packages/e2e/tests/helpers.ts) is opt-in
+      # now: it logs in on a published number, so an operator following
+      # the runbook no longer gets one by default. CI asks for it because
+      # disputed-flow.spec and error-ledger-report.spec log in as it.
+      #
+      # The two seed refusals cannot fire here: this job seeds
+      # NODE_ENV=test against the database `prisma migrate deploy` built
+      # empty two steps above, and ENCRYPTION_KEY is set in the job env.
+      - name: Seed database
+        env:
+          SEED_DEV_ADMIN: '1'
+        run: pnpm --filter @bimoto/server db:seed
+
+      - name: Start server
+        run: |
+          nohup pnpm --filter @bimoto/server start > /tmp/server.log 2>&1 &
+          echo $! > /tmp/server.pid
+          sleep 1
+
+      - name: Start client (Vite preview)
+        run: |
+          nohup pnpm --filter @bimoto/client exec vite preview --port 5173 --host 127.0.0.1 > /tmp/client.log 2>&1 &
+          echo $! > /tmp/client.pid
+          sleep 1
+
+      - name: Wait for stack
+        run: |
+          npx --yes wait-on \
+            http://localhost:3000/api/health \
+            http://localhost:5173 \
+            -t 90000 \
+            || (echo "===== SERVER LOG =====" && cat /tmp/server.log && echo "===== CLIENT LOG =====" && cat /tmp/client.log && exit 1)
+
+      - name: Run E2E
+        run: pnpm test:e2e
+
+      - name: Echo server + client logs on failure
+        if: failure()
+        run: |
+          echo "===== SERVER LOG ====="
+          cat /tmp/server.log || true
+          echo "===== CLIENT LOG ====="
+          cat /tmp/client.log || true
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: playwright-report
+          path: packages/e2e/playwright-report/
+          retention-days: 7
+
+      - name: Upload Playwright traces on failure
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: playwright-test-results
+          path: packages/e2e/test-results/
+          retention-days: 7

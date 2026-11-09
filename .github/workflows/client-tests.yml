@@ -1,0 +1,40 @@
+name: Client Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: client-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  vitest:
+    name: vitest
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v5
+        with:
+          version: '9.15.0'
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build shared (test type-check dependency)
+        # Mirrors the equivalent step in server-tests.yml: client tests
+        # import @bimoto/shared, so its compiled output must exist for
+        # vitest to resolve types deterministically in CI.
+        run: pnpm --filter @bimoto/shared build
+
+      - name: Run client tests
+        run: pnpm test:client

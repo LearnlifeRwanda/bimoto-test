@@ -1,0 +1,940 @@
+{
+  "_readme": "Human-authored content for the generated Kinyarwanda review workbook. scripts/i18n-review/generate.ts is the only writer of docs/i18n-rw-review.md and docs/i18n-native-review-queue.md; both files are rewritten whole on every run, so prose that must survive regeneration lives HERE, not in the generated markdown. Everything below was harvested verbatim from the hand-maintained workbook this generator replaced (docs/i18n-rw-review.md at 76d14db), so the switch to generation destroyed no human note. Edit here, then run `pnpm i18n:review`.",
+  "translatorInstruction": "**Translator:** fill in the **Reviewer's RW** column for every row.\nUse the **Note** column for uncertainty, glossary disputes, or UX flags\n(see `docs/i18n-translator-brief.md` and `docs/i18n-glossary.md`).",
+  "sectionNotes": {
+    "quickMessages": "**Brevity matters** — these render as buttons on a small mobile screen.\nPrefer the shortest natural rendering.",
+    "landmarks": "**Note:** many Kigali landmarks (bus stations, hospitals, hotels) have\nestablished Kinyarwanda renderings in everyday use. Please **validate**\nthe current AI rendering against common usage rather than re-creating it."
+  },
+  "namespaceNotes": {
+    "activeJourney": "TODO(rw): native review required for the 'activeJourney' keys.",
+    "child": "TODO(GAP-P4) Kinyarwanda native review for R3-CHILD strings (machine-translated placeholders).",
+    "driverApproach": "TODO Kinyarwanda native review — strings below are AI-generated approximations pending the same translator-packet review tracked in i18n.ts.",
+    "guide": "TODO(rw): native review required for all 'guide' keys (AI draft).",
+    "home": "TODO(rw): native review required for the following 'home' + 'urgent' + 'priority' keys.",
+    "journeyHistory": "TODO Kinyarwanda native review (R3-N-5).",
+    "outbox": "TODO(rw): native review required for all 'outbox' keys (AI draft). These are read by a passenger who has just lost signal, so tone is the whole job: 'saved on this phone' must land as reassurance, never as an error or a warning. Check `kubika`/`kohereza` usage against the glossary, and confirm the waiting-count plural reads naturally for 1 and for many.",
+    "payout": "PAYOUT-C — the driver money screen. These strings tell a driver how\nmuch they earned today and exactly when it reaches their MoMo wallet;\nplain, reassuring wording matters more than literal fidelity.",
+    "urgent": "TODO(rw): native review required for the entire 'urgent' + 'priority' namespaces.",
+    "intel": "INTEL-DECK G5 — the analyst reading room (/intel). These strings are read by a data analyst rather than by a rider, and the tooling is EN-first by agreement, so RW/FR renderings here are lower priority than any passenger- or driver-facing namespace. Two lines carry real weight and should be reviewed even if the rest waits: `intel.empty` (\"No cells cleared the privacy threshold here.\") must read as a statement about the privacy rule, never as an error or an empty database — an analyst who reads it as a failure will draw the wrong conclusion about Kigali; and `intel.marginal.other` (\"other (folded)\") must read as a REMAINDER the platform declined to break down, not as a vehicle type called \"other\". `intel.subtitle` is the promise the whole surface makes and should stay plain: this cannot show you a person, only a city.",
+    "report": "TEAM-ANSWERS G6 — the driver's incident report (OPEN DECISIONS item 15, driver side). AI-generated draft pending native review. TWO THINGS CARRY THE WEIGHT HERE. (1) `report.reason.*` are CATEGORY LABELS the Kigali team is expected to edit: the five keys are a starter set chosen on 18 August, and the words are the team's to change freely — only the underlying keys are fixed (changing one is a database migration). Translate for how a motari would actually name the trouble, not literally from the English. (2) `report.reviewNote` is the promise the whole surface makes and must not drift: the passenger is NOT scored, and is NOT told who reported. A rendering that implies a rating, a mark against the passenger, or that the passenger will hear about it is wrong even if it reads well.",
+    "confirmArrival": "TEAM-ANSWERS G6 — the passenger confirms the ride is done (item 16b). AI-generated draft pending native review. `confirmArrival.fallback` is the load-bearing line: it says that if she does nothing the ride confirms itself after two hours AND THE MOTARI IS PAID EITHER WAY. That is the honest fact and it must survive translation — a passenger who reads this as 'the motari is only paid if I tap' has been told something false, and one who reads it as a deadline she can miss will worry about money that is not at risk.",
+    "rating": "TEAM-ANSWERS G6 — the low-star reason keys (`rating.reason.*`, item 15). Same standing as `report.reason.*`: CATEGORY LABELS, a starter set the Kigali team is expected to edit, with only the underlying keys fixed. Render them the way a passenger in Kigali would name the problem. `rating.reasonOptional` must read as reassurance — the stars are sent whether or not she says anything — never as an instruction to fill the fields in.",
+    "emergency": "SOS-FOLLOW G6 — the live-follow strings. SAFETY-CRITICAL TONE: these are the only strings in this file read by somebody who has just pressed a panic button, or by an operator deciding whether to act on one, so a rendering that reads well but lands wrong is worse than an awkward one that lands right. THREE LINES CARRY THE WEIGHT. (1) `emergency.followingLive` / `followingLiveParcel` are what the person who pressed the button reads on their own phone. They must land as REASSURANCE — somebody is watching, help knows where you are — never as surveillance and never as a warning. (2) The exception to that promise no longer has keys of its own: it now lives inside the closing clause of the three #176 ride-trace sentences themselves — `legal.rideTraceNotice`, `guide.trace.body` and `diagnostics.rideTraceNote`, reviewed under their own namespaces. Judge those closing clauses by the same standard the separate sentences were held to: the exception must read as a BOUNDED one — only during an emergency, only our safety team, and only until the emergency is closed — and it must read as part of the same breath as the promise it qualifies, not as an afterthought. A rendering that drops any of the three bounds, or that lets the promise land as final before the exception arrives, has told a driver something false about his own phone. (3) `emergency.ops*` are read by ops staff under time pressure. `opsLastPosition` and the `opsAge*` units must read as AN AGE — how long ago we last heard from this person — never as a current position: on this screen those are opposite facts and only one is true. `opsStatusExpired` must read as 'nobody closed this in time', not as an error and not as a resolution."
+  },
+  "subtreeNotes": {
+    "screener.help": "TODO Kinyarwanda native review (R3-SCREENER-HELP-LAYER, GAP-P26) — AI-generated, priority-1 batch."
+  },
+  "carriedOverGuidance": [
+    {
+      "title": "2026-07-02 — card payment (PR #99)",
+      "body": "The 12 `payment.method.*` / `payment.card.*` keys shipped with the\ncard-payment client work. Like every other row, the Current RW column\nis AI-generated and pending native review."
+    },
+    {
+      "title": "2026-07-02 — PAYOUT-C (driver money screen)",
+      "body": "The 29 `payout.*` keys and 4 new `errors.*` keys shipped with the driver\nmoney screen. All RW renderings are AI-generated best-effort and pending\nnative review. Money/time wording matters here — see the glossary for\n`amafaranga` / `kwishyurwa` usage."
+    },
+    {
+      "title": "2026-07-03 — GEOCODE (address search)",
+      "body": "The 4 `journey.address*` keys shipped with the LocationIQ address-search\nwork. RW renderings are AI-generated and pending native review."
+    },
+    {
+      "title": "2026-07-08 — DRIVER-ID v3 (jacket numbers)",
+      "body": "11 keys shipped with the revocable driver-identity work, all with\nAI-generated RW pending native review: `driver.revokedNotice` (the revoked\ndriver's terminal notice — tone must stay calm and neutral, no accusatory\nvocabulary), `driver.jacketNumber`, `errors.vehicleChangeBlocked`, and the 8\n`checkDriver.*` keys of the public driver-number check page (`title`,\n`subtitle`, `inputLabel`, `inputPlaceholder`, `submit`, `active`,\n`inactive`, `error`). The `checkDriver.inactive` line is the uniform public\nnegative — it must not imply wrongdoing, only non-activity."
+    },
+    {
+      "title": "2026-07-23 — SCHED-UI (advance booking)",
+      "body": "The 26 `scheduled.*` keys, 4 new `errors.scheduledFor*` keys,\n`nav.scheduled`, and `journey.status.scheduled` shipped with the\nadvance-booking UI. All RW renderings are AI-generated and pending native\nreview. Time/fallback wording matters: the customer reassurance lines\n(`scheduled.waitingNote`, `scheduled.fallbackNote`) must read as calm\nstatements that waiting is normal, not as warnings."
+    },
+    {
+      "title": "2026-07-23 — BIKE-GATE (vehicle-aware verification)",
+      "body": "2 `verification.*` keys shipped with the vehicle-aware driver-verification\nwork: `verification.driverNumber` (the person identifier label shown to\ndrivers whose vehicle type needs no RURA authorization — it names the\nBimoto jacket number, not a government permit; keep the RURA/jacket\ndistinction clear) and `verification.driverNumberHint`. RW renderings are\nAI-generated and pending native review."
+    },
+    {
+      "title": "2026-07-23 — PILOT-UX G4 (completeness sweep)",
+      "body": "A systematic extractor (now a permanent vitest:\n`packages/client/src/__tests__/i18n-used-keys.test.ts`) diffed every\ntranslation key used in `packages/client/src` against the locale files and\nfound **262 keys used by live screens but present in no locale** — these\nrendered as raw key strings on the pilot phone (`journey.findDrivers`,\n`profile.title`, the whole driver ride flow, the confirm/rating flow,\netc.). All 262 are now supplied in en/fr/rw. Every RW rendering is\nAI-generated best-effort and pending native review. Tone notes:\n`emergency.*` / `interrupt.*` must stay calm and factual; `status.*` are\nshort badge labels; `bid.*` / `bids.*` money wording should follow the\nglossary's `igiciro`/`amafaranga` usage."
+    },
+    {
+      "title": "2026-08-15 — TRUE-WORDS (the team's 13-Aug wording review)",
+      "body": "The team's own correction document (\"APP TRANSLATED WORDING CORRECTIONS\", 13 Aug) was applied across the app. It reviewed build 5226c5c; every row was reconciled against HEAD first and the result is in `docs/wording-reconciliation.md` — 84 rows applied, 24 already applied, 5 drifted (reported, not applied), 2 split, 4 with no live target.\n\nThree things a reviewer should know before working the queue below.\n\n1. **Provenance is in the note column.** Rows marked \"verbatim from the review\" carry the team's own Kinyarwanda and need a transcription check, not a translation check — the source PDF split words across lines. Rows marked \"mechanical vocabulary sweep\" changed only because Umushoferi became Umumotari, so the question is noun class and agreement, not word choice.\n\n2. **The paired form needs a decision.** Where the review addresses both a moto rider and a cyclist it writes \"umumotari/umunyonzi\". That is faithful to the document, but a slash in a button label is a UX cost. If the app should pick one word from the journey's vehicle type instead, say so and it becomes two keys.\n\n3. **French moved too, mechanically.** 55 French values changed in the same pass: the decided role words (Chauffeur / Cycliste / Passager, with \"conducteur\" and the Kinyarwanda \"motari\" retired from French copy), \"Écrivez ici\" for the two faded hints, \"séquestre\" retired with escrow, and fresh French for the keys whose meaning changed. This generator only queues Kinyarwanda, so the French list lives in `docs/wording-reconciliation.md` §9 and wants a French speaker on the next pass."
+    },
+    {
+      "title": "2026-08-15 — RED-BUTTON (the motari's SOS)",
+      "body": "The driver now carries the same red SOS button as the passenger, on his approach and active-ride screens. No new keys were needed — `emergency.*` was already written role-neutrally (\"your contacts\", \"Bimoto\"), and it now reads correctly for either person because the server resolves whose contacts to call from who is calling.\n\nOne string changed and wants a native eye: **`guide.sos.body`** gained a closing sentence in all three locales, stating that motari and passenger each have the same button and that it alerts the presser's own contacts. Two things to check in the Kinyarwanda:\n\n1. **The reflexive is load-bearing.** \"abantu we ubwe yashyizeho\" has to land as *that person's own* contacts, not *your* contacts — the whole point of the sentence is that the two lists never cross. If a cleaner construction says it better, take it.\n\n2. **`Umumotari` follows TRUE-WORDS.** The sentence uses the decided role words (Umumotari / umugenzi); it does not use the paired \"umumotari/umunyonzi\" form, whose open question is unchanged by this work.\n\nThe French sentence is likewise AI-drafted and wants the French pass tracked in `docs/wording-reconciliation.md` §9."
+    },
+    {
+      "title": "2026-08-15 — OUTBOX (booking with no signal)",
+      "body": "The 17 `outbox.*` keys shipped with the offline booking outbox. All\nRW and FR renderings are AI-generated best-effort and pending native\nreview. Tone matters more than literal fidelity here: every one of\nthese strings is read by somebody who has just discovered they have no\nconnection, and the whole point of the feature is that this is NOT a\nfailure. `outbox.savedTitle` / `outbox.savedBody` must read as a calm\nstatement of fact ('it is here, it will go'), never as an apology or a\nwarning. `outbox.cancel` is the passenger taking their own booking\nback, not the system cancelling on them — the verb should not imply\nrefusal. `outbox.rejectedGeneric` is the opposite case and must stay\nneutral: the server said no, and the copy must not guess why."
+    },
+    {
+      "title": "2026-08-15 — RED-BUTTON banner truth (driver-raised alerts)",
+      "body": "3 new `emergency.*` keys shipped with the admin banner's raisedBy\nbranch: `adminBannerTitleDriver`, `adminDriverPhone`, `adminPlate`. RW and\nFR are AI-generated and pending native review. This is life-safety copy\nread by an ops operator at speed: `adminBannerTitleDriver` must be\ninstantly distinguishable from the existing passenger title at a glance,\nso the two should differ in their FIRST content word, not only in a\ntrailing noun. Use the same word for the rider the rest of the app uses\n(see the glossary on umumotari/umugenzi) — an operator who has to work\nout which of two similar words means the driver has already lost the\nseconds this banner exists to save."
+    },
+    {
+      "title": "2026-08-16 — FLIGHT-RECORDER (consented diagnostics upload)",
+      "body": "6 keys shipped with the automatic error-report upload, RW and FR\nAI-generated and pending native review: `legal.diagnosticsConsent` (the\nsignup consent paragraph), `settings.diagnosticsUpload` +\n`settings.diagnosticsUploadHelp` (the off switch), `common.on` /\n`common.off`, and a rewritten `diagnostics.sendConsent`.\n\nThis is CONSENT copy, so accuracy outranks fluency: the paragraph must\nsay that reports are sent automatically, that phone numbers and sign-in\ncodes are removed before anything is stored, that messages, trips and\nlocation are never included, and that Settings can switch it off. If a\nnatural Kinyarwanda rendering would soften or drop any of those four\nfacts, keep the fact and flag the wording — a consent line that reads\nwell and promises less than the code does is the one failure mode that\nmatters here.\n\n`diagnostics.sendConsent` previously ended \"Nothing is sent until you tap\nSend report\", which is no longer true; the replacement must not be\ntranslated from the old sentence. `common.on`/`common.off` label a\ntwo-button switch on a small screen — prefer the shortest natural pair\nthat still reads as on/off rather than as open/closed."
+    },
+    {
+      "title": "2026-08-16 — FLIGHT-RECORDER G5 (SOS guard + the e-bike filter)",
+      "body": "3 keys, RW and FR AI-generated and pending native review.\n\n`emergency.holdHint` is read ALOUD by a screen reader and by nobody\nelse — it never appears on screen. It must say two things without\nambiguity: that a pointer press must be held, and that a keyboard or\nassistive user presses Enter instead and does not have to hold anything.\nIf only one of those survives translation, keep the second: a person who\ncannot hold the button is the person this line exists for.\n\n`emergency.cancelSend` is the label on the single large button shown\nwhile a three-second countdown runs before the alert goes to Bimoto. It\ncarries `{{seconds}}` and must read as BOTH a statement and an\ninstruction — what is about to happen, and that tapping stops it. This\nis read by someone who may be frightened or may have pressed by mistake,\nso plainness beats politeness, and the cancel meaning must not be softer\nthan the sending meaning. Note 112 is never behind this delay; the copy\nshould not imply that any help is being withheld for three seconds.\n\n`autoBid.vehicleEbike` is a filter chip next to `vehicleBike` and\n`vehicleEmoto`. It must be distinguishable from BOTH at a glance on a\nsmall screen — check the RW rendering against `vehicleBike` (igare) and\n`vehicleEmoto` in particular, since an e-bike driver picking the wrong\nchip writes a rule that can never fire."
+    },
+    {
+      "title": "2026-08-16 — INTEL-DECK (mobility reading room)",
+      "body": "The 49 `intel.*` keys shipped with the analyst intelligence surface: the\nhex density map, the origin-destination flow table, the CSV/JSONL export\nand the admin-only pipeline panel. All RW and FR renderings are\nAI-generated best-effort and pending native review. Vocabulary notes:\n`akazu`/`utuzu` is used for the hexagonal grid cell (a made-up sense of an\neveryday word — a native reviewer should say whether a clearer term\nexists); \"k-anonymised\" is deliberately left as a borrowed technical term\nrather than translated; and the privacy lines noted under the `intel`\nnamespace matter more than literal fidelity."
+    },
+    {
+      "title": "2026-08-17 — LOOSE-ENDS (the emergency system learns \"parcel\")",
+      "body": "4 keys shipped so the emergency surfaces stop calling a parcel run a\nride: `emergency.alertReceivedParcel` (the in-journey toast),\n`emergency.adminBannerTitleSender` and\n`emergency.adminBannerTitleDriverParcel` (the admin banner titles), and\n`emergency.adminSenderPhone` (the customer's phone label when he is a\nsender rather than a passenger). RW and FR are AI-generated and pending\nnative review.\n\nThe RW vocabulary needs a native decision on ONE thing: how a parcel\nsender is named. The glossary lists \"sender (goods)\" as the\ntranslator's call and it was not user-facing until now; these keys use\n`uwohereza umuzigo` (\"the one who sends the parcel\"), built on the\nlocked `umuzigo` from the parcel flow. If a shorter or more natural\nnoun exists, it should replace this everywhere the four keys use it —\nand also in the hardcoded bilingual SMS bodies in\n`packages/server/src/routes/journey.routes.ts` (the emergency endpoint),\nwhich carry the same phrase and are NOT locale keys. `Atwaye umuzigo`\n(\"he is carrying a parcel\") and `mu gutwara umuzigo` (\"while carrying\nthe parcel\") live there too.\n\nTone is the whole job on these lines: they are read by a family member\nor by an ops operator during an emergency, so they must say who is in\ntrouble and what he was doing, plainly, with no softening. A sender is\nNOT on the bike — that distinction is the reason these keys exist, and\nit must survive translation."
+    },
+    {
+      "title": "2026-08-25 — COUNTER-READY (the counter-offer, and the walk-away)",
+      "body": "35 keys shipped in this wave and 2 retired, across five namespaces.\nRW and FR are AI-generated and pending native review as usual, but two\ngroups carry more weight than the rest and should be reviewed even if\nthe others wait.\n\nTHE COUNTER STRINGS ARE NOT YET LIVE. The whole counter-offer feature\nships DORMANT behind a server switch (COUNTER_BID_ENABLED) and the\nfounder turns it on only after several weeks of plain bidding have\nproduced a baseline. So `bids.suggestPrice`, `bids.counter*`,\n`bid.counter*`, `notify.bidCountered/counterAccepted/counterDeclined`\nand `errors.counter*` will render for nobody until then — which is a\ngift, not a problem: there is real time to get the wording right\nbefore a single passenger reads it.\n\n(1) TWO SENTENCES MUST NOT DRIFT, in any language, because each one\ncorrects a false reading the screen would otherwise invite.\n`bids.counterDeclinedState` (\"Your price was not accepted. This offer\nstill stands at {{price}} RWF.\") and `notify.counterDeclined` are read\nby a passenger who has just been told no. The motari's offer is STILL\nLIVE at his own price and she can still accept it — the bid never left\nPENDING. A rendering that lands as \"this offer is gone\" has told her\nsomething false and will cost her a ride she could have had. Its mirror\nis `bid.counterDeclineNote` (\"If you decline, your offer of {{price}}\nRWF stays on their screen.\"), read by the motari with his thumb over\nthe decline button: it must not land as \"give up this ride\".\n\n(2) `bids.counterOnce` (\"You can suggest a price once per offer.\") is\nthe one-shot rule, said BEFORE it is spent. There is no way back to\nthat entry — she gets one number per offer, ever — so this must read\nas a plain fact she can act on, not as a warning and not as a\nrestriction being apologised for.\n\nTHE WITHDRAW STRINGS (`bidList.withdraw*`) ARE LIVE IN APK 14 and are\nread by a passenger walking away from a request she made minutes ago.\n`bidList.withdrawConfirmBody` must be honest in both halves: her\nrequest closes AND the offers on it end, and she can book again\nwhenever she likes. `bidList.withdrawKeep` (\"Keep waiting\") is the\nsafe half of a two-button choice and should read as the calm option,\nnever as a nag.\n\nRETIRED: `account.deleteConfirm` and `account.deleteButton` are gone.\nThey rendered nowhere and had been FALSE since the 72-hour deletion\nwindow shipped — \"this cannot be undone\" is not what account deletion\ndoes any more. The live `map.offline.deleteConfirm` and\n`map.offline.deleteConfirmNamed` keys are a different namespace and are\nuntouched."
+    }
+  ],
+  "queueFlags": {
+    "payout.frozenNotice": {
+      "source": "PR #109 (AML-FP, 2026-07-08)",
+      "note": "Money+trust wording — must reassure, never accuse. \"ari amahoro\" (is safe) needs a native check."
+    },
+    "driver.revokedNotice": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "driver.jacketNumber": {
+      "source": "PR #110 (DRIVER-ID v3, 2026-07-08)",
+      "note": "\"Jacket Nº {{number}}\" — check the numeral/abbreviation convention."
+    },
+    "errors.vehicleChangeBlocked": {
+      "source": "PR #110 (DRIVER-ID v3, 2026-07-08)",
+      "note": ""
+    },
+    "checkDriver.inactive": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "transparency.feeWaivedLine": {
+      "source": "LAUNCH-TRUTH (2026-07-13)",
+      "note": "\"yahagaritswe\" (suspended/stopped) vs a better verb for \"waived/forgiven\" — glossary decision needed. Must NOT read as \"payment failed\"."
+    },
+    "transparency.feeWaivedAmount": {
+      "source": "LAUNCH-TRUTH (2026-07-13)",
+      "note": "Same \"waived\" verb decision as above."
+    },
+    "transparency.feeWaivedNote": {
+      "source": "LAUNCH-TRUTH (2026-07-13)",
+      "note": "\"abika\" (keeps/saves) — confirm it reads as \"keeps all of it\"."
+    },
+    "transparency.feeWaivedChip": {
+      "source": "LAUNCH-TRUTH (2026-07-13)",
+      "note": "Rendered as a tiny chip — must stay short."
+    },
+    "payout.waiverLifetime": {
+      "source": "LAUNCH-TRUTH (2026-07-13)",
+      "note": "This is the stage-promise sentence — it must match what cooperative leaders say aloud."
+    },
+    "payout.waiverTemporary": {
+      "source": "LAUNCH-TRUTH (2026-07-13)",
+      "note": "The cliff date must be unmistakable; a driver must never be surprised by the waiver ending."
+    },
+    "welcome.screen1.body": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "nav.scheduled": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "nav.myRides": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "The review's English is singular (\"My Journey\") for a list of many; the Kinyarwanda follows it (\"Urugendo Rwajye\"). Confirm, or give the plural."
+    },
+    "login.phoneLabel": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "The review turns this label into an instruction (\"Andika numero ya telefone hano\") while English stays the noun \"Phone number\". Confirm that is intended and not a placeholder the reviewer mistook for the label."
+    },
+    "journey.pickup": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "journey.destination": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "journey.findDrivers": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Uses the review's paired form \"umumotari/umunyonzi\". Same question as transparency.driverReceives."
+    },
+    "journey.vehicleType": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "journey.wishPriceHelper": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Uses the review's paired form \"umumotari/umunyonzi\"."
+    },
+    "journey.wishPricePlaceholder": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "goods.size_small": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "goods.size_medium": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "goods.size_large": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "goods.fragile": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "goods.description": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "goods.descriptionPlaceholder": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "goods.details": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "goods.recipientNamePlaceholder": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "goods.title": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "goods.tierLabel": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "goods.tierNormal": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "guide.title": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "guide.ride.body": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "guide.parcel.body": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "guide.bidding.title": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Applied the review's \"Ibiciro no guhitamo umumotari\". Confirm it reads better than the live \"Ibiciro n'ihitamo ry'umumotari\"."
+    },
+    "guide.bidding.body": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "guide.sos.body": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "guide.help.body": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "home.title": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "home.requestRideHint": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Uses the review's paired form \"umumotari/umunyonzi\"."
+    },
+    "home.sendParcel": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "home.sendParcelHint": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Uses the review's paired form \"umumotari/umunyonzi\"."
+    },
+    "profile.emergency_contacts": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "profile.emergencyContacts": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "settings.logout": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "settings.emergencyContacts": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "sync.connected": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "matched.liveTracking": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Uses the review's paired form \"Umumotari/Umunyonzi\"."
+    },
+    "driver.stats.acceptanceRate": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "driver.stats.avgAcceptanceTime": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "driver.stats.completionRate": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "driver.stats.weeklyEarnings": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "driver.stats.showMore": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "driver.stats.earningsTrendTitle": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "driver.stats.cohortBreakdownTitle": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "legal.privacyTitle": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "legal.privacyText": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Uses the review's paired form \"umumotari/umunyonzi\"."
+    },
+    "account.viewAccount": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "vehicles.bike": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "vehicles.moto": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "vehicles.emoto": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "vehicles.ebike": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "vehicles.motoRegistrationHint": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "simulation.inboxLink": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "transparency.youWillReceive": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "transparency.driverReceives": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Uses the review's paired form \"Umumotari/Umunyonzi\". Say whether the app should instead pick one word from the journey's vehicle type."
+    },
+    "transparency.priceBinding": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "transparency.exactAmountDependsOnCustomer": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "transparency.paymentHeldInEscrow": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "transparency.submitOffer": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "transparency.customerCommission": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "transparency.confirmOffer": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "delivery.addStopToggle": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "delivery.speedExpress": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "payout.title": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "payout.balanceLabel": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "payout.emptyBalance": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "payout.landsAt": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "The review's sentence names 18:00 literally; the live string interpolates {{time}}, so the token was kept."
+    },
+    "checkDriver.title": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Uses the review's paired form \"Umumotari/Umunyonzi\"."
+    },
+    "scheduled.leaveNow": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "scheduled.scheduleLater": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "scheduled.pickupTimeLabel": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "scheduled.submit": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "scheduled.driverListEmpty": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "scheduled.driverListEmptyHint": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "The review rewrote the first sentence only; the second (offers open 60 minutes before pickup) post-dates the review and was kept. Confirm the two sit together."
+    },
+    "bids.sortEta": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "bids.sortRating": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "bids.waitingForDrivers": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Uses the review's paired form. Note the review's corrected sentence is singular (\"atange\") where the live one was plural."
+    },
+    "dashboard.goOnline": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "dashboard.imOffline": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "history.title": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "The review's English is singular (\"My Journey\") for a list of many; the Kinyarwanda follows it (\"Urugendo Rwajye\"). Confirm, or give the plural."
+    },
+    "map.offline.description": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "The review's sentence names a storage figure; the live string interpolates {{mb}} instead, so the token was kept. Confirm the phrasing still reads naturally around it."
+    },
+    "register.roleCustomer": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "register.roleDriver": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Uses the review's paired form \"Nk'umumotari/Nk'umunyonzi\". If the role picker should ask which vehicle first, say so."
+    },
+    "register.vehicleType": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "picker.pickup": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "picker.destination": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "bidList.state.liveHint": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Kinyarwanda taken verbatim from the team's 13-Aug wording review. Confirm the transcription: the PDF split words across lines and lost some spacing, which was repaired rather than guessed."
+    },
+    "welcome.screen2.body": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "welcome.screen3.body": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "auth.role_driver": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "journey.searching": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "journey.will_go_live": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "bid.bid_too_late": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "bid.new_driver": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "The review writes \"Umumotori mushya\"; normalised to Umumotari. Confirm, and say whether a bicycle offer should read Umunyonzi here."
+    },
+    "match.driver_coming": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "match.choose_another": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "ride.rate_driver": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "home.priorityDeliveryHint": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "home.urgentDeliveryHint": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "activeJourney.matchedCustomer": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "urgent.broadcastNotice": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "urgent.infoCardSpeed": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "errors.journey_already_matched": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "errors.notAssignedDriver": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "errors.driverNotVerified": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "matched.cancelDriverNoShow": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "matched.cancelDriverLate": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "matched.driverDidntShow": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "matched.findAnotherDriver": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "matched.redispatchFailed": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "matched.pickupVerify.title": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "matched.pickupVerify.yes": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "matched.approach.silent": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "matched.approach.approaching": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "matched.approach.arrived": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "matched.approach.lost": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "matched.chooseAnother": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "matched.driver": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "matched.driverOnTheWay": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "driver.stats.cohortSize": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "approach.cantMakeTripConfirm": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "legal.driverTermsTitle": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "legal.driverTermsText": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "legal.driverTermsAgree": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "verification.title": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "verification.driverNumber": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "vehicles.bikeRegistrationHint": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "vehicles.emotoRegistrationHint": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "driverApproach.etaUnknown": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "driverApproach.stale": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "driverApproach.mapLabel": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "journeyHistory.badgeNoDriverDispute": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "journeyHistory.badgeDriverDisputed": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "delivery.infoCardLine1": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "admin.funnel.subtitle": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "screener.help.is18OrOlder": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "screener.help.weeklyAvailabilityHours": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "screener.questions.cooperativeAffiliation": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "checkDriver.subtitle": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "checkDriver.inputLabel": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "checkDriver.active": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "scheduled.biddingOpensAt": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "scheduled.fallbackNote": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "scheduled.conflictTitle": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "scheduled.conflictBody": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "scheduled.chooseAnotherDriver": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "scheduled.acceptAnywayFailed": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "bids.anonymousDriver": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "register.driverProfileFailed": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "reliability.newDriver": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "The review writes \"Umumotori mushya\"; normalised to Umumotari. Confirm, and say whether a bicycle offer should read Umunyonzi here."
+    },
+    "status.MATCHED": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "payments.status.RELEASED": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "payments.howItWorks": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Mechanical vocabulary sweep only — Umushoferi → Umumotari (founder decision, 12 Aug). Check the noun class and any agreement the swap disturbed."
+    },
+    "transparency.driverCommission": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Not a row of the review: moved so it stays coherent with its corrected pair. See docs/wording-reconciliation.md §8."
+    },
+    "dashboard.imOnline": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "Not a row of the review: moved so it stays coherent with its corrected pair. See docs/wording-reconciliation.md §8."
+    },
+    "payout.trainingWheelsExplainer": {
+      "source": "TRUE-WORDS (PR #165, 2026-08-15)",
+      "note": "The review queried whether this says three hours where English says three shifts. At HEAD it already says \"imirimo 3\" — please confirm that reads as shifts, not tasks."
+    },
+    "legal.safetyAckTitle": {
+      "source": "COMPLIANCE-ACK / LOGIN-EASE (2026-08-24)",
+      "note": "LEGAL-ADJACENT — heads the safety acknowledgment a user ticks at consent. Machine-drafted rw; needs Lilian."
+    },
+    "legal.safetyAckNoInfants": {
+      "source": "COMPLIANCE-ACK / LOGIN-EASE (2026-08-24)",
+      "note": "LEGAL-ADJACENT, HIGH PRIORITY — \"no babies or infants, ever, no exception\". The rw must carry the absoluteness; a softened modal here changes what the user is agreeing to. Check that \"uruhinja\" and the infant term read as the founder means them."
+    },
+    "legal.safetyAckOnePassenger": {
+      "source": "COMPLIANCE-ACK / LOGIN-EASE (2026-08-24)",
+      "note": "LEGAL-ADJACENT, HIGH PRIORITY — \"exactly one passenger, no exception\". Check the rw numeral/exclusivity construction: \"one\" must read as a hard limit, not a typical case."
+    },
+    "legal.safetyAckMinimumAge": {
+      "source": "COMPLIANCE-ACK / LOGIN-EASE (2026-08-24)",
+      "note": "LEGAL-ADJACENT, HIGH PRIORITY — deliberately carries NO number; the legal minimum age awaits counsel (Trello 2ZazTeyo). The rw must NOT introduce a figure, and must read as a legal threshold rather than a vague \"too young\"."
+    },
+    "legal.safetyAckDriverRefuse": {
+      "source": "COMPLIANCE-ACK / LOGIN-EASE (2026-08-24)",
+      "note": "LEGAL-ADJACENT — the motari’s own sentence: he refuses such a ride even when the passenger insists. Check the rw carries refusal-despite-pressure, not mere reluctance."
+    },
+    "legal.safetyAckAgree": {
+      "source": "COMPLIANCE-ACK / LOGIN-EASE (2026-08-24)",
+      "note": "LEGAL-ADJACENT — the checkbox label; this is the affirmative act itself. Must read as \"I have read AND accept\", not just \"OK\"."
+    },
+    "login.subtitle": {
+      "source": "COMPLIANCE-ACK / LOGIN-EASE (2026-08-24)",
+      "note": "REWORDED (Jean, 24 Aug) — was the phone-entry instruction, now the standing welcome under the wordmark. Check \"abamotari\" and the bicycle-rider term are the words the field actually uses, and that it stays one short line on a small screen."
+    },
+    "deletion.exportNotice": {
+      "source": "EXPORT-AND-LEDGER (2026-08-24)",
+      "note": "LEGAL-ADJACENT — the data-export carve-out sentence (founder decision D20). It names five categories of fraud-prevention record that are deliberately withheld, and it is the sentence a user will quote back at us. Check the rw keeps all five categories DISTINCT rather than collapsing them into one word for “investigation”, keeps the reason (a fraud check readable by its own subject stops working) rather than softening it to a policy formula, and keeps “you can ask for them” as a real offer rather than a refusal. Machine-drafted."
+    }
+  },
+  "keyNotes": {
+    "account.frozenBody": "Body of the blocking freeze notice; acknowledging logs the user out",
+    "account.frozenTitle": "Title of the blocking freeze notice",
+    "attribution.searchBy": "Prefix of the required \"Search by LocationIQ\" credit under address-search results and on the pick-on-map overlay. \"LocationIQ\" is a proper noun and stays untranslated; the phrase must read naturally in front of it",
+    "bids.autoBidPlaced": "Toast when a stored auto-bid rule fires server-side",
+    "bids.newBidReceived": "Toast when a new offer arrives live (was hardcoded English)",
+    "common.backToHome": "Escape hatch on every creation screen",
+    "connection.backOnline": "Brief flash when the connection recovers",
+    "connection.offline": "Persistent banner while the device has no network",
+    "connection.retryCountdown": "Live countdown to the next automatic retry; {{seconds}} interpolated",
+    "connection.retryNow": "Manual retry button on the banner",
+    "connection.unreachable": "Banner when network is up but Bimoto is unreachable (dead tunnel)",
+    "dashboard.goOfflineFailed": "Driver banner when the going-offline write fails; honesty matters — the server may still list the driver as available",
+    "dashboard.goOnlineFailed": "Driver banner when going online fails; sits next to a Retry button. \"ku kazi\" follows dashboard.imOnline vocabulary — please confirm",
+    "dashboard.locationSyncLost": "Driver banner when the periodic location update starts failing while online",
+    "dashboard.newRequestNearby": "Subtle cue on the driver dashboard when a journey arrives live",
+    "driver.stats.myRating": "Header of the own-rating tile on the driver stats card",
+    "driver.stats.noRatingsYet": "Shown in place of stars until the driver receives a first rating",
+    "emergency.adminAcknowledge": "Only way to dismiss an admin emergency banner",
+    "emergency.adminBannerTitle": "Title of the persistent red admin banner",
+    "emergency.adminJourney": "Admin banner field label",
+    "emergency.adminRiderPhone": "Admin banner field label",
+    "emergency.alertReceived": "Toast to journey participants (incl. the driver) when SOS fires",
+    "emergency.callEmergencyNumber": "Foremost action on the post-confirm SOS sheet (tel link)",
+    "emergency.notified": "SOS sheet status on success",
+    "emergency.notifyFailed": "SOS sheet offline/failure copy; 112 action stays foremost",
+    "emergency.notifying": "SOS sheet status while the POST is in flight",
+    "emergency.retry": "Manual retry of the platform notification",
+    "errors.account_frozen": "Server rejection at login when the account is frozen",
+    "errors.bidNotFound": "Server rejection: offer no longer exists",
+    "errors.bidNotPending": "Server rejection: offer already answered",
+    "errors.bidWindowNotOpen": "Server rejection: bidding not open yet (scheduled rides)",
+    "errors.boundaryRetry": "Button reloads the app",
+    "errors.boundaryTitle": "Shown on the boot-failure retry screen",
+    "errors.chargeFailed": "Server rejection: payment failed",
+    "errors.driverNotVerified": "Server rejection: driver account not verified",
+    "errors.forbidden": "Server rejection: no permission",
+    "errors.invalidBody": "Server rejection: invalid request body (same copy as invalidInput)",
+    "errors.invalidDistance": "Server rejection: route not valid",
+    "errors.invalidInput": "Server rejection: invalid input",
+    "errors.journeyNotAtPickup": "Server rejection: ride not at pickup yet",
+    "errors.journeyNotFound": "Server rejection: ride does not exist",
+    "errors.mapNotAvailable": "Server error key for the 404 (rarely surfaced — UI stays calm)",
+    "errors.notAssignedDriver": "Server rejection: driver not assigned to the ride",
+    "errors.notFound": "Server rejection: generic not-found",
+    "errors.notJourneyCustomer": "Server rejection: ride belongs to another customer",
+    "errors.notJourneyParticipant": "Server rejection: user not part of the ride",
+    "errors.offlineQueued": "Toast when an action was saved to the offline queue",
+    "errors.offlineRetry": "Toast when an action failed with no connection and no queue",
+    "errors.rejectedGeneric": "Fallback when the server rejects with an unknown message",
+    "errors.routeNotFound": "Server error key; client falls back to the straight line silently",
+    "errors.scheduledForInvalid": "SCHED-UI",
+    "errors.scheduledForRequired": "SCHED-UI — client mirror of server validator",
+    "errors.scheduledForTooFar": "SCHED-UI — 30-day maximum lead",
+    "errors.scheduledForTooSoon": "SCHED-UI — 1-hour minimum lead",
+    "errors.serverProblem": "5xx toast — must NOT blame the user's phone",
+    "errors.userNotFound": "Server rejection: account not found",
+    "goods.missingDescription": "Same hint block on the parcel screen; mirrors goods.descriptionRequired vocabulary",
+    "goods.tierLabel": "Urgency tier group label in the parcel flow",
+    "goods.tierNormal": "Default tier option (also on urgent/priority page)",
+    "guide.bidding.body": "Explains the bidding model in customer terms",
+    "guide.bidding.title": "Guide section heading",
+    "guide.help.body": "Pilot-stand wording may need localising to how the team actually operates",
+    "guide.help.title": "Guide section heading",
+    "guide.language.body": "Language names stay untranslated by design",
+    "guide.language.title": "Guide section heading",
+    "guide.parcel.body": "Must make clear only the parcel travels",
+    "guide.parcel.title": "Guide section heading",
+    "guide.ride.body": "Must make clear the ride carries a person",
+    "guide.ride.title": "Guide section heading",
+    "guide.sos.body": "Safety copy — accuracy matters more than style",
+    "guide.sos.title": "Guide section heading",
+    "guide.title": "Page title; also the entry label on Profile and the welcome screen",
+    "history.emptyHint": "Second line of the empty \"My rides\" screen",
+    "home.requestRide": "Fork tile",
+    "home.requestRideHint": "Was \"A driver comes to pick you up\" — must say the PERSON travels",
+    "home.sendParcel": "Fork tile",
+    "home.sendParcelHint": "Was \"A driver picks it up and delivers it\" — must say only the parcel travels",
+    "home.title": "Heading on the home sheet",
+    "journey.addressNoResults": "GEOCODE — empty suggestion list",
+    "journey.addressSearchUnavailable": "GEOCODE — shown when LOCATIONIQ_API_KEY is unset or server says 503",
+    "journey.addressSearching": "GEOCODE — live autocomplete loading state",
+    "journey.addressSuggestions": "GEOCODE — accessibility label for the dropdown",
+    "journey.missingDestination": "Same hint block, destination line",
+    "journey.missingPickup": "Shown above the disabled request button naming what is still missing",
+    "journey.newRide": "Ride-screen title; was \"New ride\" — now names the passenger",
+    "journey.pickOnMap": "Button under each address field that opens pick-on-map; becomes the primary control when address search is unavailable",
+    "journey.status.scheduled": "SCHED-UI — waiting-for-bid-window status",
+    "journey.useSuggestedPrice": "One-tap button next to the suggested-fare hint; fills the wish-price field with the suggested amount",
+    "login.codeExpired": "Replaces the OTP inputs when the 5-minute validity is over — must point at the resend button",
+    "login.codeExpiresIn": "Live countdown under the OTP inputs; {{time}} is m:ss (e.g. 4:59)",
+    "login.resendCode": "Resend button once the 60s cooldown has passed",
+    "login.resendIn": "Disabled resend button during the cooldown; {{seconds}} interpolated",
+    "map.offline.delete": "Button; frees the storage",
+    "map.offline.deleteConfirm": "Confirm-modal body before deleting",
+    "map.offline.description": "{{mb}} is the size estimate (e.g. 40)",
+    "map.offline.download": "Button; starts the ~40 MB download",
+    "map.offline.downloadedMeta": "{{date}} localized date, {{mb}} actual size",
+    "map.offline.downloading": "Progress state; a percent figure may follow",
+    "map.offline.failed": "Shown after a failed/cancelled download; restart is the recovery",
+    "map.offline.notAvailable": "Calm line when the pilot server has no extract yet (404)",
+    "map.offline.title": "Profile card title for the downloadable Kigali map",
+    "map.offline.update": "Button; re-downloads a newer extract",
+    "map.offline.wifiHint": "Small hint under the description — the file is large",
+    "map.offlineHint": "Calm hint when tiles can't load / offline",
+    "matched.liveTracking": "Heading over the live approach map on the customer's matched screen — names the tracking feature",
+    "nav.scheduled": "SCHED-UI — driver bottom-nav tab",
+    "payments.activeTitle": "Section heading over the active ride's payment state",
+    "payments.empty": "Empty-state title",
+    "payments.emptyHint": "Empty-state body",
+    "payments.howItWorks": "Explains the end-of-bidding payment moment and escrow in plain words — no persisted method preference exists",
+    "payments.recentTitle": "Section heading over the completed-rides list",
+    "payments.status.FROZEN": "Admin freeze — must not sound like the customer's fault",
+    "payments.status.HELD": "The escrow promise in customer terms",
+    "payments.status.PENDING": "Escrow state labels — plain words, no banking jargon",
+    "payments.statusFetchFailed": "Inline failure line for the escrow-status check; sits next to a retry link",
+    "payments.title": "Page title and the Profile entry label for customers",
+    "picker.confirmDestination": "Confirm button over the map",
+    "picker.confirmPickup": "Confirm button over the map",
+    "picker.destination": "Mode chip; mirrors `journey.destination`",
+    "picker.modeLabel": "Accessibility label on the chip row",
+    "picker.pickup": "Mode chip; mirrors `journey.pickup` phrasing",
+    "picker.routeSummary": "Distance/time chip over the map when a road route is drawn",
+    "receipt.missingMoneyData": "Honest gap line — shown instead of fake zeros when a ride has no money data",
+    "receipt.paymentStatus": "Label above the escrow state on the receipt",
+    "receipt.vehicle": "Label on the receipt's vehicle line",
+    "receipt.viewReceipt": "Button on completed rides in History and on the ride-completion screen",
+    "scheduled.badgePickup": "Driver feed badge — brevity matters",
+    "scheduled.conflictRide": "Interpolated line: time · pickup → destination",
+    "scheduled.fallbackNote": "Must stay factually aligned with auto-fallback.ts (lowest-priced on-time offer)",
+    "scheduled.waitingNote": "Reassurance line — calm, not a warning",
+    "sheet.dragHandle": "Accessibility label on the sheet handle",
+    "states.loadFailed": "Shared error-state headline when a screen failed to load",
+    "states.loadFailedHint": "Shared error-state hint; reassures the user it is not their fault",
+    "wallet.title": "Driver's Profile entry to the existing money screen — the team asked for this vocabulary; please confirm Igikwama is the natural term (alternatives: konti, umufuka w'amafaranga)",
+    "connection.shortOffline": "CHROME-C: the header status pill's word for a device with no network. MUST be short — it sits in a pill beside the back control, not in a banner. `connection.offline` is the same state's full sentence and stays as it is, inside the detail sheet.",
+    "connection.shortNoServer": "CHROME-C: the header status pill's word for network-up-but-Bimoto-unreachable. Short, as above; `connection.unreachable` is the same state's full sentence in the detail sheet. This is the one state that turns the whole header red, so the word must carry that weight in two or three syllables.",
+    "connection.openDetail": "CHROME-C: screen-reader-only tail on the status pill's label, e.g. 'Offline — open details'. A verb phrase, lower case, never shown visually.",
+    "connection.detailTitle": "CHROME-C: title of the sheet the status pill opens. Covers BOTH the connection and anything saved on the phone waiting to go out, so it must not name only one of them.",
+    "outbox.savedToast": "CHROME-C: the toast shown the moment a booking is held on the phone. Same job and same tone as the strip it replaces — calm statement of fact, never an apology or a warning — but it now has to work as a sentence that appears and leaves on its own, so it must be complete and readable at a glance."
+  }
+}

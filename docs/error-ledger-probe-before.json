@@ -1,0 +1,103 @@
+[
+  {
+    "trigger": "A. render error inside a screen (ScreenErrorBoundary)",
+    "userSees": {
+      "rootChildren": 2,
+      "screenFallback": true,
+      "screenFallbackText": "This screen hit a problemGo to home screenRetry",
+      "screenRetry": true,
+      "screenHome": true,
+      "rootBoundary": false,
+      "bodyText": "SIMULATION — no real money SMS inbox × Go back Connected This screen hit a problem Go to home screen Retry Home My rides Profile",
+      "pathname": "/diagnostics?g1crash=screen"
+    },
+    "consoleErrors": [
+      "warning: ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more informa",
+      "warning: ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see http",
+      "error: The above error occurred in the <DiagnosticsPage> component:\n\n    at DiagnosticsPage (http://localhost:5173/src/pages/shared/DiagnosticsPage.tsx?t=1786401697628:60:11)\n    at ScreenErrorBoundaryInner ",
+      "error: [screen] uncaught render error on /diagnostics: Error: G1 probe: screen render crash\n    at DiagnosticsPage (http://localhost:5173/src/pages/shared/DiagnosticsPage.tsx?t=1786401697628:60:11)\n    at re"
+    ],
+    "pageErrors": [
+      "G1 probe: screen render crash",
+      "G1 probe: screen render crash"
+    ],
+    "persistenceDelta": []
+  },
+  {
+    "trigger": "B. render error outside a screen (top-level ErrorBoundary)",
+    "userSees": {
+      "rootChildren": 1,
+      "screenFallback": false,
+      "screenFallbackText": null,
+      "screenRetry": false,
+      "screenHome": false,
+      "rootBoundary": true,
+      "bodyText": "Something went wrong Retry",
+      "pathname": "/diagnostics?g1crash=root"
+    },
+    "consoleErrors": [
+      "error: The above error occurred in the <Toast> component:\n\n    at Toast (http://localhost:5173/src/components/ui/Toast.tsx?t=1786401703826:58:11)\n    at Router (http://localhost:5173/node_modules/.vite/deps/",
+      "error: [boot] uncaught render error: Error: G1 probe: root render crash\n    at Toast (http://localhost:5173/src/components/ui/Toast.tsx?t=1786401703826:58:11)\n    at renderWithHooks (http://localhost:5173/no"
+    ],
+    "pageErrors": [
+      "G1 probe: root render crash",
+      "G1 probe: root render crash"
+    ],
+    "persistenceDelta": []
+  },
+  {
+    "trigger": "C. unhandled promise rejection",
+    "userSees": {
+      "rootChildren": 2,
+      "screenFallback": false,
+      "screenFallbackText": null,
+      "screenRetry": false,
+      "screenHome": false,
+      "rootBoundary": false,
+      "bodyText": "SIMULATION — no real money SMS inbox × Go back Connected Diagnostics A snapshot of what this phone and the server currently agree on. Take a screenshot and send it to us if something is not working. A",
+      "pathname": "/diagnostics"
+    },
+    "consoleErrors": [],
+    "pageErrors": [
+      "G1 probe: lost promise"
+    ],
+    "persistenceDelta": []
+  },
+  {
+    "trigger": "D. window.onerror-class error",
+    "userSees": {
+      "rootChildren": 2,
+      "screenFallback": false,
+      "screenFallbackText": null,
+      "screenRetry": false,
+      "screenHome": false,
+      "rootBoundary": false,
+      "bodyText": "SIMULATION — no real money SMS inbox × Go back Connected Diagnostics A snapshot of what this phone and the server currently agree on. Take a screenshot and send it to us if something is not working. A",
+      "pathname": "/diagnostics"
+    },
+    "consoleErrors": [],
+    "pageErrors": [
+      "G1 probe: window error"
+    ],
+    "persistenceDelta": []
+  },
+  {
+    "trigger": "E. failed API call (5xx)",
+    "userSees": {
+      "rootChildren": 2,
+      "screenFallback": false,
+      "screenFallbackText": null,
+      "screenRetry": false,
+      "screenHome": false,
+      "rootBoundary": false,
+      "bodyText": "SIMULATION — no real money SMS inbox × Go back Connected Diagnostics A snapshot of what this phone and the server currently agree on. Take a screenshot and send it to us if something is not working. A",
+      "pathname": "/diagnostics",
+      "serverBuildRow": "—"
+    },
+    "consoleErrors": [
+      "error: Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+    ],
+    "pageErrors": [],
+    "persistenceDelta": []
+  }
+]

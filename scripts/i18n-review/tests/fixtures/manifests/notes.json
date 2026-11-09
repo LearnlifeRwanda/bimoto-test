@@ -1,0 +1,26 @@
+{
+  "translatorInstruction": "**Translator:** fill in the **Reviewer's RW** column for every row.",
+  "sectionNotes": {
+    "quickMessages": "**Brevity matters** — these render as buttons.",
+    "landmarks": "**Note:** validate against everyday usage."
+  },
+  "namespaceNotes": {
+    "journey": "Fixture namespace note for `journey`."
+  },
+  "subtreeNotes": {
+    "errors.invalid": "Fixture subtree note."
+  },
+  "carriedOverGuidance": [
+    {
+      "title": "2026-01-01 — fixture guidance",
+      "body": "Preserved human prose that must survive regeneration."
+    }
+  ],
+  "queueFlags": {
+    "app.tagline": { "source": "fixture PR #1", "note": "Brand promise — keep it short." },
+    "gone.key": { "source": "fixture PR #2", "note": "This key no longer exists." }
+  },
+  "keyNotes": {
+    "journey.moto": "Fixture key note for the vehicle word."
+  }
+}
