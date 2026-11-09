@@ -10,9 +10,9 @@
   },
   "devDependencies": {
     "@bimoto/shared": "workspace:*",
-    "@playwright/test": "^1.45.0",
+    "@playwright/test": "^1.65.0",
     "@prisma/client": "^5.20.0",
-    "@types/node": "^20.0.0",
+    "@types/node": "^20.19.43",
     "typescript": "^5.5.0"
   }
 }
